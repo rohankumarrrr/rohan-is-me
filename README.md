@@ -16,7 +16,7 @@ Welcome to my personal website repository! This is a fully responsive and intera
 ## 📸 Screenshots
 ![Homepage Screenshot](public/home-page-image.png)
 
-To run this project: Open [http://localhost:3000](https://rohan-is.me) in your browser.
+To run this project: Open [https://rohan-is.me](https://rohan-is.me) in your browser.
 
 ## 📬 Contact
 If you have any questions, feel free to reach out:
