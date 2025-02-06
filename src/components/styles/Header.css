@@ -1,0 +1,119 @@
+.header {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    max-height: 8vh;
+    width: 100%;
+    z-index: 35;
+  }
+  
+  @font-face {
+    font-family: 'Futura'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book Italic font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Lunar Escape'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Digitag'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Graffiti'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  .logo {
+    object-fit: cover;
+    height: 3.5rem;
+    border-radius: 50%;
+  }
+
+  .logo:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  .nav-links {
+    display: flex;
+    position: relative;
+    gap: 1.5rem;
+    color: #4b5563;
+    list-style-type: none;
+    background-color: #fafaf8;
+    padding: 0rem 0.8rem;
+    padding-right: 2rem;
+    border-radius: 30px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    align-items: center;
+    border: solid;
+    border-right: none;
+    border-width: 0.5px;
+    border-color: #4b5563;
+    font-family: 'Lunar Escape';
+    font-size: 0.8rem;
+  }
+
+  .contacts-container {
+    display: flex;
+    position: relative;
+    width: 13.5rem;
+    height: 3rem;
+    gap: 0.8rem;
+    color: #4b5563;
+    list-style-type: none;
+    background-color: #fafaf8;
+    padding: 0rem 0.8rem;
+    padding-right: 2rem;
+    border-radius: 30px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    align-items: center;
+    border: solid;
+    border-left: none;
+    border-width: 0.5px;
+    border-color: #4b5563;
+  }
+  
+  .nav-links li:hover {
+    color: black;
+  }
+
+  .menu-icon {
+    display: flex;
+    position: relative;
+    object-fit: contain;
+    width: 3rem;
+    align-self: flex-start;
+    cursor: pointer;
+    padding: 0rem 0rem;
+    filter: invert(33%) sepia(8%) saturate(948%) hue-rotate(176deg) brightness(92%) contrast(91%);
+  }
+
+  .menu-icon:hover {
+    filter: none;
+  }
+
+  .contact-logo-container {
+      width: 2rem;
+      height: 2.5rem;
+      margin-left: 0.25rem;
+      object-fit: cover;
+  }
+  
+  .contact-logo-container:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }

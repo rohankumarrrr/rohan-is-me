@@ -1,0 +1,29 @@
+.contacts-section-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #fafaf8;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: 1%;
+    width: 100%;
+    height: 10vh;
+    gap: 1rem;
+    font-family: 'Lunar Escape';
+  }
+
+  @font-face {
+    font-family: 'Lunar Escape'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+.contact-link {
+    color: #1f2935;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.divider {
+  color: #1f2935;
+  font-size: 1rem;
+}

@@ -1,0 +1,139 @@
+.skills-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #fafaf8;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skills-content {
+    display: flex;
+    width: 100%;
+  }
+  
+  @font-face {
+    font-family: 'Futura'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book Italic font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Lunar Escape'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Digitag'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Graffiti'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  .skills-title {
+    font-size: 3rem;
+    text-transform: lowercase;
+    font-family: "Futura";
+  }
+
+  .skills-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0rem 1rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .line {
+    max-height: 1px;
+    background: linear-gradient(to right, #fafaf8, #4b5563, #fafaf8); /* Subtle gradient effect */
+    border-radius: 2px;
+    min-width: 48rem; /* Prevents it from being too long */
+  }
+
+  .skills-section {
+    padding: 2rem;
+    width: 90vw;
+    margin: 0 auto;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(3, 30vw);
+    gap: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color:#6b7280;
+  }
+  
+  .skill-bar {
+    display:inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.75rem;
+    font-family: monospace;
+    cursor: pointer;
+  }
+  
+  .skill-name {
+    flex: 1;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+    color: #6b7280;
+    font-family: 'Lunar Escape';
+    align-self: flex-end;
+    width: 8rem;
+  }
+
+  .skills-progress-icon {
+    padding-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1.5rem;
+    filter: grayscale(1);
+    margin-right: 1rem;
+  }
+
+  .bar-container {
+    width: 15vw;
+    background-color: #e0e0e0;
+    overflow: hidden;
+    height: 12px;
+    margin: 0 10px;
+    border: solid;
+    border-width: 0.5px;
+    border-color:#4b5563;
+  }
+  
+  .bar-fill {
+    height: 100%;
+    background-color: #6b7280;
+  }
+  
+  .proficiency {
+    flex: 0.5;
+    font-weight: 500;
+    color: #6b7280;
+    text-align: left;
+    font-family: 'Lunar Escape';
+    font-size: 0.8rem;
+  }
+ 
+  

@@ -1,0 +1,348 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #fafaf8;
+    padding: 1rem;
+    overflow-x: hidden;
+  }
+
+  @font-face {
+    font-family: 'Futura'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book Italic font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Lunar Escape'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Digitag'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Graffiti'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Futura'
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1f2935;
+  }
+  
+  p {
+    color: #6b7280;
+    margin-top: 1rem;
+    max-width: 24rem;
+    font-size: 0.8rem;
+    font-family: 'Lunar Escape';
+  }
+
+  .experience-p {
+    color: #fff;
+    margin: none;
+    font-size: 0.75rem;
+    font-family: "Lunar Escape"
+  }
+  
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    background: #252835;
+    color: white;
+    transition: opacity 0.2s;
+    height: 1.2rem;
+    font-family: 'Graffiti';
+    border: none;
+    margin: 0;
+    font-size: 1rem;
+    text-decoration: none;
+    align-content: center;
+  }
+  
+  .cta-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  .image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 10rem;
+    bottom: 10rem;
+  }
+
+  .background-shape {
+    position: absolute;
+    width: 12rem;
+    height: 12rem;
+    background: black;
+    transform: rotate(45deg);
+  }
+
+  .banner-img {
+    max-height: 40rem;
+    align-self: flex-start;
+  }
+  
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+  
+  .footer a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+  
+  .footer a:hover {
+    color: black;
+  }
+
+  .uiuc-container {
+    background-color: #252835;
+    position: absolute;
+    right: 35rem;
+    bottom: 7rem;
+    width: 20rem;
+    height: 8rem;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    padding: 1rem;
+    overflow-y: hidden;
+    z-index: 40;
+  }
+
+  .uiuc-line-horizontal {
+    position: absolute;
+    background-color: #252835;
+    height: 0.2rem;
+    width: 12rem;
+    right: 33rem;
+  }
+
+  .uiuc-line-vertical {
+    position: absolute;
+    background-color: #252835;
+    height: 2.2rem;
+    width: 0.2rem;
+    right: 45rem;
+    top: 2.9rem;
+  }
+
+  .uiuc-circle {
+    position: absolute;
+    background-color: #fafaf8;
+    border: solid;
+    border-width: 0.17rem;
+    border-color: #252835;
+    height: 0.67rem;
+    width: 0.67rem;
+    border-radius: 50%;
+    right: 33rem;
+  }
+
+  .experience1-container {
+    background-color: #252835;
+    position: absolute;
+    left: 32rem;
+    width: 15rem;
+    height: 30rem;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    padding: 1rem;
+    overflow-y: hidden;
+    z-index: 40;
+  }
+
+  .experience1-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.2rem;
+    width: 6.6rem;
+    left: 25.35rem;
+    top: 6.5rem;
+  }
+
+  .experience1-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 3.5rem;
+    width: 0.2rem;
+    left: 25.35rem;
+    top: 6.5rem;
+  }
+
+  .experience1-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 0.17rem;
+    border-color: #fafaf8;
+    height: 0.67rem;
+    width: 0.67rem;
+    border-radius: 50%;
+    left: 25rem;
+    top: 10rem;
+  }
+
+  .experience2-container {
+    background-color: #252835;
+    position: absolute;
+    right: 32rem;
+    top: 12.5rem;
+    width: 20rem;
+    height: 23rem;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    padding: 1rem;
+    z-index: 40;
+    overflow-y: hidden;
+  }
+
+  .experience2-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.2rem;
+    width: 3.5rem;
+    right: 33.5rem;
+    top: 11.1rem;
+  }
+
+  .experience2-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 1.5rem;
+    width: 0.2rem;
+    right: 37rem;
+    top: 11.1rem;
+  }
+
+  .experience2-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 0.17rem;
+    border-color: #fafaf8;
+    height: 0.67rem;
+    width: 0.67rem;
+    border-radius: 50%;
+    right: 33.5rem;
+    top: 10.8rem;
+  }
+
+  .experience3-container {
+    background-color: #252835;
+    position: absolute;
+    left: 26rem;
+    top: 24.65rem;
+    width: 20rem;
+    height: 18rem;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    padding: 1rem;
+    z-index: 40;
+    overflow-y: hidden;
+  }
+
+  .experience3-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.2rem;
+    width: 6rem;
+    left: 30.5rem;
+    top: 23.5rem;
+  }
+
+  .experience3-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 1.2rem;
+    width: 0.2rem;
+    left: 36.5rem;
+    top: 23.5rem;
+  }
+
+  .experience3-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 0.17rem;
+    border-color: #fafaf8;
+    height: 0.67rem;
+    width: 0.67rem;
+    border-radius: 50%;
+    left: 30.5rem;
+    top: 23rem;
+  }
+
+  .dropdown-arrow {
+    position: sticky;
+    filter: invert(100%);
+    bottom: 0rem;
+    left: 20rem;
+    animation: blinker 1s ease-in-out infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+  }
+
+  .click-me-div {
+    position: absolute;
+    bottom: 6rem;
+    left: 30rem;
+    font-family: "Graffiti";
+    transition: opacity 0.5s ease-in-out;
+    transition-delay: 1s
+  }
+
+  .click-me-h1 {
+    font-family: "Graffiti";
+    font-size: 2rem;
+    transform: rotate(15deg);
+    position: absolute;
+    bottom: -2rem;
+    left: 2rem;
+  }
+
+  .click-me-arrow {
+    position: absolute;
+    width: 4rem;
+    left: 2rem;
+    top: 1rem;
+    transform: rotate(135deg)
+  }
+
+
+

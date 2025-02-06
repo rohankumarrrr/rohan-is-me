@@ -1,0 +1,191 @@
+.section-container {
+    display: flex;
+    width: 100%;
+    background-color: #fafaf8;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+.section-title {
+    font-family: 'Lunar Escape';
+    color: #1f2935;
+    font-size: 1rem;
+    margin-top: 3rem;
+    font-weight: 600;
+}
+
+.section-subheader {
+    font-family: 'Lunar Escape';
+    color: #1f2935;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 0.01rem;
+}
+
+@font-face {
+    font-family: 'Futura'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book Italic font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Lunar Escape'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Digitag'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Graffiti'; /* Name your font family */
+    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+
+  .projects-section {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: #fafaf8;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .project-card {
+    height: 18vh;
+    width: 90vw;
+    clip-path: polygon(5% 0%, 100% 0%, 100% 70%, 95% 100%, 0% 100%, 0% 30%);
+    transition: clip-path 0.25s ease-in-out 0.25s; /* Delayed box-shadow */
+    flex-direction: row;
+    align-content: center;
+    text-align: center;
+    justify-items: center;
+    background-color: #1f2935;
+  }
+
+  .card-wrapper:hover .project-card {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
+  }
+
+  .card-wrapper {
+    display: inline-block;
+    transition: box-shadow 0.25s ease-in-out 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .card-wrapper:hover {
+    box-shadow: 5px 5px #4b5563; /* Add box-shadow on hover */
+  }
+
+    /* Hover Out: Box-Shadow disappears first, THEN clip-path changes back */
+  .card-wrapper:not(:hover) {
+    transition: box-shadow 0.25s ease-in-out 0.25s; /* No delay when removing shadow */
+  }
+  
+  .card-wrapper:not(:hover) .project-card {
+    transition: clip-path 0.25s ease-in-out 0.5s; /* Delay clip-path revert until shadow is gone */
+  }
+
+  .project-content {
+    height: 17.5vh;
+    width: 89.5vw;
+    clip-path: polygon(5% 0%, 100% 0%, 100% 70%, 95% 100%, 0% 100%, 0% 30%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #fafaf8;
+  }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    height: 90%;
+    background-color: #fafaf8;
+    margin-right: 4rem;
+    border: solid;
+    border-color:#1f2935;
+    border-width: 1px;
+  }
+
+  .project-img {
+    object-fit: cover;
+    width: 8rem;
+    height: 9rem;
+    filter: grayscale(0.5);
+  }
+  
+  .project-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-left: 4rem;
+    margin-top: 1rem;
+  }
+
+  .project-title {
+    font-size: 2rem;
+    font-family: "Graffiti";
+    font-weight: bold;
+    margin: 0rem 1rem;
+    color: #1f2935;
+  }
+  
+  .project-description {
+    font-size: 0.85rem;
+    color: #4b5563;
+    margin-left: 4rem;
+    margin-top: 1rem;
+    text-align: left;
+    font-family: 'Lunar Escape';
+  }
+  
+  .tech-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+    margin-left: 4rem;
+  }
+  
+  .tech-tag {
+    background-color: #e5e7eb;
+    padding: 0.3rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    color: #1f2935;
+    font-weight: 500;
+    font-family: 'Lunar Escape';
+  }
+  
+  .project-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
