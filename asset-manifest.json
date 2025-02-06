@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "./static/css/main.ce1bcc01.css",
-    "main.js": "./static/js/main.ab1f9107.js",
-    "static/js/151.6bfbf073.chunk.js": "./static/js/151.6bfbf073.chunk.js",
+    "main.js": "./static/js/main.12ea4525.js",
+    "static/js/151.2801b265.chunk.js": "./static/js/151.2801b265.chunk.js",
     "static/media/banner-img-final3.png": "./static/media/banner-img-final3.797d68d615c9259ebe56.png",
     "static/media/rk-logo-2.png": "./static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
     "static/media/Zerowax-6RLzg.otf": "./static/media/Zerowax-6RLzg.28f49da34aee274c5e07.otf",
@@ -15,11 +15,11 @@
     "static/media/Digitag.ttf": "./static/media/Digitag.f220b4f78090dda4e071.ttf",
     "index.html": "./index.html",
     "main.ce1bcc01.css.map": "./static/css/main.ce1bcc01.css.map",
-    "main.ab1f9107.js.map": "./static/js/main.ab1f9107.js.map",
-    "151.6bfbf073.chunk.js.map": "./static/js/151.6bfbf073.chunk.js.map"
+    "main.12ea4525.js.map": "./static/js/main.12ea4525.js.map",
+    "151.2801b265.chunk.js.map": "./static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ce1bcc01.css",
-    "static/js/main.ab1f9107.js"
+    "static/js/main.12ea4525.js"
   ]
 }
