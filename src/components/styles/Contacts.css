@@ -14,7 +14,7 @@
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
   }
 
 .contact-link {

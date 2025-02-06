@@ -11,27 +11,27 @@
   
   @font-face {
     font-family: 'Futura'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book Italic font.ttf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/lunar-escape/Lunar Escape.otf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
   }
 
   @font-face {
     font-family: 'Futura Upright'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/futura/Futura Book font.ttf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
 
   @font-face {
     font-family: 'Digitag'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
   }
 
   @font-face {
     font-family: 'Graffiti'; /* Name your font family */
-    src: url('/Users/rohan/personal-website/personal-website/src/assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
+    src: url('../../assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
   }
 
   .logo {

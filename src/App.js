@@ -8,7 +8,7 @@ import Contacts from "./components/Contacts";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <div>
       <Header />
       <div id="Home"><Home /></div>
