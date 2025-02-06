@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.45b40aa5.css",
+    "main.js": "/static/js/main.83943159.js",
+    "static/js/151.6bfbf073.chunk.js": "/static/js/151.6bfbf073.chunk.js",
+    "static/media/banner-img-final3.png": "/static/media/banner-img-final3.797d68d615c9259ebe56.png",
+    "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
+    "static/media/Zerowax-6RLzg.otf": "/static/media/Zerowax-6RLzg.28f49da34aee274c5e07.otf",
+    "static/media/soundswipe-img-png.png": "/static/media/soundswipe-img-png.dab6389ff0fbc90707c1.png",
+    "static/media/streebytes-promo-img.jpeg": "/static/media/streebytes-promo-img.563d6e3bdb2d9f214d45.jpeg",
+    "static/media/spray-arrow.png": "/static/media/spray-arrow.b2ed22d4ef37b61e0d2d.png",
+    "static/media/Futura Book Italic font.ttf": "/static/media/Futura Book Italic font.2fc529e7b78696a862c1.ttf",
+    "static/media/Futura Book font.ttf": "/static/media/Futura Book font.ed19af444f0976dbaf41.ttf",
+    "static/media/Lunar Escape.otf": "/static/media/Lunar Escape.f9d1218b8a645c33865a.otf",
+    "static/media/Digitag.ttf": "/static/media/Digitag.f220b4f78090dda4e071.ttf",
+    "index.html": "/index.html",
+    "main.45b40aa5.css.map": "/static/css/main.45b40aa5.css.map",
+    "main.83943159.js.map": "/static/js/main.83943159.js.map",
+    "151.6bfbf073.chunk.js.map": "/static/js/151.6bfbf073.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45b40aa5.css",
+    "static/js/main.83943159.js"
+  ]
+}
