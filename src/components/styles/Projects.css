@@ -1,37 +1,30 @@
 .section-container {
     display: flex;
-    width: 100%;
+    width: 100vw;
     background-color: #fafaf8;
     flex-direction: column;
     overflow-y: hidden;
 }
 
 .section-title {
-    font-family: 'Lunar Escape';
-    color: #1f2935;
-    font-size: 1rem;
-    margin-top: 3rem;
-    font-weight: 600;
+  font-weight: 600;
+  margin-top: 8vh;
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #1f2935;
+  font-family: 'Lunar Escape';
+  font-size: 2.3vh;
+
 }
 
 .section-subheader {
     font-family: 'Lunar Escape';
     color: #1f2935;
-    font-size: 0.8rem;
+    font-size: 1.7vh;
     font-weight: 500;
     text-align: center;
-    margin-top: 0.01rem;
+    margin-top: 0vh;
 }
-
-@font-face {
-    font-family: 'Futura'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
-
-  @font-face {
-    font-family: 'Futura Upright'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
@@ -48,33 +41,16 @@
     src: url('../../assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
   }
 
-
   .projects-section {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    gap: 1.5rem;
-    padding: 2rem;
+    width: 80vw;
+    gap: 3.5vh;
+    padding: 5vh 0;
     background-color: #fafaf8;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-  }
-  
-  .project-card {
-    height: 18vh;
-    width: 90vw;
-    clip-path: polygon(5% 0%, 100% 0%, 100% 70%, 95% 100%, 0% 100%, 0% 30%);
-    transition: clip-path 0.25s ease-in-out 0.25s; /* Delayed box-shadow */
-    flex-direction: row;
-    align-content: center;
-    text-align: center;
-    justify-items: center;
-    background-color: #1f2935;
-  }
-
-  .card-wrapper:hover .project-card {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
   }
 
   .card-wrapper {
@@ -84,8 +60,12 @@
     text-decoration: none;
   }
 
+  .card-wrapper:hover .project-card {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
+  }
+
   .card-wrapper:hover {
-    box-shadow: 5px 5px #4b5563; /* Add box-shadow on hover */
+    box-shadow: 7.5px 7.5px #4b5563;
   }
 
     /* Hover Out: Box-Shadow disappears first, THEN clip-path changes back */
@@ -97,9 +77,21 @@
     transition: clip-path 0.25s ease-in-out 0.5s; /* Delay clip-path revert until shadow is gone */
   }
 
+  .project-card {
+    height: 20vh;
+    width: 75vw;
+    clip-path: polygon(5% 0%, 100% 0%, 100% 70%, 95% 100%, 0% 100%, 0% 30%);
+    transition: clip-path 0.25s ease-in-out 0.25s; /* Delayed box-shadow */
+    flex-direction: row;
+    align-content: center;
+    text-align: center;
+    justify-items: center;
+    background-color: #1f2935;
+  }
+
   .project-content {
-    height: 17.5vh;
-    width: 89.5vw;
+    height: 19.5vh;
+    width: 74.5vw;
     clip-path: polygon(5% 0%, 100% 0%, 100% 70%, 95% 100%, 0% 100%, 0% 30%);
     display: flex;
     flex-direction: row;
@@ -111,76 +103,62 @@
 
   .project-info {
     display: flex;
+    width: 58vw;
+    height: 19.5vh;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 3.5vw;
+  }
+
+  .project-title {
+    font-size: 4.5vh;
+    font-family: "Graffiti";
+    font-weight: bold;
+    margin: 0vh 1vw;
+    margin-top: 2vh;
+    color: #1f2935;
+  }
+
+  .tech-tags {
+    display: flex;
+    gap: 0.5vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1vh;
+  }
+  
+  .tech-tag {
+    background-color: #e5e7eb;
+    padding: 0.5vh 0.7vw;
+    border-radius: 9999px;
+    font-size: 1.5vh;
+    color: #1f2935;
+    font-weight: 500;
+    font-family: 'Lunar Escape';
+  }
+
+  .project-description {
+    font-size: 2vh;
+    color: #4b5563;
+    margin: 0 auto;
+    margin-top: 2vh;
+    text-align: left;
+    font-family: 'Lunar Escape';
   }
 
   .img-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 8rem;
-    height: 8rem;
-    height: 90%;
+    width: 19.5vh;
+    height: 19.5vh;
+    margin-right: 3.5vw;
     background-color: #fafaf8;
-    margin-right: 4rem;
-    border: solid;
-    border-color:#1f2935;
-    border-width: 1px;
   }
 
   .project-img {
     object-fit: cover;
-    width: 8rem;
-    height: 9rem;
+    width: 9vw;
+    height: 9vw;
     filter: grayscale(0.5);
-  }
-  
-  .project-header {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    margin-left: 4rem;
-    margin-top: 1rem;
-  }
-
-  .project-title {
-    font-size: 2rem;
-    font-family: "Graffiti";
-    font-weight: bold;
-    margin: 0rem 1rem;
-    color: #1f2935;
-  }
-  
-  .project-description {
-    font-size: 0.85rem;
-    color: #4b5563;
-    margin-left: 4rem;
-    margin-top: 1rem;
-    text-align: left;
-    font-family: 'Lunar Escape';
-  }
-  
-  .tech-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 0.5rem;
-    margin-left: 4rem;
-  }
-  
-  .tech-tag {
-    background-color: #e5e7eb;
-    padding: 0.3rem 0.7rem;
-    border-radius: 9999px;
-    font-size: 0.7rem;
-    color: #1f2935;
-    font-weight: 500;
-    font-family: 'Lunar Escape';
-  }
-  
-  .project-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
   }
