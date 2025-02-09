@@ -89,13 +89,6 @@
     cursor: pointer;
   }
 
-  .experience-p {
-    color: #fff;
-    margin: none;
-    font-size: 0.8rem;
-    font-family: "Lunar Escape"
-  }
-
   .banner-img {
     display: flex;
     position: relative;
@@ -141,196 +134,19 @@
     transform: rotate(135deg)
   }
 
-  .uiuc-container {
-    background-color: #252835;
-    position: absolute;
-    width: 16vw;
-    height: 13vh;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    overflow-y: hidden;
-    z-index: 40;
-  }
-
-  .uiuc-line-horizontal {
-    position: absolute;
-    background-color: #252835;
-    height: 0.2rem;
-    width: 12rem;
-    right: 33rem;
-    z-index: 40;
-  }
-
-  .uiuc-line-vertical {
-    position: absolute;
-    background-color: #252835;
-    height: 2.2rem;
-    width: 0.2rem;
-    right: 45rem;
-    top: 2.9rem;
-  }
-
-  .uiuc-circle {
-    position: absolute;
-    background-color: #fafaf8;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #252835;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    right: 33rem;
-    z-index: 40;
-  }
-
-  .experience1-container {
-    background-color: #252835;
-    position: absolute;
-    left: 32rem;
-    width: 15rem;
-    height: 30rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    overflow-y: hidden;
-    z-index: 40;
-  }
-
-  .experience1-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 6.6rem;
-    left: 25.35rem;
-    top: 6.5rem;
-  }
-
-  .experience1-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 3.5rem;
-    width: 0.2rem;
-    left: 25.35rem;
-    top: 6.5rem;
-  }
-
-  .experience1-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    left: 25rem;
-    top: 10rem;
-  }
-
-  .experience2-container {
-    background-color: #252835;
-    position: absolute;
-    right: 32rem;
-    top: 12.5rem;
-    width: 20rem;
-    height: 23rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    z-index: 40;
-    overflow-y: hidden;
-  }
-
-  .experience2-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 3.5rem;
-    right: 33.5rem;
-    top: 11.1rem;
-  }
-
-  .experience2-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 1.5rem;
-    width: 0.2rem;
-    right: 37rem;
-    top: 11.1rem;
-  }
-
-  .experience2-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    right: 33.5rem;
-    top: 10.8rem;
-  }
-
-  .experience3-container {
-    background-color: #252835;
-    position: absolute;
-    left: 26rem;
-    top: 24.65rem;
-    width: 20rem;
-    height: 18rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    z-index: 40;
-    overflow-y: hidden;
-  }
-
-  .experience3-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 6rem;
-    left: 30.5rem;
-    top: 23.5rem;
-  }
-
-  .experience3-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 1.2rem;
-    width: 0.2rem;
-    left: 36.5rem;
-    top: 23.5rem;
-  }
-
-  .experience3-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    left: 30.5rem;
-    top: 23rem;
+  .experience-p {
+    color: #fff;
+    margin: 1.5vh 0;
+    padding-right: 2vw;
+    font-size: 1.6vh;
+    font-family: "Lunar Escape"
   }
 
   .dropdown-arrow {
     position: sticky;
     filter: invert(100%);
-    bottom: 0rem;
-    left: 20rem;
+    bottom: -1.5vh;
+    left: 20.5vw;
     animation: blinker 1s ease-in-out infinite;
   }
 
@@ -338,6 +154,215 @@
     50% {
         opacity: 0;
     }
+  }
+
+  .uiuc-container {
+    background-color: #252835;
+    position: absolute;
+    width: 22vw;
+    height: 15vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    right: 38vw;
+    bottom: 74vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 40;
+  }
+
+  .uiuc-circle {
+    position: absolute;
+    background-color: #fafaf8;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #252835;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 70vh;
+    right: 37vw;
+  }
+
+  .uiuc-line-horizontal {
+    position: absolute;
+    background-color: #252835;
+    height: 0.5vh;
+    width: 12vw;
+    right: 37vw;
+    bottom: 70.75vh;
+    z-index: 40;
+  }
+
+  .uiuc-line-vertical {
+    position: absolute;
+    background-color: #252835;
+    height: 4vh;
+    width: 0.5vh;
+    right: 49vw;
+    bottom: 70.75vh;
+  }
+
+  .experience1-container {
+    background-color: #252835;
+    position: absolute;
+    width: 22vw;
+    height: 20vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    left: 35.35vw;
+    bottom: 50vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 45;
+  }
+
+  .experience1-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 7vw;
+    left: 28.35vw;
+    bottom: 66vh;
+    z-index: 40;
+  }
+
+  .experience1-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 5vh;
+    width: 0.5vh;
+    left: 28.35vw;
+    bottom: 61vh;
+    z-index: 30;
+  }
+
+  .experience1-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 61vh;
+    left: 28vw;
+  }
+
+  .experience2-container {
+    background-color: #252835;
+    position: absolute;
+    width: 20vw;
+    height: 15vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    right: 35vw;
+    bottom: 36vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 42;
+  }
+
+  .experience2-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 4vw;
+    right: 37vw;
+    bottom: 61.5vh;
+    z-index: 40;
+  }
+
+  .experience2-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 12vh;
+    width: 0.5vh;
+    right: 41vw;
+    bottom: 50vh;
+    z-index: 40;
+  }
+
+  .experience2-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 61vh;
+    right: 37vw;
+  }
+
+  .experience3-container {
+    background-color: #252835;
+    position: absolute;
+    width: 20vw;
+    height: 20vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    left: 36vw;
+    bottom: 24vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 45;
+  }
+
+  .experience3-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 8vw;
+    left: 33.3vw;
+    z-index: 40;
+  }
+
+  .experience3-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 4vh;
+    width: 0.5vh;
+    left: 41.25vw;
+    bottom: 38.75vh;
+    z-index: 40;
+  }
+
+  .experience3-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    left: 33.3vw;
   }
 
 

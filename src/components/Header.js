@@ -78,7 +78,7 @@ function Header() {
         },
         hide: {
             opacity: 1,
-            x: 262,
+            x: 280,
             transition: {
                 type: "spring",
                 duration: 0.5,

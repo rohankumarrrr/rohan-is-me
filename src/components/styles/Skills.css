@@ -52,9 +52,9 @@
     padding: 2vh 0vw;
     width: 75vw;
     min-height: 50vh;
-    margin: 0 auto;
+    margin: 0 0;
     display: grid;
-    justify-items: center;
+    justify-items: space-between;
     align-items: center;
     grid-template-columns: repeat(3, 25vw);
     gap: 1vh 0vw;
@@ -90,7 +90,7 @@
     background-color: #e0e0e0;
     overflow: hidden;
     height: 1.5vh;
-    margin: 0 1vw;
+    margin: 0 1.5vw;
     border: solid;
     border-width: 0.5px;
     border-color:#4b5563;
