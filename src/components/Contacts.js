@@ -23,18 +23,20 @@ const Contacts = () => {
     }
 
     return (
-        <motion.div className="contacts-section-container" variants={container} initial="hidden" whileInView={"show"} viewport={{once: true}}>
-            <motion.a className="contact-link" variants={item} href="mailto:rohankumarrr313@gmail.com" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
-            email
-            </motion.a>
-            <p className="divider">/</p>
-            <motion.a className="contact-link" variants={item} href="https://github.com/rohankumarrrr" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
-            github
-            </motion.a>
-            <p className="divider">/</p>
-            <motion.a className="contact-link" variants={item} href="https://linkedin.com/in/rohankumarrr313" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
-            linkedin
-            </motion.a>
+        <motion.div className="container-for-section" >
+            <motion.div className="container-for-contacts" variants={container} initial="hidden" whileInView={"show"} viewport={{once: true}}>
+                <motion.a className="contact-link" variants={item} href="mailto:rohankumarrr313@gmail.com" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
+                email
+                </motion.a>
+                <p className="divider">/</p>
+                <motion.a className="contact-link" variants={item} href="https://github.com/rohankumarrrr" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
+                github
+                </motion.a>
+                <p className="divider">/</p>
+                <motion.a className="contact-link" variants={item} href="https://linkedin.com/in/rohankumarrr313" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
+                linkedin
+                </motion.a>
+            </motion.div>
         </motion.div>
     );
 };

@@ -1,16 +1,17 @@
-.contacts-section-container {
-    display: flex;
-    flex-direction: row;
+.container-for-section {
+    width: 100vw;
     background-color: #fafaf8;
+    display: flex;
     justify-content: center;
-    align-items: flex-end;
-    overflow: hidden;
-    padding-bottom: 1%;
-    width: 100%;
-    height: 10vh;
-    gap: 1rem;
-    font-family: 'Lunar Escape';
   }
+
+.container-for-contacts {
+  display: flex;
+  width: 20vw;
+  height: 10vh;
+  justify-content: center;
+  font-family: 'Lunar Escape';
+}
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
@@ -18,12 +19,26 @@
   }
 
 .contact-link {
-    color: #1f2935;
-    font-size: 1rem;
-    margin-bottom: 1rem;
+  display: flex;
+  width: 5vw;
+  height: 10vh;
+  font-size: 2vh;
+  color: #1f2935;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .divider {
+  display: flex;
+  height: 10vh;
+  width: 1.5vw;
+  font-size: 2vh;
+  margin: 0;
   color: #1f2935;
-  font-size: 1rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
 }
+

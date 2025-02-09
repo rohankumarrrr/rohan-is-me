@@ -38,9 +38,7 @@ const ProjectCard = ({ project, p_index }) => {
     >
         <motion.div className="project-content">
             <motion.div className="project-info">
-                <motion.div className="project-header">
-                    <h3 className="project-title">{project.title}</h3>
-                </motion.div>
+                <h3 className="project-title">{project.title}</h3>
                 <div className="tech-tags">
                         {project.tech.map((tech, index) => (
                         <span key={index} className="tech-tag">{tech}</span>

@@ -39,7 +39,7 @@ const Skills = () => {
             initial={{ width: 0 }}
             whileInView={{ width: `${skill.profiency * 10}%` }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: index * 0.2 }}
+            transition={{ duration: 1, delay: index * 0.2 + 1 }}
           ></motion.div>
         </div>
         <span className="proficiency">{skill.profiency}</span>
@@ -49,6 +49,7 @@ const Skills = () => {
 
   return (
     <motion.section className="skills-container">
+      <motion.h2 className="section-title" style={{color: "#6b7280"}} initial={{opacity: 0, y: 150}} viewport={{once: true}} whileInView={{opacity: 1, y: 0}} transition={{duration: 1, type: "spring", bounce: 0.3}}>/ skills & proficiency /</motion.h2>
       <motion.div className="skills-section">
         {skills.map((skill, index) => (
           <SkillBar key={index} skill={skill} index={index} />

@@ -4,7 +4,7 @@
     justify-content: center;
     min-height: 100vh;
     background-color: #fafaf8;
-    padding: 1rem;
+    padding: 2vh 0vw;
     overflow-x: hidden;
   }
 
@@ -16,11 +16,6 @@
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
     src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
-  }
-
-  @font-face {
-    font-family: 'Futura Upright'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
 
   @font-face {
@@ -40,275 +35,118 @@
     font-family: 'Futura'
   }
   
-  h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #1f2935;
-  }
-  
-  p {
-    color: #6b7280;
-    margin-top: 1rem;
-    max-width: 24rem;
-    font-size: 0.8rem;
-    font-family: 'Lunar Escape';
+  .text-container {
+    width: 30vw;
+    height: 85vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .experience-p {
-    color: #fff;
-    margin: none;
-    font-size: 0.75rem;
-    font-family: "Lunar Escape"
-  }
-  
-  .cta-button {
-    padding: 0.75rem 1.5rem;
-    background: #252835;
-    color: white;
-    transition: opacity 0.2s;
-    height: 1.2rem;
-    font-family: 'Graffiti';
-    border: none;
-    margin: 0;
-    font-size: 1rem;
-    text-decoration: none;
-    align-content: center;
-  }
-  
-  .cta-button:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-  
   .image-container {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    max-height: 10rem;
-    bottom: 10rem;
+    justify-content: flex-end;
+    height: 85vh;
+    width: 45vw;
   }
 
-  .background-shape {
-    position: absolute;
-    width: 12rem;
-    height: 12rem;
-    background: black;
-    transform: rotate(45deg);
+  h1 {
+    margin: 0;
+    margin-top: 5vh;
+    font-size: 7.8vh;
+    font-weight: bold;
+    color: #1f2935;
+    margin-bottom: 3vh;
+  }
+  
+  p {
+    color: #6b7280;
+    font-size: 1.7vh;
+    font-family: 'Lunar Escape';
+    margin: 0;
+  }
+
+  .cta-button {
+    padding: 1vh 1.5vw;
+    background: #252835;
+    color: white;
+    transition: opacity 0.2s;
+    height: 2.4vh;
+    font-family: 'Lunar Escape';
+    border: none;
+    margin: 0;
+    font-size: 1.2vh;
+    text-decoration: none;
+    align-content: center;
+    margin-top: 3vh;
+  }
+
+  .cta-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }
 
   .banner-img {
-    max-height: 40rem;
+    display: flex;
+    position: relative;
+    object-fit: contain;
+    width: 45vw;
+    height: 85vh;
+  }
+
+  .click-me-div {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     align-self: flex-start;
+    width: 15vw;
+    height: 20vh;
+    font-family: "Graffiti";
+    transition: opacity 0.5s ease-in-out;
+    transition-delay: 1s;
+    z-index: 1;
   }
-  
-  .footer {
-    margin-top: 2rem;
+
+  .click-me-h1 {
+    font-family: "Graffiti";
+    align-self: flex-start;
+    font-size: 5vh;
     text-align: center;
-    color: #6b7280;
-    font-size: 0.875rem;
-  }
-  
-  .footer a {
-    color: inherit;
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
-  
-  .footer a:hover {
-    color: black;
+    transform: rotate(15deg);
+    position: absolute;
+    margin: 0;
+    left: 5vw;
   }
 
-  .uiuc-container {
-    background-color: #252835;
+  .click-me-arrow {
     position: absolute;
-    right: 35rem;
-    bottom: 7rem;
-    width: 20rem;
-    height: 8rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    overflow-y: hidden;
-    z-index: 40;
+    object-fit: contain;
+    margin: 0;
+    width: 4.5vw;
+    height: 4.5vw;
+    align-self: flex-end;
+    right: 4vw;
+    bottom: 2vh;
+    transform: rotate(135deg)
   }
 
-  .uiuc-line-horizontal {
-    position: absolute;
-    background-color: #252835;
-    height: 0.2rem;
-    width: 12rem;
-    right: 33rem;
-  }
-
-  .uiuc-line-vertical {
-    position: absolute;
-    background-color: #252835;
-    height: 2.2rem;
-    width: 0.2rem;
-    right: 45rem;
-    top: 2.9rem;
-  }
-
-  .uiuc-circle {
-    position: absolute;
-    background-color: #fafaf8;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #252835;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    right: 33rem;
-  }
-
-  .experience1-container {
-    background-color: #252835;
-    position: absolute;
-    left: 32rem;
-    width: 15rem;
-    height: 30rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    overflow-y: hidden;
-    z-index: 40;
-  }
-
-  .experience1-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 6.6rem;
-    left: 25.35rem;
-    top: 6.5rem;
-  }
-
-  .experience1-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 3.5rem;
-    width: 0.2rem;
-    left: 25.35rem;
-    top: 6.5rem;
-  }
-
-  .experience1-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    left: 25rem;
-    top: 10rem;
-  }
-
-  .experience2-container {
-    background-color: #252835;
-    position: absolute;
-    right: 32rem;
-    top: 12.5rem;
-    width: 20rem;
-    height: 23rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    z-index: 40;
-    overflow-y: hidden;
-  }
-
-  .experience2-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 3.5rem;
-    right: 33.5rem;
-    top: 11.1rem;
-  }
-
-  .experience2-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 1.5rem;
-    width: 0.2rem;
-    right: 37rem;
-    top: 11.1rem;
-  }
-
-  .experience2-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    right: 33.5rem;
-    top: 10.8rem;
-  }
-
-  .experience3-container {
-    background-color: #252835;
-    position: absolute;
-    left: 26rem;
-    top: 24.65rem;
-    width: 20rem;
-    height: 18rem;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    padding: 1rem;
-    z-index: 40;
-    overflow-y: hidden;
-  }
-
-  .experience3-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.2rem;
-    width: 6rem;
-    left: 30.5rem;
-    top: 23.5rem;
-  }
-
-  .experience3-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 1.2rem;
-    width: 0.2rem;
-    left: 36.5rem;
-    top: 23.5rem;
-  }
-
-  .experience3-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 0.17rem;
-    border-color: #fafaf8;
-    height: 0.67rem;
-    width: 0.67rem;
-    border-radius: 50%;
-    left: 30.5rem;
-    top: 23rem;
+  .experience-p {
+    color: #fff;
+    margin: 1.5vh 0;
+    padding-right: 2vw;
+    font-size: 1.6vh;
+    font-family: "Lunar Escape"
   }
 
   .dropdown-arrow {
     position: sticky;
     filter: invert(100%);
-    bottom: 0rem;
-    left: 20rem;
+    bottom: -1.5vh;
+    left: 20.5vw;
     animation: blinker 1s ease-in-out infinite;
   }
 
@@ -318,30 +156,213 @@
     }
   }
 
-  .click-me-div {
+  .uiuc-container {
+    background-color: #252835;
     position: absolute;
-    bottom: 6rem;
-    left: 30rem;
-    font-family: "Graffiti";
-    transition: opacity 0.5s ease-in-out;
-    transition-delay: 1s
+    width: 22vw;
+    height: 15vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    right: 38vw;
+    bottom: 74vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 40;
   }
 
-  .click-me-h1 {
-    font-family: "Graffiti";
-    font-size: 2rem;
-    transform: rotate(15deg);
+  .uiuc-circle {
     position: absolute;
-    bottom: -2rem;
-    left: 2rem;
+    background-color: #fafaf8;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #252835;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 70vh;
+    right: 37vw;
   }
 
-  .click-me-arrow {
+  .uiuc-line-horizontal {
     position: absolute;
-    width: 4rem;
-    left: 2rem;
-    top: 1rem;
-    transform: rotate(135deg)
+    background-color: #252835;
+    height: 0.5vh;
+    width: 12vw;
+    right: 37vw;
+    bottom: 70.75vh;
+    z-index: 40;
+  }
+
+  .uiuc-line-vertical {
+    position: absolute;
+    background-color: #252835;
+    height: 4vh;
+    width: 0.5vh;
+    right: 49vw;
+    bottom: 70.75vh;
+  }
+
+  .experience1-container {
+    background-color: #252835;
+    position: absolute;
+    width: 22vw;
+    height: 20vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    left: 35.35vw;
+    bottom: 50vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 45;
+  }
+
+  .experience1-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 7vw;
+    left: 28.35vw;
+    bottom: 66vh;
+    z-index: 40;
+  }
+
+  .experience1-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 5vh;
+    width: 0.5vh;
+    left: 28.35vw;
+    bottom: 61vh;
+    z-index: 30;
+  }
+
+  .experience1-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 61vh;
+    left: 28vw;
+  }
+
+  .experience2-container {
+    background-color: #252835;
+    position: absolute;
+    width: 20vw;
+    height: 15vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    right: 35vw;
+    bottom: 36vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 42;
+  }
+
+  .experience2-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 4vw;
+    right: 37vw;
+    bottom: 61.5vh;
+    z-index: 40;
+  }
+
+  .experience2-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 12vh;
+    width: 0.5vh;
+    right: 41vw;
+    bottom: 50vh;
+    z-index: 40;
+  }
+
+  .experience2-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    bottom: 61vh;
+    right: 37vw;
+  }
+
+  .experience3-container {
+    background-color: #252835;
+    position: absolute;
+    width: 20vw;
+    height: 20vh;
+    border: solid;
+    border-color: #6b7280;
+    border-width: 1px;
+    border-radius: 1px;
+    left: 36vw;
+    bottom: 24vh;
+    padding: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vw;
+    overflow-y: hidden;
+    z-index: 45;
+  }
+
+  .experience3-line-horizontal {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 0.5vh;
+    width: 8vw;
+    left: 33.3vw;
+    z-index: 40;
+  }
+
+  .experience3-line-vertical {
+    position: absolute;
+    background-color: #fafaf8;
+    height: 4vh;
+    width: 0.5vh;
+    left: 41.25vw;
+    bottom: 38.75vh;
+    z-index: 40;
+  }
+
+  .experience3-circle {
+    position: absolute;
+    background-color: #252835;
+    border: solid;
+    border-width: 2.5px;
+    border-color: #fafaf8;
+    height: 0.65vw;
+    width: 0.65vw;
+    border-radius: 50%;
+    z-index: 40;
+    left: 33.3vw;
   }
 
 
