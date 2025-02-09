@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.85bbb735.css",
-    "main.js": "/static/js/main.a1371068.js",
+    "main.css": "/static/css/main.a27f8421.css",
+    "main.js": "/static/js/main.f9c58906.js",
     "static/js/151.2801b265.chunk.js": "/static/js/151.2801b265.chunk.js",
     "static/media/banner-img-final3.png": "/static/media/banner-img-final3.797d68d615c9259ebe56.png",
     "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
@@ -14,12 +14,12 @@
     "static/media/Lunar Escape.otf": "/static/media/Lunar Escape.f9d1218b8a645c33865a.otf",
     "static/media/Digitag.ttf": "/static/media/Digitag.f220b4f78090dda4e071.ttf",
     "index.html": "/index.html",
-    "main.85bbb735.css.map": "/static/css/main.85bbb735.css.map",
-    "main.a1371068.js.map": "/static/js/main.a1371068.js.map",
+    "main.a27f8421.css.map": "/static/css/main.a27f8421.css.map",
+    "main.f9c58906.js.map": "/static/js/main.f9c58906.js.map",
     "151.2801b265.chunk.js.map": "/static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.85bbb735.css",
-    "static/js/main.a1371068.js"
+    "static/css/main.a27f8421.css",
+    "static/js/main.f9c58906.js"
   ]
 }
