@@ -136,7 +136,7 @@
 
   .experience-p {
     color: #fff;
-    margin: 1.5vh 0;
+    margin: 1vh 0;
     padding-right: 2vw;
     font-size: 1.6vh;
     font-family: "Lunar Escape"
@@ -145,8 +145,10 @@
   .dropdown-arrow {
     position: sticky;
     filter: invert(100%);
-    bottom: -1.5vh;
-    left: 20.5vw;
+    align-self: flex-end;
+    margin-right: 1vw;
+    margin-bottom: 1vw;
+    object-fit: contain;
     animation: blinker 1s ease-in-out infinite;
   }
 
@@ -159,8 +161,10 @@
   .uiuc-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 22vw;
-    height: 15vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -169,10 +173,10 @@
     bottom: 74vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 40;
+    margin: 0;
   }
 
   .uiuc-circle {
@@ -211,8 +215,10 @@
   .experience1-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 22vw;
-    height: 20vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -221,7 +227,6 @@
     bottom: 50vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 45;
@@ -264,8 +269,10 @@
   .experience2-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 20vw;
-    height: 15vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -274,7 +281,6 @@
     bottom: 36vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 42;
@@ -317,17 +323,18 @@
   .experience3-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 20vw;
-    height: 20vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
     border-radius: 1px;
     left: 36vw;
-    bottom: 24vh;
+    bottom: 20.5vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 45;
