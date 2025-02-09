@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
+import './App.css';
 import Home from './components/Home';
 import Header from './components/Header';
 import Skills from "./components/Skills";
@@ -17,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <div>
+    <div className="app">
       <Header />
       <div id="Home"><Home /></div>
       <div id="Skills"><Skills /></div>

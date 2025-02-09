@@ -143,10 +143,13 @@
   }
 
   .dropdown-arrow {
-    position: sticky;
+    position: relative;
     filter: invert(100%);
-    bottom: -1.5vh;
-    left: 20.5vw;
+    aspect-ratio: 1/1;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    bottom: 0.1vh;
     animation: blinker 1s ease-in-out infinite;
   }
 
@@ -317,14 +320,14 @@
   .experience3-container {
     background-color: #252835;
     position: absolute;
-    width: 20vw;
+    width: 22vw;
     height: 20vh;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
     border-radius: 1px;
     left: 36vw;
-    bottom: 24vh;
+    bottom: 22vh;
     padding: 0;
     padding-top: 2vh;
     padding-bottom: 2vh;

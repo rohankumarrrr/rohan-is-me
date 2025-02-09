@@ -64,7 +64,6 @@
     border-color: #4b5563;
     font-family: 'Lunar Escape';
     font-size: 1.8vh;
-    z-index: -1;
   }
 
   .nav-links li:hover {

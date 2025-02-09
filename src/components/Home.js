@@ -9,20 +9,20 @@ const Home = () => {
   
   const [showExperience, setShowExperience] = useState(false);
 
-  const uiucContainerHeightCollapsed = "17vh";
-  const uiucContainerHeightExpanded = "26.5vh";
+  const uiucContainerHeightCollapsed = "20vh";
+  const uiucContainerHeightExpanded = "30vh";
   const [uiucContainerHeight, setUiucContainerHeight] = useState(uiucContainerHeightCollapsed);
 
-  const experience1ContainerHeightCollapsed = "15.5vh";
-  const experience1ContainerHeightExpanded = "58vh";
+  const experience1ContainerHeightCollapsed = "18vh";
+  const experience1ContainerHeightExpanded = "63vh";
   const [experience1ContainerHeight, setExperience1ContainerHeight] = useState(experience1ContainerHeightCollapsed);
 
-  const experience2ContainerHeightCollapsed = "10.5vh";
-  const experience2ContainerHeightExpanded = "51vh";
+  const experience2ContainerHeightCollapsed = "13vh";
+  const experience2ContainerHeightExpanded = "53vh";
   const [experience2ContainerHeight, setExperience2ContainerHeight] = useState(experience2ContainerHeightCollapsed);
 
-  const experience3ContainerHeightCollapsed = "10.5vh";
-  const experience3ContainerHeightExpanded = "42vh";
+  const experience3ContainerHeightCollapsed = "13vh";
+  const experience3ContainerHeightExpanded = "46vh";
   const [experience3ContainerHeight, setExperience3ContainerHeight] = useState(experience3ContainerHeightCollapsed);
 
   const variantsUIUC = {
@@ -155,9 +155,11 @@ const Home = () => {
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>University of Illinois Urbana-Champaign</p>
                 <p className="experience-p">August 2023 - May 2026</p>
                 <p className="experience-p">Major: Statistics & Computer Science</p>
-                <p className="experience-p">GPA: 3.97/4.0</p>
-                <p className="experience-p">Courses: Data Structures, Algorithms, Computer Systems, Numerical Methods, & Statistical Modeling</p>
-                <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: uiucContainerHeight == uiucContainerHeightExpanded ? "rotate(90deg)" : "none"}}/>
+                <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
+                    <p className="experience-p" style={{margin: 0, paddingRight: "0.5vw"}}>GPA: 3.97/4.0</p>
+                    <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: uiucContainerHeight == uiucContainerHeightExpanded ? "rotate(90deg)" : "none"}}/>
+                </div>
+                {uiucContainerHeight == uiucContainerHeightExpanded && <p className="experience-p">Courses: Data Structures, Algorithms, Computer Systems, Numerical Methods, & Statistical Modeling</p>}
             </motion.div>
             <motion.div className="uiuc-line-horizontal" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="uiuc-line-vertical" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'}/>
@@ -166,11 +168,13 @@ const Home = () => {
             <motion.div className="experience1-container" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience1ContainerHeight == experience1ContainerHeightExpanded ? setExperience1ContainerHeight(experience1ContainerHeightCollapsed) : setExperience1ContainerHeight(experience1ContainerHeightExpanded)} style={{height: experience1ContainerHeight, transition: "height 0.5s ease-out"}}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>Human-Computer Interaction Lab</p>
                 <p className="experience-p">Software Engineering Research Assistant</p>
-                <p className="experience-p">January 2024 - Present</p>
-                <p className="experience-p">Contributed to the DATA Peer Tool to evaluate the utility of data from GitHub, Slack, Google Docs to determine value of contributions by team members in CS 465, a project-based UIUC course.</p>
-                <p className="experience-p">Developed configurable dashboard web application using Qualtrics and Next.js to generate intelligent feedback on students’ teamwork behaviors, perform data-augmented peer evaluations, and enable assessment of teamwork processes.</p>
-                <p className="experience-p">Generated data visualizations using Python, Streamlit, and GitHub REST API to determine generate actionable insights on how pull requests, commits, diff files, etc. can be used to determine contribution impact of a team member.</p>
-                <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience1ContainerHeight == experience1ContainerHeightExpanded ? "rotate(90deg)" : "none", left: "20.5vw"}}/>
+                <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
+                    <p className="experience-p" style={{margin: 0, paddingRight: "0.5vw"}}>January 2024 - Present</p>
+                    <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience1ContainerHeight == experience1ContainerHeightExpanded ? "rotate(90deg)" : "none"}}/>
+                </div>
+                {experience1ContainerHeight == experience1ContainerHeightExpanded && <p className="experience-p">Contributed to the DATA Peer Tool to evaluate the utility of data from GitHub, Slack, Google Docs to determine value of contributions by team members in CS 465, a project-based UIUC course.</p>}
+                {experience1ContainerHeight == experience1ContainerHeightExpanded && <p className="experience-p">Developed configurable dashboard web application using Qualtrics and Next.js to generate intelligent feedback on students’ teamwork behaviors, perform data-augmented peer evaluations, and enable assessment of teamwork processes.</p>}
+                {experience1ContainerHeight == experience1ContainerHeightExpanded && <p className="experience-p">Generated data visualizations using Python, Streamlit, and GitHub REST API to determine generate actionable insights on how pull requests, commits, diff files, etc. can be used to determine contribution impact of a team member.</p>}
             </motion.div>
             <motion.div className="experience1-line-horizontal" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="experience1-line-vertical" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'}/>
@@ -179,13 +183,15 @@ const Home = () => {
             <motion.div className="experience2-container" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience2ContainerHeight == experience2ContainerHeightExpanded ? setExperience2ContainerHeight(experience2ContainerHeightCollapsed) : setExperience2ContainerHeight(experience2ContainerHeightExpanded)} style={{height: experience2ContainerHeight, transition: "height 0.5s ease-out"}}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>AM Best</p>
                 <p className="experience-p">Software Developer Intern</p>
-                <p className="experience-p">June 2024 - July 2024</p>
-                <p className="experience-p">Successfully designed and launched the Company Logo API for AM Best Rating Services using ASP.NET, C# and Azure DevOps, resulting in client logos being displayed on AMBest mobile app, public profile webpage, credit ratings, and financial reports.</p>
-                <p className="experience-p">Conducted unit and 30vhmated testing using MSTest and Azure Pipeline to ensure proper API functionality and
-ensured code security using Veracode.</p>
-                <p className="experience-p">Led technical team meetings, providing insights and feedback on project progress and potential improvements to
-business executives.</p>
-                <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience2ContainerHeight == experience2ContainerHeightExpanded ? "rotate(90deg)" : "none", left: "18.5vw"}}/>
+                <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
+                    <p className="experience-p" style={{margin: 0, paddingRight: "0.5vw"}}>June 2024 - July 2024</p>
+                    <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience2ContainerHeight == experience2ContainerHeightExpanded ? "rotate(90deg)" : "none"}}/>
+                </div>
+                {experience2ContainerHeight == experience2ContainerHeightExpanded && <p className="experience-p">Successfully designed and launched the Company Logo API for AM Best Rating Services using ASP.NET, C# and Azure DevOps, resulting in client logos being displayed on AMBest mobile app, public profile webpage, credit ratings, and financial reports.</p>}
+                {experience2ContainerHeight == experience2ContainerHeightExpanded && <p className="experience-p">Conducted unit and 30vhmated testing using MSTest and Azure Pipeline to ensure proper API functionality and
+ensured code security using Veracode.</p>}
+                {experience2ContainerHeight == experience2ContainerHeightExpanded && <p className="experience-p">Led technical team meetings, providing insights and feedback on project progress and potential improvements to
+business executives.</p>}
             </motion.div>
             <motion.div className="experience2-line-horizontal" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="experience2-line-vertical" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'}/>
@@ -194,11 +200,13 @@ business executives.</p>
             <motion.div className="experience3-container" key="animation-on-state" initial={false} variants={variantsExperience3} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience3ContainerHeight == experience3ContainerHeightExpanded ? setExperience3ContainerHeight(experience3ContainerHeightCollapsed) : setExperience3ContainerHeight(experience3ContainerHeightExpanded)} style={{height: experience3ContainerHeight, transition: "height 0.5s ease-out"}}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>Changing the Present</p>
                 <p className="experience-p">Front-End Developer Intern</p>
-                <p className="experience-p">November 2023 - January 2024</p>
-                <p className="experience-p">Designed and implemented responsive user interfaces with Liquid, leading to full overhaul of Shopify product page.</p>
-                <p className="experience-p">Led communication between front-end and back-end developer teams to streamline communication between API and front-end webpage.</p>
-                <p className="experience-p">Contributed to the adoption of agile methodologies using Git, improving team productivity by 15% through iterative development cycles.</p>
-                <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience3ContainerHeight == experience3ContainerHeightExpanded ? "rotate(90deg)" : "none", left: "18.5vw"}}/>
+                <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
+                    <p className="experience-p" style={{margin: 0, paddingRight: "0.5vw"}}>November 2023 - January 2024</p>
+                    <Icon icon={"ic:baseline-play-arrow"} className="dropdown-arrow" style={{transform: experience3ContainerHeight == experience3ContainerHeightExpanded ? "rotate(90deg)" : "none"}}/>
+                </div>
+                {experience3ContainerHeight == experience3ContainerHeightExpanded && <p className="experience-p">Designed and implemented responsive user interfaces with Liquid, leading to full overhaul of Shopify product page.</p>}
+                {experience3ContainerHeight == experience3ContainerHeightExpanded && <p className="experience-p">Led communication between front-end and back-end developer teams to streamline communication between API and front-end webpage.</p>}
+                {experience3ContainerHeight == experience3ContainerHeightExpanded && <p className="experience-p">Contributed to the adoption of agile methodologies using Git, improving team productivity by 15% through iterative development cycles.</p>}
             </motion.div>
             <motion.div className="experience3-line-horizontal" key="animation-on-state" initial={false} variants={variantsExperience3} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="experience3-line-vertical" key="animation-on-state" initial={false} variants={variantsExperience3} animate={showExperience ? 'show' : 'hide'}/>
