@@ -151,7 +151,7 @@ const Home = () => {
                 </h1>
                 <img className="click-me-arrow" src={sprayArrow}></img>
             </motion.div>
-            <motion.div className="uiuc-container" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => uiucContainerHeight == uiucContainerHeightExpanded ? setUiucContainerHeight(uiucContainerHeightCollapsed) : setUiucContainerHeight(uiucContainerHeightExpanded)} style={{height: uiucContainerHeight, transition: "height 0.5s ease-out"}}>
+            <motion.div className="uiuc-container" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => uiucContainerHeight == uiucContainerHeightExpanded ? setUiucContainerHeight(uiucContainerHeightCollapsed) : setUiucContainerHeight(uiucContainerHeightExpanded)}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>University of Illinois Urbana-Champaign</p>
                 <p className="experience-p">August 2023 - May 2026</p>
                 <p className="experience-p">Major: Statistics & Computer Science</p>
@@ -165,7 +165,7 @@ const Home = () => {
             <motion.div className="uiuc-line-vertical" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="uiuc-circle" key="animation-on-state" initial={false} variants={variantsUIUC} animate={showExperience ? 'show' : 'hide'}/>
 
-            <motion.div className="experience1-container" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience1ContainerHeight == experience1ContainerHeightExpanded ? setExperience1ContainerHeight(experience1ContainerHeightCollapsed) : setExperience1ContainerHeight(experience1ContainerHeightExpanded)} style={{height: experience1ContainerHeight, transition: "height 0.5s ease-out"}}>
+            <motion.div className="experience1-container" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience1ContainerHeight == experience1ContainerHeightExpanded ? setExperience1ContainerHeight(experience1ContainerHeightCollapsed) : setExperience1ContainerHeight(experience1ContainerHeightExpanded)}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>Human-Computer Interaction Lab</p>
                 <p className="experience-p">Software Engineering Research Assistant</p>
                 <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
@@ -180,7 +180,7 @@ const Home = () => {
             <motion.div className="experience1-line-vertical" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="experience1-circle" key="animation-on-state" initial={false} variants={variantsExperience1} animate={showExperience ? 'show' : 'hide'}/>
 
-            <motion.div className="experience2-container" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience2ContainerHeight == experience2ContainerHeightExpanded ? setExperience2ContainerHeight(experience2ContainerHeightCollapsed) : setExperience2ContainerHeight(experience2ContainerHeightExpanded)} style={{height: experience2ContainerHeight, transition: "height 0.5s ease-out"}}>
+            <motion.div className="experience2-container" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience2ContainerHeight == experience2ContainerHeightExpanded ? setExperience2ContainerHeight(experience2ContainerHeightCollapsed) : setExperience2ContainerHeight(experience2ContainerHeightExpanded)}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>AM Best</p>
                 <p className="experience-p">Software Developer Intern</p>
                 <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>
@@ -197,7 +197,7 @@ business executives.</p>}
             <motion.div className="experience2-line-vertical" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'}/>
             <motion.div className="experience2-circle" key="animation-on-state" initial={false} variants={variantsExperience2} animate={showExperience ? 'show' : 'hide'}/>
 
-            <motion.div className="experience3-container" key="animation-on-state" initial={false} variants={variantsExperience3} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience3ContainerHeight == experience3ContainerHeightExpanded ? setExperience3ContainerHeight(experience3ContainerHeightCollapsed) : setExperience3ContainerHeight(experience3ContainerHeightExpanded)} style={{height: experience3ContainerHeight, transition: "height 0.5s ease-out"}}>
+            <motion.div className="experience3-container" key="animation-on-state" initial={false} variants={variantsExperience3} animate={showExperience ? 'show' : 'hide'} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => experience3ContainerHeight == experience3ContainerHeightExpanded ? setExperience3ContainerHeight(experience3ContainerHeightCollapsed) : setExperience3ContainerHeight(experience3ContainerHeightExpanded)}>
                 <p className="experience-p" style={{fontFamily: "Graffiti", fontSize: "2.75vh"}}>Changing the Present</p>
                 <p className="experience-p">Front-End Developer Intern</p>
                 <div style={{display: "flex", flexDirection: "row", margin: 0, width: "100%", alignItems: "flex-start"}}>

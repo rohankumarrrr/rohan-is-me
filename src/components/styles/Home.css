@@ -136,7 +136,7 @@
 
   .experience-p {
     color: #fff;
-    margin: 1.5vh 0;
+    margin: 1vh 0;
     padding-right: 2vw;
     font-size: 1.6vh;
     font-family: "Lunar Escape"
@@ -162,8 +162,10 @@
   .uiuc-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 22vw;
-    height: 15vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -172,10 +174,10 @@
     bottom: 74vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 40;
+    margin: 0;
   }
 
   .uiuc-circle {
@@ -214,8 +216,10 @@
   .experience1-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 22vw;
-    height: 20vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -224,7 +228,6 @@
     bottom: 50vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 45;
@@ -267,8 +270,10 @@
   .experience2-container {
     background-color: #252835;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 20vw;
-    height: 15vh;
+    height: auto;
     border: solid;
     border-color: #6b7280;
     border-width: 1px;
@@ -277,7 +282,6 @@
     bottom: 36vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 42;
@@ -330,7 +334,6 @@
     bottom: 22vh;
     padding: 0;
     padding-top: 2vh;
-    padding-bottom: 2vh;
     padding-left: 2vw;
     overflow-y: hidden;
     z-index: 45;
