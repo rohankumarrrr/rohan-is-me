@@ -1,17 +1,19 @@
 .container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    gap: 5vh;
     min-height: 100vh;
-    background-color: #fafaf8;
-    padding: 2vh 0vw;
-    overflow-x: hidden;
+    padding: 2vh 10vw;
+    background-color: #fff;
+    flex-wrap: wrap;
   }
 
   @font-face {
     font-family: 'Futura'; /* Name your font family */
     src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
+
+
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
@@ -36,8 +38,8 @@
   }
   
   .text-container {
-    width: 30vw;
-    height: 85vh;
+    width: 35vw;
+    height: 45vw;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -49,14 +51,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 85vh;
+    height: 45vw;
     width: 45vw;
+    overflow: hidden;
   }
 
   h1 {
     margin: 0;
     margin-top: 5vh;
-    font-size: 7.8vh;
+    font-size: 4.7vw;
     font-weight: bold;
     color: #1f2935;
     margin-bottom: 3vh;
@@ -64,8 +67,8 @@
   
   p {
     color: #6b7280;
-    font-size: 1.7vh;
-    font-family: 'Lunar Escape';
+    font-size: 1.2vw;
+    font-family: 'Futura Upright';
     margin: 0;
   }
 
@@ -75,13 +78,15 @@
     color: white;
     transition: opacity 0.2s;
     height: 2.4vh;
-    font-family: 'Lunar Escape';
+    font-family: 'Futura Upright';
     border: none;
     margin: 0;
-    font-size: 1.2vh;
+    font-size: 0.9vw;
+    width: 6.8vw;
     text-decoration: none;
     align-content: center;
     margin-top: 3vh;
+    text-align: center;
   }
 
   .cta-button:hover {
@@ -92,19 +97,18 @@
   .banner-img {
     display: flex;
     position: relative;
-    object-fit: contain;
+    object-fit: cover;
     width: 45vw;
-    height: 85vh;
   }
 
   .click-me-div {
     position: absolute;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
     align-self: flex-start;
     width: 15vw;
-    height: 20vh;
+    height: 10vh;
     font-family: "Graffiti";
     transition: opacity 0.5s ease-in-out;
     transition-delay: 1s;
@@ -114,24 +118,19 @@
   .click-me-h1 {
     font-family: "Graffiti";
     align-self: flex-start;
-    font-size: 5vh;
+    font-size: 3vw;
     text-align: center;
     transform: rotate(15deg);
     position: absolute;
     margin: 0;
-    left: 5vw;
+    left: 6vw;
   }
 
   .click-me-arrow {
+    align-self: flex-start;
     position: absolute;
     object-fit: contain;
-    margin: 0;
-    width: 4.5vw;
-    height: 4.5vw;
-    align-self: flex-end;
-    right: 4vw;
-    bottom: 2vh;
-    transform: rotate(135deg)
+    transform: rotate(140deg);
   }
 
   .experience-p {
@@ -169,7 +168,7 @@
     border-width: 1px;
     border-radius: 1px;
     right: 38vw;
-    bottom: 74vh;
+    bottom: 68vh;
     padding: 0;
     padding-top: 2vh;
     padding-bottom: 2vh;
@@ -188,7 +187,7 @@
     width: 0.65vw;
     border-radius: 50%;
     z-index: 40;
-    bottom: 70vh;
+    bottom: 64vh;
     right: 37vw;
   }
 
@@ -198,7 +197,7 @@
     height: 0.5vh;
     width: 12vw;
     right: 37vw;
-    bottom: 70.75vh;
+    bottom: 64.75vh;
     z-index: 40;
   }
 
@@ -208,7 +207,7 @@
     height: 4vh;
     width: 0.5vh;
     right: 49vw;
-    bottom: 70.75vh;
+    bottom: 64.75vh;
   }
 
   .experience1-container {
@@ -221,7 +220,7 @@
     border-width: 1px;
     border-radius: 1px;
     left: 35.35vw;
-    bottom: 50vh;
+    bottom: 44vh;
     padding: 0;
     padding-top: 2vh;
     padding-bottom: 2vh;
@@ -236,7 +235,7 @@
     height: 0.5vh;
     width: 7vw;
     left: 28.35vw;
-    bottom: 66vh;
+    bottom: 60vh;
     z-index: 40;
   }
 
@@ -246,7 +245,7 @@
     height: 5vh;
     width: 0.5vh;
     left: 28.35vw;
-    bottom: 61vh;
+    bottom: 55vh;
     z-index: 30;
   }
 
@@ -260,7 +259,7 @@
     width: 0.65vw;
     border-radius: 50%;
     z-index: 40;
-    bottom: 61vh;
+    bottom: 55vh;
     left: 28vw;
   }
 
@@ -274,7 +273,7 @@
     border-width: 1px;
     border-radius: 1px;
     right: 35vw;
-    bottom: 36vh;
+    bottom: 30vh;
     padding: 0;
     padding-top: 2vh;
     padding-bottom: 2vh;
@@ -289,7 +288,7 @@
     height: 0.5vh;
     width: 4vw;
     right: 37vw;
-    bottom: 61.5vh;
+    bottom: 55.5vh;
     z-index: 40;
   }
 
@@ -299,7 +298,7 @@
     height: 12vh;
     width: 0.5vh;
     right: 41vw;
-    bottom: 50vh;
+    bottom: 44vh;
     z-index: 40;
   }
 
@@ -313,7 +312,7 @@
     width: 0.65vw;
     border-radius: 50%;
     z-index: 40;
-    bottom: 61vh;
+    bottom: 55vh;
     right: 37vw;
   }
 
@@ -326,8 +325,8 @@
     border-color: #6b7280;
     border-width: 1px;
     border-radius: 1px;
-    left: 36vw;
-    bottom: 22vh;
+    left: 38vw;
+    bottom: 15vh;
     padding: 0;
     padding-top: 2vh;
     padding-bottom: 2vh;
@@ -341,17 +340,18 @@
     background-color: #fafaf8;
     height: 0.5vh;
     width: 8vw;
-    left: 33.3vw;
+    left: 32.6vw;
+    bottom: 22vh;
     z-index: 40;
   }
 
   .experience3-line-vertical {
     position: absolute;
     background-color: #fafaf8;
-    height: 4vh;
+    height: 8vh;
     width: 0.5vh;
-    left: 41.25vw;
-    bottom: 38.75vh;
+    left: 32.6vw;
+    bottom: 14vh;
     z-index: 40;
   }
 
@@ -365,7 +365,8 @@
     width: 0.65vw;
     border-radius: 50%;
     z-index: 40;
-    left: 33.3vw;
+    left: 32.3vw;
+    bottom: 14vh;
   }
 
 

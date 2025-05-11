@@ -35,7 +35,8 @@
 
   .logo {
     object-fit: cover;
-    height: 7vh;
+    height: 4.5vw;
+    width: 4.5vw;
   }
 
   .logo:hover {
@@ -46,14 +47,14 @@
   .nav-links {
     display: flex;
     position: relative;
-    width: 19vw;
+    width: 13vw;
     height: 6vh;
     gap: 2vw;
     color: #4b5563;
     list-style-type: none;
     background-color: #fafaf8;
     padding-left: 1vw;
-    padding-right: 3vw;
+    padding-right: 5.5vw;
     border-radius: 30px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -62,8 +63,8 @@
     border-right: none;
     border-width: 0.5px;
     border-color: #4b5563;
-    font-family: 'Lunar Escape';
-    font-size: 1.8vh;
+    font-family: 'Futura Upright';
+    font-size: 1.2vw;
   }
 
   .nav-links li:hover {
@@ -73,7 +74,7 @@
   .contacts-container {
     display: flex;
     position: relative;
-    width: 14.5vw;
+    width: 17vw;
     height: 6vh;
     gap: 0.8vw;
     color: #4b5563;
@@ -95,8 +96,7 @@
     display: flex;
     position: relative;
     object-fit: contain;
-    width: 3vw;
-    top: 0.5vh;
+    height: 6vh;
     align-self: flex-start;
     cursor: pointer;
     padding: 0;
@@ -109,6 +109,8 @@
 
   .contact-logo-container {
       margin-left: 0.5vw;
+      width: 4.5vw;
+      height: 4.5vw;
       object-fit: cover;
   }
   

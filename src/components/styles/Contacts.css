@@ -1,6 +1,6 @@
 .container-for-section {
     width: 100vw;
-    background-color: #fafaf8;
+    background-color: #fff;
     display: flex;
     justify-content: center;
   }
@@ -10,12 +10,17 @@
   width: 20vw;
   height: 10vh;
   justify-content: center;
-  font-family: 'Lunar Escape';
+  font-family: 'Futura Upright';
 }
 
   @font-face {
     font-family: 'Lunar Escape'; /* Name your font family */
     src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
+  }
+
+  @font-face {
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
 
 .contact-link {
