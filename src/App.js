@@ -20,11 +20,7 @@ function App() {
   const handleScrollEvent = () => {
     if (isScrolling.current) return;
 
-    if (isMobile || isTablet) {
-      // For mobile and tablet devices, we can use touch events instead of scroll events
-      // This is a placeholder for future implementation if needed
-      return;
-    }
+    if (isMobile || isTablet) return;
 
     const scrollY = window.scrollY;
     const direction = scrollY > lastScrollY.current ? "down" : "up";
@@ -57,6 +53,8 @@ function App() {
   }
 
   useEffect(() => {
+    if (isMobile || isTablet) return;
+
     const throttledHandleScroll = throttle(handleScrollEvent, 200);
     window.addEventListener('scroll', throttledHandleScroll);
 
