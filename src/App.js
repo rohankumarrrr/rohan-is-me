@@ -4,11 +4,6 @@ import './App.css';
 import Home from './components/Home';
 import Header from './components/Header';
 import Experiences from './components/Experiences';
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contacts from "./components/Contacts";
-import WrongScreenSize from "./components/WrongScreenSize";
-import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import { throttle } from 'lodash';
 
 function App() {
@@ -65,16 +60,11 @@ function App() {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-    {isMobile || isTablet || Math.min(window.screen.width, window.screen.height) < 768 ?
-    <div className="app">
-      <div><WrongScreenSize /></div>
-    </div> :
-    <div className="app">
-      <Header windowMenuVisible={windowMenuVisible} setWindowMenuVisible={setWindowMenuVisible} />
-      <div id="Home"><Home /></div>
-      <div id="Experiences"><Experiences /></div>
-      <div id="Contacts"><Contacts /></div>
-    </div>}
+      <div className="app">
+        <Header windowMenuVisible={windowMenuVisible} setWindowMenuVisible={setWindowMenuVisible} />
+        <div id="Home"><Home /></div>
+        <div id="Experiences"><Experiences /></div>
+      </div>
     </BrowserRouter>
   );
 }

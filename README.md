@@ -14,8 +14,6 @@ Welcome to my personal website repository! This is a fully responsive and intera
 - **Hosting**: GitHub Pages
 
 ## 📸 Screenshots
-![Homepage Screenshot](public/home-page-image.png)
-
 To run this project: Open [https://rohan-is.me](https://rohan-is.me) in your browser.
 
 ## 📬 Contact

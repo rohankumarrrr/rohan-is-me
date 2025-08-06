@@ -1,12 +1,14 @@
 // TimelineSection.js
 import React from 'react';
 import './styles/Experiences.css';
+import Contacts from './Contacts';
+import { motion } from "framer-motion";
 
 const education = [
   {
-    period: 'august 2023 - may 2025',
+    period: 'august 2023 - may 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.97 \n\n activites: technology chair @ nobe, software developer @ ibc, content coordinator @ reflections|projections \n\n courses: data structures, algorithms, applied machine learning, database systems, programming languages & compilers, numerical methods, computer systems, statistical modeling, data science',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.89 \n\n activites: technology chair @ nobe, software developer @ ibc, content coordinator @ reflections|projections \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, computer systems, numerical methods, probability \& statistics, statistical modeling, statistical learning, data science, linear algebra',
   },
   {
     period: 'september 2019 - june 2023',
@@ -18,23 +20,18 @@ const education = [
 const experience = [
   {
     period: 'may 2025 – present',
-    title: 'software engineer intern',
-    description: '\n relativity — working on the relativity processing platform team to build a data pipeline for data ingestion and analysis.',
+    title: 'software engineer intern \@ relativity',
+    description: '\n processing arm \& infrastructure — backend infrastructure and automation tools to migrate terabytes of data from mysql to azure nosql, and reduce direct client database access by 20\% by extending api endpoints and developing automated github actions workflows.',
   },
   {
     period: 'january 2024 – present',
-    title: 'research assistant',
-    description: '\n hci lab @ uiuc — building a full-stack peer evaluation platform using next.js and python.',
+    title: 'research assistant \@ uiuc',
+    description: '\n orchid research group — developed a real-time dashboard that tracks individual contribution metrics aggregated from gitHub, slack, google drive, and google docs to provide insight and feedback on teamwork behaviors in project-based cs courses.',
   },
   {
     period: 'june 2024 – july 2024',
-    title: 'software engineer intern',
-    description: '\n am best — developed a web application api for insurance analytics using c# and .net core.',
-  },
-  {
-    period: 'november 2023 - january 2024',
-    title: 'software engineer intern',
-    description: '\n changing the present — developed a web application for non-profit organizations using liquid.js, flask, and supabase.',
+    title: 'software engineer intern @ am best',
+    description: '\n developed a web application api for insurance analytics using c# and .net core.',
   },
 ];
 
@@ -70,6 +67,7 @@ export default function Experiences() {
           ))}
         </div>
       </div>
+      <div id="Contacts"><Contacts /></div>
     </section>
   );
 }

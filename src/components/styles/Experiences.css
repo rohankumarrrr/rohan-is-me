@@ -12,12 +12,12 @@
     padding: 2vh 10vw;
     background-color: #fff;
     flex-wrap: wrap;
-    height: 88vh;
   }
   
   .timeline-column {
     flex: 1;
     min-width: 300px;
+    max-height: 80vh;
     position: relative;
   }
   
@@ -86,4 +86,53 @@
     color: #6b7280;
     line-height: 1.5;
   }
+
+  @media (max-width: 768px) {
+    .timeline-section {
+      gap: 3vh; /* Add spacing between sections */
+    }
   
+    .timeline-column {
+      max-height: none; /* Allow columns to expand dynamically */
+      width: 100%; /* Make columns take full width */
+    }
+  
+    .timeline-heading {
+      font-size: 1.2rem; /* Adjust heading size for smaller screens */
+      text-align: center; /* Center-align headings */
+    }
+  
+    .timeline-line {
+      left: -3.8vw;
+      padding-left: 1.5vw; /* Reduce padding for smaller screens */
+      border-left: 1px solid #252835;
+    }
+  
+    .timeline-item {
+      margin-bottom: 1.5rem; /* Adjust spacing between items */
+      width: 80vw;
+    }
+
+    .timeline-dot {
+      left: 0rem; /* Adjust dot position */
+      top: 3vh; /* Adjust dot alignment */
+      width: 8px; /* Adjust dot size */
+      height: 8px;
+    }
+  
+    .timeline-content {
+      padding: 0.8rem 1rem; /* Adjust padding for smaller screens */
+    }
+  
+    .timeline-period {
+      font-size: 0.8rem; /* Adjust font size for smaller screens */
+    }
+  
+    .timeline-title {
+      font-size: 1rem; /* Adjust title size */
+    }
+  
+    .timeline-description {
+      font-size: 0.85rem; /* Adjust description size */
+    }
+  }

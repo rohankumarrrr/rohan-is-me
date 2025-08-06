@@ -52,33 +52,10 @@ function Header({ windowMenuVisible, setWindowMenuVisible }) {
         };
       }, []);
 
-      const variantsWindows = {
-        show: {
-            opacity: 1,
-            x: "0vw",
-            transition: {
-                type: "spring",
-                duration: 0.5,
-                bounce: 0.3,
-                ease: "easeOut"
-            }
-        },
-        hide: {
-            opacity: 1,
-            x: "14.5vw",
-            transition: {
-                type: "spring",
-                duration: 0.5,
-                bounce: 0.3,
-                ease: "easeOut"
-            }
-        }
-    };
-
     const variantsContacts = {
         show: {
             opacity: 1,
-            x: "0vw",
+            x: "0%",
             transition: {
                 type: "spring",
                 duration: 0.5,
@@ -88,7 +65,7 @@ function Header({ windowMenuVisible, setWindowMenuVisible }) {
         },
         hide: {
             opacity: 1,
-            x: "-14vw",
+            x: "70%",
             transition: {
                 type: "spring",
                 duration: 0.5,
@@ -100,7 +77,8 @@ function Header({ windowMenuVisible, setWindowMenuVisible }) {
 
     return (
     <header className="header">
-        <motion.div className="contacts-container" key="animation-on-state" variants={variantsContacts} animate={!windowMenuVisible.current ? 'show' : 'hide'}>
+        <motion.div className="contacts-container" key="animation-on-state" variants={variantsContacts} animate={windowMenuVisible.current ? 'show' : 'hide'}>
+            <motion.img src={require("../assets/images/rk-logo-2.png")} alt="logo" className="logo"  whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}/>
             <motion.a href="mailto:rohankumarrr313@gmail.com" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
                 <img alt="Mail Logo" className="contact-logo-container" src="https://icons.veryicon.com/png/o/miscellaneous/practical-life-icon/mail-255.png" style={{width: "3vw", height: "8vh", marginTop: '0.2vh'}}></img>
             </motion.a>
@@ -110,15 +88,7 @@ function Header({ windowMenuVisible, setWindowMenuVisible }) {
             <motion.a href="https://linkedin.com/in/rohankumarrr313" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
                 <img alt="LinkedIn Logo" className="contact-logo-container" src="https://img.icons8.com/ios11/512/linkedin.png" style={{width: "2.5vw", height: "6vh", marginTop: "0.5vh", marginLeft: "1vw", marginRight: '0.25vw'}}></img>
             </motion.a>
-            <motion.img src={require("../assets/images/rk-logo-2.png")} alt="logo" className="logo"  whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }} onClick={() => {setWindowMenuVisible(!windowMenuVisible.current)}}/>
         </motion.div>
-         <nav>
-           <motion.ul className="nav-links" key="animation-on-state" variants={variantsWindows} animate={windowMenuVisible.current ? 'show' : 'hide'}>
-             <motion.img whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }} className='menu-icon' src={require("../assets/images/menu-icon.png")}  onClick={() => {setWindowMenuVisible(!windowMenuVisible.current)}} />
-             <motion.li style={{cursor: "pointer"}} whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }} onClick={() => handleHeaderClick("Home")}>home</motion.li>
-             <motion.li style={{cursor: "pointer"}} whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }} onClick={() => handleHeaderClick("Experiences")}>experiences</motion.li>
-           </motion.ul>
-         </nav>
     </header>
     )
 }

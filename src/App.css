@@ -7,7 +7,7 @@ html, body {
   scroll-snap-type: y mandatory;
 }
 
-#Home, #Experiences, #Contacts {
+#Home, #Experiences {
   scroll-snap-align: start; /* Optional: For better snapping behavior */
 }
 

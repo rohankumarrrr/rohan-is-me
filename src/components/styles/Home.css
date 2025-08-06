@@ -12,23 +12,6 @@
     font-family: 'Futura'; /* Name your font family */
     src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
-
-
-
-  @font-face {
-    font-family: 'Lunar Escape'; /* Name your font family */
-    src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
-  }
-
-  @font-face {
-    font-family: 'Digitag'; /* Name your font family */
-    src: url('../../assets/fonts/digitag/Digitag.ttf'); /* Locate the .ttf file within your directory*/
-  }
-
-  @font-face {
-    font-family: 'Graffiti'; /* Name your font family */
-    src: url('../../assets/fonts/zerowax-font/Zerowax-6RLzg.otf'); /* Locate the .ttf file within your directory*/
-  }
   
   .content {
     display: flex;
@@ -101,273 +84,48 @@
     width: 45vw;
   }
 
-  .click-me-div {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    align-self: flex-start;
-    width: 15vw;
-    height: 10vh;
-    font-family: "Graffiti";
-    transition: opacity 0.5s ease-in-out;
-    transition-delay: 1s;
-    z-index: 1;
-  }
-
-  .click-me-h1 {
-    font-family: "Graffiti";
-    align-self: flex-start;
-    font-size: 3vw;
-    text-align: center;
-    transform: rotate(15deg);
-    position: absolute;
-    margin: 0;
-    left: 6vw;
-  }
-
-  .click-me-arrow {
-    align-self: flex-start;
-    position: absolute;
-    object-fit: contain;
-    transform: rotate(140deg);
-  }
-
-  .experience-p {
-    color: #fff;
-    margin: 1.5vh 0;
-    padding-right: 2vw;
-    font-size: 1.6vh;
-    font-family: "Lunar Escape"
-  }
-
-  .dropdown-arrow {
-    position: relative;
-    filter: invert(100%);
-    aspect-ratio: 1/1;
-    align-self: center;
-    padding: 0;
-    margin: 0;
-    bottom: 0.1vh;
-    animation: blinker 1s ease-in-out infinite;
-  }
-
   @keyframes blinker {
     50% {
         opacity: 0;
     }
   }
 
-  .uiuc-container {
-    background-color: #252835;
-    position: absolute;
-    width: 22vw;
-    height: 15vh;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    right: 38vw;
-    bottom: 68vh;
-    padding: 0;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 2vw;
-    overflow-y: hidden;
-    z-index: 40;
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column-reverse; /* Stack elements vertically */
+    align-items: center; /* Center align for mobile */
+    justify-content: center;
   }
 
-  .uiuc-circle {
-    position: absolute;
-    background-color: #fafaf8;
-    border: solid;
-    border-width: 2.5px;
-    border-color: #252835;
-    height: 0.65vw;
-    width: 0.65vw;
-    border-radius: 50%;
-    z-index: 40;
-    bottom: 64vh;
-    right: 37vw;
+  .text-container {
+    width: 90%; /* Adjust width for smaller screens */
+    height: auto; /* Allow height to adjust dynamically */
   }
 
-  .uiuc-line-horizontal {
-    position: absolute;
-    background-color: #252835;
-    height: 0.5vh;
-    width: 12vw;
-    right: 37vw;
-    bottom: 64.75vh;
-    z-index: 40;
+  .image-container {
+    width: 90%; /* Adjust width for smaller screens */
+    height: auto; /* Allow height to adjust dynamically */
+    justify-content: center; /* Center the image */
   }
 
-  .uiuc-line-vertical {
-    position: absolute;
-    background-color: #252835;
-    height: 4vh;
-    width: 0.5vh;
-    right: 49vw;
-    bottom: 64.75vh;
+  .banner-img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
   }
 
-  .experience1-container {
-    background-color: #252835;
-    position: absolute;
-    width: 22vw;
-    height: 20vh;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    left: 35.35vw;
-    bottom: 44vh;
-    padding: 0;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 2vw;
-    overflow-y: hidden;
-    z-index: 45;
+  h1 {
+    font-size: 10vw; /* Adjust font size for smaller screens */
   }
 
-  .experience1-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.5vh;
-    width: 7vw;
-    left: 28.35vw;
-    bottom: 60vh;
-    z-index: 40;
+  p {
+    font-size: 3vw; /* Adjust font size for smaller screens */
   }
 
-  .experience1-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 5vh;
-    width: 0.5vh;
-    left: 28.35vw;
-    bottom: 55vh;
-    z-index: 30;
+  .cta-button {
+    font-size: 2.5vw; /* Adjust button font size */
+    padding: 1vh 2vw; /* Adjust padding for smaller screens */
+    width: auto; /* Allow buttons to resize dynamically */
   }
-
-  .experience1-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 2.5px;
-    border-color: #fafaf8;
-    height: 0.65vw;
-    width: 0.65vw;
-    border-radius: 50%;
-    z-index: 40;
-    bottom: 55vh;
-    left: 28vw;
-  }
-
-  .experience2-container {
-    background-color: #252835;
-    position: absolute;
-    width: 20vw;
-    height: 15vh;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    right: 35vw;
-    bottom: 30vh;
-    padding: 0;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 2vw;
-    overflow-y: hidden;
-    z-index: 42;
-  }
-
-  .experience2-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.5vh;
-    width: 4vw;
-    right: 37vw;
-    bottom: 55.5vh;
-    z-index: 40;
-  }
-
-  .experience2-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 12vh;
-    width: 0.5vh;
-    right: 41vw;
-    bottom: 44vh;
-    z-index: 40;
-  }
-
-  .experience2-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 2.5px;
-    border-color: #fafaf8;
-    height: 0.65vw;
-    width: 0.65vw;
-    border-radius: 50%;
-    z-index: 40;
-    bottom: 55vh;
-    right: 37vw;
-  }
-
-  .experience3-container {
-    background-color: #252835;
-    position: absolute;
-    width: 22vw;
-    height: 20vh;
-    border: solid;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 1px;
-    left: 38vw;
-    bottom: 15vh;
-    padding: 0;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 2vw;
-    overflow-y: hidden;
-    z-index: 45;
-  }
-
-  .experience3-line-horizontal {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 0.5vh;
-    width: 8vw;
-    left: 32.6vw;
-    bottom: 22vh;
-    z-index: 40;
-  }
-
-  .experience3-line-vertical {
-    position: absolute;
-    background-color: #fafaf8;
-    height: 8vh;
-    width: 0.5vh;
-    left: 32.6vw;
-    bottom: 14vh;
-    z-index: 40;
-  }
-
-  .experience3-circle {
-    position: absolute;
-    background-color: #252835;
-    border: solid;
-    border-width: 2.5px;
-    border-color: #fafaf8;
-    height: 0.65vw;
-    width: 0.65vw;
-    border-radius: 50%;
-    z-index: 40;
-    left: 32.3vw;
-    bottom: 14vh;
-  }
-
-
+}
 
