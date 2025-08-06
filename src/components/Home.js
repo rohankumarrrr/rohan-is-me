@@ -18,14 +18,14 @@ const Home = () => {
                 }
               }
             >
-            <motion.h1
-              initial = {{ opacity: 0, y: 100 }}
-              animate = {{opacity: 1, y: 0}}
-              transition = {{duration: 1.5, ease: "backIn", type: "spring", bounce: 0.5}}
-              style={{whiteSpace: "nowrap"}}
-            >
-              hey, it's Rohan
-            </motion.h1>
+              <motion.h1
+                initial = {{ opacity: 0, y: 100 }}
+                animate = {{opacity: 1, y: 0}}
+                transition = {{duration: 1.5, ease: "backIn", type: "spring", bounce: 0.5}}
+                style={{whiteSpace: "nowrap"}}
+              >
+                hey, it's Rohan
+              </motion.h1>
             </div>
             <motion.p  initial = {{ opacity: 0, y: 100 }} animate = {{ opacity: 1, y: 0 }} transition = {{ duration: 1.5, ease: "backIn", type: "spring", bounce: 0.5, delay: 0.25}}>
               i'm a junior at the university of illinois urbana-champaign. when i'm not thinking of what to eat next, producing music, or doomscrolling for my next favorite pair of jeans on depop, i'm a passionate software developer, data engineer, and computer scientist.
