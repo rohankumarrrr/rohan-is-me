@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import Header from './components/Header';
 import Experiences from './components/Experiences';
+import { isMobile, isTablet } from 'react-device-detect';
 import { throttle } from 'lodash';
 
 function App() {
@@ -18,6 +19,12 @@ function App() {
 
   const handleScrollEvent = () => {
     if (isScrolling.current) return;
+
+    if (isMobile || isTablet) {
+      // For mobile and tablet devices, we can use touch events instead of scroll events
+      // This is a placeholder for future implementation if needed
+      return;
+    }
 
     const scrollY = window.scrollY;
     const direction = scrollY > lastScrollY.current ? "down" : "up";
