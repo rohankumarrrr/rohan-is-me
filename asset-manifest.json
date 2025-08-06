@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.6f64569d.css",
+    "main.css": "/static/css/main.ac1278fd.css",
     "main.js": "/static/js/main.697fba95.js",
     "static/js/151.2801b265.chunk.js": "/static/js/151.2801b265.chunk.js",
     "static/media/banner-img.png": "/static/media/banner-img.ca5372c55314b9e570f0.png",
     "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
-    "static/media/Futura Bold Italic font.ttf": "/static/media/Futura Bold Italic font.d4a603f6dc11d13d50b9.ttf",
-    "static/media/Futura Book Italic font.ttf": "/static/media/Futura Book Italic font.2fc529e7b78696a862c1.ttf",
-    "static/media/Futura Book font.ttf": "/static/media/Futura Book font.ed19af444f0976dbaf41.ttf",
+    "static/media/futura_book_italic_font-truetype.ttf": "/static/media/futura_book_italic_font-truetype.2fc529e7b78696a862c1.ttf",
+    "static/media/futura_book_font-truetype.ttf": "/static/media/futura_book_font-truetype.ed19af444f0976dbaf41.ttf",
+    "static/media/futura_book_italic_font-webfont.woff": "/static/media/futura_book_italic_font-webfont.f6c232c622343d222a0e.woff",
+    "static/media/futura_book_font-webfont.woff": "/static/media/futura_book_font-webfont.e8582817fea4b9b6130f.woff",
+    "static/media/futura_book_italic_font-webfont.woff2": "/static/media/futura_book_italic_font-webfont.86a03a20c7604036b06d.woff2",
+    "static/media/futura_book_font-webfont.woff2": "/static/media/futura_book_font-webfont.42034007279286d8639a.woff2",
     "index.html": "/index.html",
-    "main.6f64569d.css.map": "/static/css/main.6f64569d.css.map",
+    "main.ac1278fd.css.map": "/static/css/main.ac1278fd.css.map",
     "main.697fba95.js.map": "/static/js/main.697fba95.js.map",
     "151.2801b265.chunk.js.map": "/static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f64569d.css",
+    "static/css/main.ac1278fd.css",
     "static/js/main.697fba95.js"
   ]
 }
