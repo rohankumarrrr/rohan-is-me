@@ -1,21 +1,18 @@
 .container-for-section {
     width: 100vw;
-    background-color: #fafaf8;
     display: flex;
     justify-content: center;
   }
 
 .container-for-contacts {
   display: flex;
-  width: 20vw;
-  height: 10vh;
   justify-content: center;
-  font-family: 'Lunar Escape';
+  font-family: 'Futura Upright';
 }
 
   @font-face {
-    font-family: 'Lunar Escape'; /* Name your font family */
-    src: url('../../assets/fonts/lunar-escape/Lunar\ Escape.otf'); /* Locate the .ttf file within your directory*/
+    font-family: 'Futura Upright'; /* Name your font family */
+    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
   }
 
 .contact-link {
@@ -40,5 +37,22 @@
   justify-content: center;
   align-items: center;
 
+}
+
+@media (max-width: 768px) {
+  .container-for-contacts {
+    flex-direction: row; /* Stack links vertically */
+    align-items: center; /* Center align for mobile */
+    gap: 2vw; /* Add spacing between links */
+  }
+
+  .contact-link {
+    width: auto; /* Allow links to resize dynamically */
+    height: auto; /* Adjust height for smaller screens */
+    font-size: 3vw; /* Adjust font size for smaller screens */
+  }
+
+  .divider {
+  }
 }
 

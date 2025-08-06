@@ -12,7 +12,7 @@ const Contacts = () => {
                 duration: 1,
                 type: "spring",
                 bounce: 0.3,
-                delayChildren: 1.2
+                delayChildren: 0.5
             }
         }
     }

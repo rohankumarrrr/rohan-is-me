@@ -3,7 +3,12 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+#Home, #Experiences {
+  scroll-snap-align: start; /* Optional: For better snapping behavior */
 }
 
 .app {
