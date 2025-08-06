@@ -1,10 +1,5 @@
 /* TimelineSection.css */
 
-@font-face {
-    font-family: 'Futura Upright'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
-
 .timeline-section {
     display: flex;
     justify-content: center;
@@ -14,125 +9,125 @@
     flex-wrap: wrap;
   }
   
+.timeline-column {
+  flex: 1;
+  min-width: 300px;
+  max-height: 80vh;
+  position: relative;
+}
+
+.timeline-heading {
+  color: #252835;
+  font-size: 1.5rem;
+  font-family: 'Futura Upright';
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.timeline-line {
+  position: relative;
+  padding-left: 2.5vw;
+  border-left: 1px solid #252835;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.1rem;
+  top: 5vh;
+  width: 10px;
+  height: 10px;
+  background-color: #252835;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 1;
+}
+
+.timeline-content {
+  background-color: #ffffff;
+  padding: 1rem 1.25rem;
+  border-width: 1px;
+  border-style: solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-content:hover {
+  transform: scale(1.02);
+  translate: ease;
+}
+
+.timeline-period {
+  font-family: 'Futura Upright';
+  font-size: 0.9rem;
+  color: #252835;
+  font-weight: 600;
+}
+
+.timeline-title {
+  font-family: 'Futura Upright';
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.3rem 0;
+}
+
+.timeline-description {
+  font-family: 'Futura Upright';
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .timeline-section {
+    gap: 3vh; /* Add spacing between sections */
+  }
+
   .timeline-column {
-    flex: 1;
-    min-width: 300px;
-    max-height: 80vh;
-    position: relative;
+    max-height: none; /* Allow columns to expand dynamically */
+    width: 100%; /* Make columns take full width */
   }
-  
+
   .timeline-heading {
-    color: #252835;
-    font-size: 1.5rem;
-    font-family: 'Futura Upright';
-    margin-bottom: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem; /* Adjust heading size for smaller screens */
+    text-align: center; /* Center-align headings */
   }
-  
+
   .timeline-line {
-    position: relative;
-    padding-left: 2.5vw;
+    left: -3.8vw;
+    padding-left: 1.5vw; /* Reduce padding for smaller screens */
     border-left: 1px solid #252835;
   }
-  
+
   .timeline-item {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
+    margin-bottom: 1.5rem; /* Adjust spacing between items */
+    width: 80vw;
   }
-  
+
   .timeline-dot {
-    position: absolute;
-    left: -1.1rem;
-    top: 5vh;
-    width: 10px;
-    height: 10px;
-    background-color: #252835;
-    border-radius: 50%;
-    border: 2px solid white;
-    z-index: 1;
+    left: 0rem; /* Adjust dot position */
+    top: 3vh; /* Adjust dot alignment */
+    width: 8px; /* Adjust dot size */
+    height: 8px;
   }
-  
+
   .timeline-content {
-    background-color: #ffffff;
-    padding: 1rem 1.25rem;
-    border-width: 1px;
-    border-style: solid;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 0.8rem 1rem; /* Adjust padding for smaller screens */
   }
-  
-  .timeline-content:hover {
-    transform: scale(1.02);
-    translate: ease;
-  }
-  
+
   .timeline-period {
-    font-family: 'Futura Upright';
-    font-size: 0.9rem;
-    color: #252835;
-    font-weight: 600;
+    font-size: 0.8rem; /* Adjust font size for smaller screens */
   }
-  
+
   .timeline-title {
-    font-family: 'Futura Upright';
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0.3rem 0;
+    font-size: 1rem; /* Adjust title size */
   }
-  
+
   .timeline-description {
-    font-family: 'Futura Upright';
-    font-size: 0.95rem;
-    color: #6b7280;
-    line-height: 1.5;
+    font-size: 0.85rem; /* Adjust description size */
   }
-
-  @media (max-width: 768px) {
-    .timeline-section {
-      gap: 3vh; /* Add spacing between sections */
-    }
-  
-    .timeline-column {
-      max-height: none; /* Allow columns to expand dynamically */
-      width: 100%; /* Make columns take full width */
-    }
-  
-    .timeline-heading {
-      font-size: 1.2rem; /* Adjust heading size for smaller screens */
-      text-align: center; /* Center-align headings */
-    }
-  
-    .timeline-line {
-      left: -3.8vw;
-      padding-left: 1.5vw; /* Reduce padding for smaller screens */
-      border-left: 1px solid #252835;
-    }
-  
-    .timeline-item {
-      margin-bottom: 1.5rem; /* Adjust spacing between items */
-      width: 80vw;
-    }
-
-    .timeline-dot {
-      left: 0rem; /* Adjust dot position */
-      top: 3vh; /* Adjust dot alignment */
-      width: 8px; /* Adjust dot size */
-      height: 8px;
-    }
-  
-    .timeline-content {
-      padding: 0.8rem 1rem; /* Adjust padding for smaller screens */
-    }
-  
-    .timeline-period {
-      font-size: 0.8rem; /* Adjust font size for smaller screens */
-    }
-  
-    .timeline-title {
-      font-size: 1rem; /* Adjust title size */
-    }
-  
-    .timeline-description {
-      font-size: 0.85rem; /* Adjust description size */
-    }
-  }
+}
