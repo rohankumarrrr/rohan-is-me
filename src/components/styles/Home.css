@@ -7,11 +7,6 @@
     background-color: #fff;
     flex-wrap: wrap;
   }
-
-  @font-face {
-    font-family: 'Futura'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
   
   .content {
     display: flex;
@@ -19,7 +14,7 @@
     justify-content: space-between;
     font-family: 'Futura'
   }
-  
+
   .text-container {
     width: 35vw;
     height: 45vw;
@@ -46,6 +41,8 @@
     font-weight: bold;
     color: #1f2935;
     margin-bottom: 3vh;
+    font-weight: bold;
+    font-family: 'Futura';
   }
   
   p {

@@ -10,11 +10,6 @@
   font-family: 'Futura Upright';
 }
 
-  @font-face {
-    font-family: 'Futura Upright'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
-
 .contact-link {
   display: flex;
   width: 5vw;

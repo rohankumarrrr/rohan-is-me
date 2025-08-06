@@ -7,16 +7,6 @@
     width: 100vw;
     z-index: 35;
   }
-  
-  @font-face {
-    font-family: 'Futura'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ Italic\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
-
-  @font-face {
-    font-family: 'Futura Upright'; /* Name your font family */
-    src: url('../../assets/fonts/futura/Futura\ Book\ font.ttf'); /* Locate the .ttf file within your directory*/
-  }
 
   .logo {
     object-fit: cover;
