@@ -12,7 +12,7 @@
 .timeline-column {
   flex: 1;
   min-width: 300px;
-  max-height: 80vh;
+  /* max-height: 80vh; */ /* <-- REMOVE THIS LINE */
   position: relative;
 }
 
@@ -27,7 +27,18 @@
 .timeline-line {
   position: relative;
   padding-left: 2.5vw;
-  border-left: 1px solid #252835;
+  /* border-left: 1px solid #252835; */ /* <-- REMOVE THIS */
+}
+
+.timeline-line-visual {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #252835;
+  z-index: 0;
+  transform-origin: top; /* This makes the scale animation grow downwards */
 }
 
 .timeline-item {
