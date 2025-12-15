@@ -5,12 +5,12 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 
 const education = [
   {
-    period: 'august 2023 - december 2026',
+    period: 'august 2023 – december 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.89 \n\n activites: systems architect @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, computer systems, distributed systems, high frequency trading technology, statistical modeling, statistical learning',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.89 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, computer systems, distributed systems, high frequency trading technology, statistical modeling, statistical learning',
   },
   {
-    period: 'september 2019 - june 2023',
+    period: 'september 2019 – june 2023',
     title: 'randolph high school',
     description: '\n gpa: 4.87',
   },
@@ -40,11 +40,11 @@ const experience = [
   {
     period: 'june 2024 – july 2024',
     title: 'software engineer intern @ am best',
-    description: '\n developed a production .net api in c# to serve financial records and credit ratings for over 300 insurance clients \n\n identified and resolved performance bottlenecks, implementing caching strategies that reduced query response times by 25% \n\n technologies: c#, mysql, blazor, asp.net, azure services, restful apis, ci/cd',
+    description: '\n web development \n\n developed a production .net api in c# to serve financial records and credit ratings for over 300 insurance clients \n\n identified and resolved performance bottlenecks, implementing caching strategies that reduced query response times by 25% \n\n technologies: c#, mysql, blazor, asp.net, azure services, restful apis, ci/cd',
   }
 ];
 
-function TimelineItem({ period, title, description, type = 'experience', variants }) {
+function TimelineItem({ period, title, description, type = 'experience', variants, isProgrammaticScroll }) {
   const [isHovered, setIsHovered] = useState(false);
   const contentRef = useRef(null);
 
@@ -56,7 +56,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
         <div className="timeline-dot" />
         <motion.div 
           className="timeline-content"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
         >
           <span className="timeline-period">{period}</span>
           <h3 className="timeline-title">{title}</h3>
@@ -81,7 +81,16 @@ function TimelineItem({ period, title, description, type = 'experience', variant
         const viewportHeight = window.innerHeight;
         if (rect.bottom > viewportHeight) {
           const scrollByAmount = rect.bottom - viewportHeight + 20;
+          
+          // Activate the lock
+          isProgrammaticScroll.current = true;
+          
           window.scrollBy({ top: scrollByAmount, behavior: 'smooth' });
+
+          // Release the lock after the scroll is finished
+          setTimeout(() => {
+            isProgrammaticScroll.current = false;
+          }, 1000); // A 1-second lock is usually safe for smooth scrolls
         }
       }
     }, 400);
@@ -122,7 +131,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
   );
 }
 
-export default function Experiences() {
+export default function Experiences({ isProgrammaticScroll }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
@@ -174,7 +183,7 @@ export default function Experiences() {
             variants={lineVariants}
           />
           {education.map((item, i) => (
-            <TimelineItem key={i} {...item} type="education" variants={itemVariantsLeft} />
+            <TimelineItem key={i} {...item} type="education" variants={itemVariantsLeft} isProgrammaticScroll={isProgrammaticScroll} />
           ))}
         </motion.div>
       </div>
@@ -191,7 +200,7 @@ export default function Experiences() {
             variants={lineVariants}
           />
           {experience.map((item, i) => (
-            <TimelineItem key={i} {...item} type="experience" variants={itemVariantsRight} />
+            <TimelineItem key={i} {...item} type="experience" variants={itemVariantsRight} isProgrammaticScroll={isProgrammaticScroll} />
           ))}
         </motion.div>
       </div>

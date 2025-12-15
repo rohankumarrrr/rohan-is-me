@@ -6,17 +6,14 @@ import Header from './components/Header';
 import Experiences from './components/Experiences';
 
 function App() {
-  const windowMenuVisible = useRef(true);
-  const setWindowMenuVisible = (value) => {
-    windowMenuVisible.current = value;
-  };
+  const isProgrammaticScroll = useRef(false);
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="app">
-        <Header windowMenuVisible={windowMenuVisible} setWindowMenuVisible={setWindowMenuVisible} />
+        <Header isProgrammaticScroll={isProgrammaticScroll} />
         <div id="Home"><Home /></div>
-        <div id="Experiences"><Experiences /></div>
+        <div id="Experiences"><Experiences isProgrammaticScroll={isProgrammaticScroll} /></div>
       </div>
     </BrowserRouter>
   );

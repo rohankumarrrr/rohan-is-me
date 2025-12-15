@@ -66,7 +66,7 @@ const Home = () => {
             <motion.a className="cta-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/ROHAN_KUMAR.pdf" target="_blank" rel="noopener noreferrer">see my resume</motion.a>
           </motion.div>
         </div>
-        <motion.div className="image-container" variants={imageVariants} whileHover={{ scale: 1.05 }}>
+        <motion.div className="image-container" variants={imageVariants} whileHover={{ scale: 0.9, transition: { type: "spring", bounce: 0.5 } }}>
           <img src={require("../assets/images/banner-img.png")} alt="Rohan Kumar" draggable="false" className="banner-img" />
         </motion.div>
       </motion.div>
