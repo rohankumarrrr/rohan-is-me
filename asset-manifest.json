@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.3dc7afd2.css",
-    "main.js": "/static/js/main.1c23e44e.js",
+    "main.css": "/static/css/main.ab31282a.css",
+    "main.js": "/static/js/main.e4663c70.js",
     "static/js/151.2801b265.chunk.js": "/static/js/151.2801b265.chunk.js",
-    "static/media/banner-img.png": "/static/media/banner-img.ca5372c55314b9e570f0.png",
+    "static/media/banner-img.webp": "/static/media/banner-img.567f20ced35e40da2517.webp",
     "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
+    "static/media/banner-img-lowres.webp": "/static/media/banner-img-lowres.4fb82e60aea137cc9caf.webp",
     "static/media/futura_medium_italic_font-truetype.ttf": "/static/media/futura_medium_italic_font-truetype.6180d54a312d36bd0924.ttf",
     "static/media/futura_book_font-truetype.ttf": "/static/media/futura_book_font-truetype.ed19af444f0976dbaf41.ttf",
     "static/media/futura_medium_italic_font-webfont.woff": "/static/media/futura_medium_italic_font-webfont.7edd106b15c19735b9f2.woff",
@@ -12,12 +13,12 @@
     "static/media/futura_medium_italic_font-webfont.woff2": "/static/media/futura_medium_italic_font-webfont.cde222212c459ecc4af7.woff2",
     "static/media/futura_book_font-webfont.woff2": "/static/media/futura_book_font-webfont.42034007279286d8639a.woff2",
     "index.html": "/index.html",
-    "main.3dc7afd2.css.map": "/static/css/main.3dc7afd2.css.map",
-    "main.1c23e44e.js.map": "/static/js/main.1c23e44e.js.map",
+    "main.ab31282a.css.map": "/static/css/main.ab31282a.css.map",
+    "main.e4663c70.js.map": "/static/js/main.e4663c70.js.map",
     "151.2801b265.chunk.js.map": "/static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dc7afd2.css",
-    "static/js/main.1c23e44e.js"
+    "static/css/main.ab31282a.css",
+    "static/js/main.e4663c70.js"
   ]
 }
