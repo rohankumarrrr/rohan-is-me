@@ -2,23 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import './styles/Header.css';
 import { motion } from 'framer-motion';
 
-function Header({ isProgrammaticScroll }) {
+function Header() {
     const [currentSection, setCurrentSection] = useState("Home");
     const [isContainerVisible, setIsContainerVisible] = useState(true); // State to control visibility
 
     const lastScrollY = useRef(0);
 
-    const handleHeaderClick = (section) => {
-      const element = document.getElementById(section);
-      element.scrollIntoView({block: "start", behavior: "smooth"});
-    }
-
     useEffect(() => {
         const handleScroll = () => {
-          // If the scroll is programmatic, do nothing.
-          if (isProgrammaticScroll.current) {
-            return;
-          }
 
           const currentScrollY = window.scrollY;
 
@@ -51,7 +42,7 @@ function Header({ isProgrammaticScroll }) {
         return () => {
           window.removeEventListener("scroll", handleScroll);
         };
-    }, [isProgrammaticScroll, currentSection]); // Add dependencies
+    }, [currentSection]); // Add dependencies
 
     const variantsContacts = {
         show: {
@@ -84,7 +75,7 @@ function Header({ isProgrammaticScroll }) {
             variants={variantsContacts} 
             animate={isContainerVisible ? 'show' : 'hide'}
         >
-            <motion.img src={require("../assets/images/rk-logo-2.png")} alt="logo" className="logo"  whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}/>
+            <motion.img src={require("../assets/images/rk-logo-2.png")} alt="logo" className="logo"  whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }} onClick={() => setIsContainerVisible(!isContainerVisible)}/>
             <motion.a href="mailto:rohankumarrr313@gmail.com" target="_blank" whileHover={{ scale: 1.05 }} whileTap ={{ scale: 0.95 }}>
                 <img alt="Mail Logo" className="contact-logo-container" src="https://pngimg.com/d/email_PNG100739.png" />
             </motion.a>

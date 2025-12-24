@@ -6,6 +6,18 @@ import LastListened from "./Scrobbler";
 const Home = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
+  const highResImageSrc = require("../assets/images/banner-img.webp");
+  const lowResImageSrc = require("../assets/images/banner-img-lowres.webp");
+
+  React.useEffect(() => {
+    const img = new Image();
+    img.src = highResImageSrc;
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [highResImageSrc]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,7 +79,8 @@ const Home = () => {
           </motion.div>
         </div>
         <motion.div className="image-container" variants={imageVariants} whileHover={{ scale: 0.9, transition: { type: "spring", bounce: 0.5 } }}>
-          <img src={require("../assets/images/banner-img.png")} alt="Rohan Kumar" draggable="false" className="banner-img" />
+          <img src={lowResImageSrc} alt="Rohan Kumar" draggable="false" className="banner-img" style={{filter: imageLoaded ? 'blur(0px)' : 'blur(20px)', transition: 'filter 0.5s ease-in-out' }} />
+          <img src={highResImageSrc} alt="Rohan Kumar" draggable="false" className="banner-img" style={{ position: 'absolute', top: 0, left: 0, opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }} />
         </motion.div>
       </motion.div>
     </div>
