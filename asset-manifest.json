@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ab31282a.css",
-    "main.js": "/static/js/main.e4663c70.js",
+    "main.css": "/static/css/main.a02b7c24.css",
+    "main.js": "/static/js/main.ac281200.js",
     "static/js/151.2801b265.chunk.js": "/static/js/151.2801b265.chunk.js",
     "static/media/banner-img.webp": "/static/media/banner-img.567f20ced35e40da2517.webp",
     "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
@@ -13,12 +13,12 @@
     "static/media/futura_medium_italic_font-webfont.woff2": "/static/media/futura_medium_italic_font-webfont.cde222212c459ecc4af7.woff2",
     "static/media/futura_book_font-webfont.woff2": "/static/media/futura_book_font-webfont.42034007279286d8639a.woff2",
     "index.html": "/index.html",
-    "main.ab31282a.css.map": "/static/css/main.ab31282a.css.map",
-    "main.e4663c70.js.map": "/static/js/main.e4663c70.js.map",
+    "main.a02b7c24.css.map": "/static/css/main.a02b7c24.css.map",
+    "main.ac281200.js.map": "/static/js/main.ac281200.js.map",
     "151.2801b265.chunk.js.map": "/static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab31282a.css",
-    "static/js/main.e4663c70.js"
+    "static/css/main.a02b7c24.css",
+    "static/js/main.ac281200.js"
   ]
 }
