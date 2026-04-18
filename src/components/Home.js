@@ -68,7 +68,7 @@ const Home = () => {
             </motion.h1>
           </div>
           <motion.p variants={itemVariants}>
-            i'm a junior at the university of illinois urbana-champaign. when i'm not thinking of what to eat next, producing music, or doomscrolling for my next favorite pair of jeans on depop, i'm a passionate software engineer and computer scientist.
+            i'm a rising senior at the university of illinois urbana-champaign. when i'm not daydreaming about taco bell, producing music, or doomscrolling for my next favorite pair of jeans on depop, i'm a passionate software engineer and computer scientist.
           </motion.p>
           <motion.div style={{ marginTop: '2vh' }} variants={itemVariants}>
             <LastListened />

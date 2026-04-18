@@ -7,7 +7,7 @@ const education = [
   {
     period: 'august 2023 – december 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, computer systems, distributed systems, high frequency trading technology, statistical modeling, statistical learning',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, computer security, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning, machine learning systems',
   },
   {
     period: 'september 2019 – june 2023',
@@ -20,12 +20,12 @@ const experience = [
   {
     period: 'may 2026 – august 2026',
     title: 'software engineer intern @ pinterest',
-    description: '\n security (incoming summer 2026)'
+    description: '\n (summer 2026) product security'
   },
   {
     period: 'february 2026 – april 2026',
-    title: 'software engineer intern @ amazon',
-    description: '\n music personalization for amazon music (incoming winter 2026)'
+    title: 'software development engineer intern @ amazon',
+    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music’s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in Java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions. \n\n technologies: java, pyspark, aws (glue), reinforcement learning (rl), a/b testing, distributed systems',
   },
   {
     period: 'january 2024 – december 2025',
@@ -50,7 +50,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
 
   const hasDetailsToExpand = description.includes('\n\n');
 
-  if (type === 'education' || !hasDetailsToExpand) {
+  if (!hasDetailsToExpand) {
     return (
       <motion.div className="timeline-item" variants={variants}>
         <div className="timeline-dot" />
