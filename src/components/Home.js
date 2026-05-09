@@ -1,23 +1,37 @@
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import "./styles/Home.css";
 import LastListened from "./Scrobbler";
+import { useTheme } from "../hooks/useTheme";
+import { ReactComponent as GitHubIcon } from "../assets/images/github-logo.svg";
+import { ReactComponent as LinkedInIcon } from "../assets/images/linkedin-logo.svg";
+import { ReactComponent as EmailIcon } from "../assets/images/email-logo.svg";
+import { ReactComponent as ResumeIcon } from "../assets/images/cv-logo.svg";
+
+const lightHighRes = require("../assets/images/banner-img-light.webp");
+const darkHighRes  = require("../assets/images/banner-img-dark.webp");
 
 const Home = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
-  const [imageLoaded, setImageLoaded] = React.useState(false);
+  const { theme } = useTheme();
 
-  const highResImageSrc = require("../assets/images/banner-img.webp");
-  const lowResImageSrc = require("../assets/images/banner-img-lowres.webp");
+  // Seed rotation from initial theme so the correct face shows on first paint
+  const initialRotation = theme === 'dark' ? 180 : 0;
+  const rotateYValue = useMotionValue(initialRotation);
+  const currentRotation = useRef(initialRotation);
+  const prevTheme = useRef(theme);
 
   React.useEffect(() => {
-    const img = new Image();
-    img.src = highResImageSrc;
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-  }, [highResImageSrc]);
+    if (prevTheme.current !== theme) {
+      prevTheme.current = theme;
+      currentRotation.current += 180;
+      animate(rotateYValue, currentRotation.current, {
+        duration: 0.45,
+        ease: 'easeInOut',
+      });
+    }
+  }, [theme, rotateYValue]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,20 +81,86 @@ const Home = () => {
               hey, it's Rohan
             </motion.h1>
           </div>
-          <motion.p variants={itemVariants}>
-            i'm a rising senior at the university of illinois urbana-champaign. when i'm not daydreaming about taco bell, producing music, or doomscrolling for my next favorite pair of jeans on depop, i'm a passionate software engineer and computer scientist.
+          <motion.p style={{ marginTop: '2vh' }} variants={itemVariants}>
+            i'm a rising senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a>
+          </motion.p>
+          <motion.p style={{ marginTop: '2vh' }} variants={itemVariants}>
+            i'm passionate about building software that solves interesting, challenging problems at scale. my work has spanned full-stack development, distributed systems, applied ai/ml, computer security, and human-computer interaction.
+          </motion.p>
+          <motion.p style={{ marginTop: '2vh' }} variants={itemVariants}>
+            i'm currently a software engineering intern at <a className="inline-link" href="https://medium.com/pinterest-engineering" target="_blank" rel="noopener noreferrer">pinterest</a>, building ai agents to proactively surface, investigate, and remediate security threats across pinterest's microservice ecosystem. prior to this, i was on <a className="inline-link" href="https://music.amazon.com/" target="_blank" rel="noopener noreferrer">amazon music</a>'s sequencing and alexa voice recommendations team, where i introduced language-affinity components into the music recommendation reinforcement learning pipeline, improving linguistic diveristy and recommendation accuracy for multilingual users.
+          </motion.p>
+          <motion.p style={{ marginTop: '2vh' }} variants={itemVariants}>
+            when i'm not building, you can find me <a className="inline-link" href="https://open.spotify.com/artist/0dWCkDXiZhBI7l1LcE0BoV?si=yaev3hm-QPCRJjY37EUgVw" target="_blank" rel="noopener noreferrer">producing music</a>, doomscrolling for new jeans on <a className="inline-link" href="https://www.depop.com/rohankumarrr/" target="_blank" rel="noopener noreferrer">depop</a>, or enjoying the latest taco bell menu item.
           </motion.p>
           <motion.div style={{ marginTop: '2vh' }} variants={itemVariants}>
             <LastListened />
           </motion.div>
-          <motion.div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1vw' }} variants={itemVariants}>
-            <motion.a className="cta-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="mailto:rohankumarrr313@gmail.com" target="_blank">connect with me</motion.a>
-            <motion.a className="cta-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/ROHAN_KUMAR.pdf" target="_blank" rel="noopener noreferrer">see my resume</motion.a>
+          <motion.div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.8vw' }} variants={itemVariants}>
+            <motion.a href="/ROHAN_KUMAR.pdf" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <ResumeIcon className="social-icon" />
+            </motion.a>
+            <motion.a href="mailto:rohankumarrr313@gmail.com" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <EmailIcon className="social-icon" />
+            </motion.a>
+            <motion.a href="https://github.com/rohankumarrrr" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <GitHubIcon className="social-icon" />
+            </motion.a>
+            <motion.a href="https://linkedin.com/in/rohankumarrr313" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <LinkedInIcon className="social-icon" />
+            </motion.a>
           </motion.div>
         </div>
-        <motion.div className="image-container" variants={imageVariants} whileHover={{ scale: 0.9, transition: { type: "spring", bounce: 0.5 } }}>
-          <img src={lowResImageSrc} alt="Rohan Kumar" draggable="false" className="banner-img" style={{filter: imageLoaded ? 'blur(0px)' : 'blur(20px)', transition: 'filter 0.5s ease-in-out' }} />
-          <img src={highResImageSrc} alt="Rohan Kumar" draggable="false" className="banner-img" style={{ position: 'absolute', top: 0, left: 0, opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }} />
+
+        <motion.div
+          className="image-container"
+          variants={imageVariants}
+          whileHover={{ scale: 0.9, transition: { type: "spring", bounce: 0.5 } }}
+          style={{ perspective: 1200 }}
+        >
+          {/* Card — both faces always in DOM, GPU-decoded before first toggle */}
+          <motion.div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              transformStyle: 'preserve-3d',
+              rotateY: rotateYValue,
+              willChange: 'transform',
+            }}
+          >
+            {/* Front face: light image */}
+            <img
+              src={lightHighRes}
+              alt="Rohan Kumar"
+              draggable="false"
+              className="banner-img"
+              decoding="async"
+              style={{
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+              }}
+            />
+            {/* Back face: dark image, pre-rotated so it faces the viewer at 180° */}
+            <img
+              src={darkHighRes}
+              alt="Rohan Kumar"
+              draggable="false"
+              className="banner-img"
+              decoding="async"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+              }}
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
     </div>

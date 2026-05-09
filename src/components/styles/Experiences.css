@@ -4,8 +4,8 @@
     display: flex;
     justify-content: center;
     gap: 5vh;
-    padding: 2vh 10vw 20vh;
-    background-color: #fff;
+    padding: 2vh 10vw 4vh;
+    background-color: var(--bg-primary);
     flex-wrap: wrap;
   }
   
@@ -17,7 +17,7 @@
 }
 
 .timeline-heading {
-  color: #252835;
+  color: var(--text-primary);
   font-size: 1.5rem;
   font-family: 'Futura Upright';
   margin-bottom: 1.5rem;
@@ -36,7 +36,7 @@
   top: 0;
   width: 1px;
   height: 100%;
-  background-color: #252835;
+  background-color: var(--text-primary);
   z-index: 0;
   transform-origin: top; /* This makes the scale animation grow downwards */
 }
@@ -53,14 +53,15 @@
   top: 5vh;
   width: 10px;
   height: 10px;
-  background-color: #252835;
+  background-color: var(--text-primary);
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--bg-secondary);
   z-index: 1;
 }
 
 .timeline-content {
-  background-color: #ffffff;
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
   padding: 1rem 1.25rem;
   border-width: 1px;
   border-style: solid;
@@ -75,22 +76,40 @@
 .timeline-period {
   font-family: 'Futura Upright';
   font-size: 0.9rem;
-  color: #252835;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .timeline-title {
   font-family: 'Futura Upright';
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0.3rem 0;
+  color: var(--text-primary);
 }
 
 .timeline-description {
   font-family: 'Futura Upright';
   font-size: 0.95rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   line-height: 1.5;
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.tech-pill {
+  font-family: 'Futura Upright';
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
@@ -104,14 +123,14 @@
   }
 
   .timeline-heading {
-    font-size: 1.2rem; /* Adjust heading size for smaller screens */
-    text-align: center; /* Center-align headings */
+    font-size: 1.8rem;
+    text-align: center;
   }
 
   .timeline-line {
     left: -3.8vw;
     padding-left: 1.5vw; /* Reduce padding for smaller screens */
-    border-left: 1px solid #252835;
+    border-left: 1px solid var(--border);
   }
 
   .timeline-item {
@@ -131,14 +150,18 @@
   }
 
   .timeline-period {
-    font-size: 0.8rem; /* Adjust font size for smaller screens */
+    font-size: 0.9rem;
   }
 
   .timeline-title {
-    font-size: 1rem; /* Adjust title size */
+    font-size: 1.2rem;
   }
 
   .timeline-description {
-    font-size: 0.85rem; /* Adjust description size */
+    font-size: 1.0rem;
+  }
+
+  .tech-pill {
+    font-size: 0.82rem;
   }
 }

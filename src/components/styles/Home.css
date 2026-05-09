@@ -4,7 +4,7 @@
     gap: 5vh;
     min-height: 100vh;
     padding: 2vh 10vw;
-    background-color: #fff;
+    background-color: var(--bg-primary);
     flex-wrap: wrap;
   }
   
@@ -12,11 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 5vw;
   }
 
   .text-container {
-    width: 35vw;
-    height: 45vw;
+    width: 32.5vw;
+    height: 42.5vw;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -28,46 +29,45 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 45vw;
-    width: 45vw;
-    overflow: hidden;
+    height: 42.5vw;
+    width: 42.5vw;
   }
 
   h1 {
     margin: 0;
-    margin-top: 5vh;
     font-size: 4.7vw;
-    color: #1f2935;
-    margin-bottom: 3vh;
+    color: var(--text-primary);
     font-family: 'Futura';
     font-weight: normal;
   }
   
   p {
-    color: #6b7280;
-    font-size: 1.2vw;
+    color: var(--text-secondary);
+    font-size: 1vw;
     font-family: 'Futura Upright';
     margin: 0;
   }
 
-  .cta-button {
-    padding: 1vh 1.5vw;
-    background: #252835;
-    color: white;
-    transition: opacity 0.2s;
-    height: 2.4vh;
-    font-family: 'Futura Upright';
-    border: none;
-    margin: 0;
-    font-size: 0.9vw;
-    width: 6.8vw;
-    text-decoration: none;
-    align-content: center;
+  .inline-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  .social-icon {
+    display: block;
+    width: 2.8vw;
+    height: 2.8vw;
+    object-fit: contain;
     margin-top: 3vh;
-    text-align: center;
   }
 
-  .cta-button:hover {
+  .social-icon:hover {
     opacity: 0.8;
     cursor: pointer;
   }
@@ -76,7 +76,7 @@
     display: flex;
     position: relative;
     object-fit: cover;
-    width: 45vw;
+    width: 42.5vw;
   }
 
   @keyframes blinker {
@@ -96,6 +96,7 @@
   .text-container {
     width: 90%; /* Adjust width for smaller screens */
     height: auto; /* Allow height to adjust dynamically */
+    align-items: center;
   }
 
   .image-container {
@@ -114,13 +115,13 @@
   }
 
   p {
-    font-size: 3vw; /* Adjust font size for smaller screens */
+    font-size: 3vw;
+    width: 100%;
   }
 
-  .cta-button {
-    font-size: 2.5vw; /* Adjust button font size */
-    padding: 1vh 2vw; /* Adjust padding for smaller screens */
-    width: auto; /* Allow buttons to resize dynamically */
+  .social-icon {
+    width: 5vw;
+    height: 5vw;
   }
 }
 

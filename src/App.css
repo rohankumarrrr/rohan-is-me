@@ -4,13 +4,17 @@ html, body {
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
-
-#Home, #Experiences {
-  scroll-snap-align: start; /* Optional: For better snapping behavior */
 }
 
 .app {
-  background-color: #fafaf8;
+  background-color: var(--bg-primary);
+}
+
+.footer {
+  text-align: center;
+  padding: 2vh 0 3vh;
+  font-family: 'Futura Upright';
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
 }

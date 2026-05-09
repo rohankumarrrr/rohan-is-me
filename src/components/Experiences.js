@@ -7,12 +7,12 @@ const education = [
   {
     period: 'august 2023 – december 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, computer security, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning, machine learning systems',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning, machine learning systems',
   },
   {
     period: 'september 2019 – june 2023',
     title: 'randolph high school',
-    description: '\n gpa: 4.87',
+    description: '',
   },
 ];
 
@@ -20,41 +20,53 @@ const experience = [
   {
     period: 'may 2026 – august 2026',
     title: 'software engineer intern @ pinterest',
-    description: '\n (summer 2026) product security'
+    description: '\n product security'
   },
   {
     period: 'february 2026 – april 2026',
     title: 'software development engineer intern @ amazon',
-    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music’s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in Java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions. \n\n technologies: java, pyspark, aws (glue), reinforcement learning (rl), a/b testing, distributed systems',
+    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music’s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in Java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions.',
+    technologies: ['java', 'pyspark', 'aws (glue)', 'reinforcement learning (rl)', 'a/b testing', 'distributed systems'],
   },
   {
     period: 'january 2024 – december 2025',
     title: 'research assistant @ uiuc',
-    description: '\n human-computer interaction, professor brian p. bailey \n\n engineered a scalable data pipeline in python to process and analyze teamwork behaviors across 100+ github repositories \n\n architected a cloud-native backend on gcp and firebase, ensuring efficient data management for over 120 concurrent users \n\n developed and deployed a responsive dashboard using next.js and fastapi with real-time data tracking capabilities \n\n technologies: python, numpy, pandas, sci-kit learn, next.js, fastapi, gcp, firebase, restful apis',
+    description: '\n human-computer interaction, professor brian p. bailey \n\n engineered a scalable data pipeline in python to process and analyze teamwork behaviors across 100+ github repositories \n\n architected a cloud-native backend on gcp and firebase, ensuring efficient data management for over 120 concurrent users \n\n developed and deployed a responsive dashboard using next.js and fastapi with real-time data tracking capabilities',
+    technologies: ['python', 'numpy', 'pandas', 'sci-kit learn', 'next.js', 'fastapi', 'gcp', 'firebase', 'restful apis'],
   },
   {
     period: 'may 2025 – august 2025',
     title: 'software engineer intern @ relativity',
-    description: '\n processing arm & infrastructure \n\n owned the end-to-end development of internal api extensions and automated github actions ci/cd workflows, reducing direct client data access during incident resolution and improving resolution speed \n\n designed and engineered fault-tolerant .net (c#) migration jobs to transition over 1tb of data from legacy sql systems to a distributed, azure-hosted nosql architecture, enhancing horizontal scalability and reducing storage costs \n\n technologies: c#, .net, azure kubernetes service (aks), mysql, docker, restful apis, gitHub actions',
+    description: '\n processing arm & infrastructure \n\n owned the end-to-end development of internal api extensions and automated github actions ci/cd workflows, reducing direct client data access during incident resolution and improving resolution speed \n\n designed and engineered fault-tolerant .net (c#) migration jobs to transition over 1tb of data from legacy sql systems to a distributed, azure-hosted nosql architecture, enhancing horizontal scalability and reducing storage costs',
+    technologies: ['c#', '.net', 'azure kubernetes service (aks)', 'mysql', 'docker', 'restful apis', 'github actions'],
   },
   {
     period: 'june 2024 – july 2024',
     title: 'software engineer intern @ am best',
-    description: '\n web development \n\n developed a production .net api in c# to serve financial records and credit ratings for over 300 insurance clients \n\n identified and resolved performance bottlenecks, implementing caching strategies that reduced query response times by 25% \n\n technologies: c#, mysql, blazor, asp.net, azure services, restful apis, ci/cd',
+    description: '\n web development \n\n developed a production .net api in c# to serve financial records and credit ratings for over 300 insurance clients \n\n identified and resolved performance bottlenecks, implementing caching strategies that reduced query response times by 25%',
+    technologies: ['c#', 'mysql', 'blazor', 'asp.net', 'azure services', 'restful apis', 'ci/cd'],
   }
 ];
 
-function TimelineItem({ period, title, description, type = 'experience', variants }) {
+function TimelineItem({ period, title, description, technologies = [], type = 'experience', variants }) {
   const [isHovered, setIsHovered] = useState(false);
   const contentRef = useRef(null);
 
   const hasDetailsToExpand = description.includes('\n\n');
 
+  const techPills = technologies.length > 0 && (
+    <div className="tech-pills">
+      {technologies.map((tech, i) => (
+        <span key={i} className="tech-pill">{tech}</span>
+      ))}
+    </div>
+  );
+
   if (!hasDetailsToExpand) {
     return (
       <motion.div className="timeline-item" variants={variants}>
         <div className="timeline-dot" />
-        <motion.div 
+        <motion.div
           className="timeline-content"
           whileHover={{ scale: 1.03 }}
         >
@@ -63,6 +75,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
           <p className="timeline-description" style={{ whiteSpace: "pre-line", margin: 0 }}>
             {description.trim()}
           </p>
+          {techPills}
         </motion.div>
       </motion.div>
     );
@@ -81,7 +94,6 @@ function TimelineItem({ period, title, description, type = 'experience', variant
         const viewportHeight = window.innerHeight;
         if (rect.bottom > viewportHeight) {
           const scrollByAmount = rect.bottom - viewportHeight + 20;
-          
           window.scrollBy({ top: scrollByAmount, behavior: 'smooth' });
         }
       }
@@ -91,7 +103,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
   return (
     <motion.div className="timeline-item" variants={variants}>
       <div className="timeline-dot" />
-      <motion.div 
+      <motion.div
         ref={contentRef}
         className="timeline-content"
         onMouseEnter={handleMouseEnter}
@@ -101,7 +113,7 @@ function TimelineItem({ period, title, description, type = 'experience', variant
       >
         <span className="timeline-period">{period}</span>
         <h3 className="timeline-title">{title}</h3>
-        <p className="timeline-description" style={{whiteSpace: "pre-line", margin: 0 }}>
+        <p className="timeline-description" style={{ whiteSpace: "pre-line", margin: 0 }}>
           {teamHeader}
         </p>
         <AnimatePresence>
@@ -112,12 +124,13 @@ function TimelineItem({ period, title, description, type = 'experience', variant
               exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
               style={{ overflow: 'hidden' }}
             >
-              <p className="timeline-description" style={{whiteSpace: "pre-line", paddingTop: '1rem'}}>
+              <p className="timeline-description" style={{ whiteSpace: "pre-line", paddingTop: '1rem' }}>
                 {details.join('\n\n')}
               </p>
             </motion.div>
           )}
         </AnimatePresence>
+        {techPills}
       </motion.div>
     </motion.div>
   );
