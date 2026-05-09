@@ -1,19 +1,25 @@
 import React from 'react';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import Home from './components/Home';
-import Header from './components/Header';
-import Experiences from './components/Experiences';
+import { ThemeProvider } from './hooks/useTheme';
+import Navbar from './components/Navbar';
+import About from './pages/About';
+import Blog from './pages/Blog';
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <div className="app">
-        <Header/>
-        <div id="Home"><Home /></div>
-        <div id="Experiences"><Experiences/></div>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <div className="app">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+          </Routes>
+          <footer className="footer">© 2026 Rohan Kumar</footer>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

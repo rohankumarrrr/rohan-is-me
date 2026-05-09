@@ -1,0 +1,116 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 35;
+  padding: 2.5vh 2.5vw 0 0;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2vw;
+  padding-bottom: 0.8vh;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.nav-link {
+  font-family: 'Futura Upright';
+  font-size: 1vw;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.nav-link--active {
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  font-size: 1vw;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile menu — hidden on desktop */
+.navbar-mobile {
+  display: none;
+  width: 100%;
+}
+
+.navbar-mobile--open {
+  background-color: var(--bg-secondary);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.mobile-menu-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 3vh 5vw 1vh;
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+  padding: 0.5rem 5vw 2rem;
+}
+
+.mobile-nav-link {
+  font-family: 'Futura Upright';
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.mobile-nav-link.nav-link--active {
+  color: var(--text-primary);
+}
+
+.mobile-theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: 'Futura Upright';
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    left: 0;
+    padding: 0;
+  }
+  .navbar-links {
+    display: none;
+  }
+  .navbar-mobile {
+    display: block;
+  }
+}
