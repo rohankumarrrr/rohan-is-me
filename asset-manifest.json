@@ -1,24 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.a02b7c24.css",
-    "main.js": "/static/js/main.ac281200.js",
+    "main.css": "/static/css/main.fa713332.css",
+    "main.js": "/static/js/main.bf4b2bc6.js",
     "static/js/151.2801b265.chunk.js": "/static/js/151.2801b265.chunk.js",
-    "static/media/banner-img.webp": "/static/media/banner-img.567f20ced35e40da2517.webp",
-    "static/media/rk-logo-2.png": "/static/media/rk-logo-2.a6561d7d4ce8224e7c9f.png",
-    "static/media/banner-img-lowres.webp": "/static/media/banner-img-lowres.4fb82e60aea137cc9caf.webp",
+    "static/media/banner-img-light.webp": "/static/media/banner-img-light.567f20ced35e40da2517.webp",
+    "static/media/banner-img-dark.webp": "/static/media/banner-img-dark.ac0d552e558929cb671a.webp",
     "static/media/futura_medium_italic_font-truetype.ttf": "/static/media/futura_medium_italic_font-truetype.6180d54a312d36bd0924.ttf",
     "static/media/futura_book_font-truetype.ttf": "/static/media/futura_book_font-truetype.ed19af444f0976dbaf41.ttf",
     "static/media/futura_medium_italic_font-webfont.woff": "/static/media/futura_medium_italic_font-webfont.7edd106b15c19735b9f2.woff",
     "static/media/futura_book_font-webfont.woff": "/static/media/futura_book_font-webfont.e8582817fea4b9b6130f.woff",
     "static/media/futura_medium_italic_font-webfont.woff2": "/static/media/futura_medium_italic_font-webfont.cde222212c459ecc4af7.woff2",
     "static/media/futura_book_font-webfont.woff2": "/static/media/futura_book_font-webfont.42034007279286d8639a.woff2",
+    "static/media/github-logo.svg": "/static/media/github-logo.fdc048908dffb6d0f52bc38bfbd82611.svg",
+    "static/media/cv-logo.svg": "/static/media/cv-logo.12be5b4a00a88276c97d2a9176563f66.svg",
+    "static/media/linkedin-logo.svg": "/static/media/linkedin-logo.c7edb0f3cd867a03828551d841262eb6.svg",
     "index.html": "/index.html",
-    "main.a02b7c24.css.map": "/static/css/main.a02b7c24.css.map",
-    "main.ac281200.js.map": "/static/js/main.ac281200.js.map",
+    "static/media/email-logo.svg": "/static/media/email-logo.c61baf361f9744da17dcf845f4bec8e3.svg",
+    "main.fa713332.css.map": "/static/css/main.fa713332.css.map",
+    "main.bf4b2bc6.js.map": "/static/js/main.bf4b2bc6.js.map",
     "151.2801b265.chunk.js.map": "/static/js/151.2801b265.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a02b7c24.css",
-    "static/js/main.ac281200.js"
+    "static/css/main.fa713332.css",
+    "static/js/main.bf4b2bc6.js"
   ]
 }
