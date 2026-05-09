@@ -1,4 +1,3 @@
-// TimelineSection.js
 import React, { useState, useRef } from 'react';
 import './styles/Experiences.css';
 import { motion, AnimatePresence, useInView } from "framer-motion";

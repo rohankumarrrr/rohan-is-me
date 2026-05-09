@@ -1,26 +1,17 @@
-# Personal Website
+# rohan-is.me
 
-Welcome to my personal website repository! This is a fully responsive and interactive portfolio built using **React**, **HTML/CSS**, and **Framer Motion** to showcase my projects, skills, and experience.
+Personal website built with React and Framer Motion. Live at [rohan-is.me](https://rohan-is.me).
 
-## 🚀 Features
-- **Dynamic Project Showcase** – Interactive project cards with hover animations
-- **Smooth Animations** – Powered by Framer Motion for a polished experience
-- **Responsive Design** – Fully optimized for desktop and mobile devices
-- **Contact Section** – Easy way to reach out via email or social media
+## Stack
 
-## 🛠️ Tech Stack
-- **Frontend**: React, HTML/CSS, Framer Motion
-- **Icons**: Iconify
-- **Hosting**: GitHub Pages
+- React 19, React Router v7
+- Framer Motion
+- CSS custom properties (light/dark theme)
+- Deployed on Vercel
 
-## 📸 Screenshots
-To run this project: Open [https://rohan-is.me](https://rohan-is.me) in your browser.
+## Local dev
 
-## 📬 Contact
-If you have any questions, feel free to reach out:
-- **Email**: rohankumarrr313@gmail.com
-- **LinkedIn**: [Rohan Kumar](https://linkedin.com/in/rohankumarrr313)
-- **Portfolio**: [rohan-is.me](https://rohan-is.me)
-
-## 📝 License
-This project is **MIT Licensed**. Feel free to use and modify it as you like!
+```bash
+npm install
+npm start
+```
