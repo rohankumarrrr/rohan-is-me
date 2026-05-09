@@ -5,6 +5,7 @@ import { ThemeProvider } from './hooks/useTheme';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Blog from './pages/Blog';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <footer className="footer">© 2026 Rohan Kumar</footer>
         </div>
       </BrowserRouter>
+      <Analytics />
     </ThemeProvider>
   );
 }
