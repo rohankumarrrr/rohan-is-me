@@ -19,7 +19,8 @@ const experience = [
   {
     period: 'may 2026 – august 2026',
     title: 'software engineer intern @ pinterest',
-    description: '\n product security'
+    description: '\n product security \n\n built vulnscout, an ai-assisted application security agent that mines pinterest\'s accepted bugcrowd history to proactively surface variants of prior web/api authorization bugs (idor, broken access control) before external researchers report them \n\n engineered a langgraph deepagent grounding llm candidate generation in a vector db of historical reports (multi-query rag), pinterest source code, and jira/github fix-pr context via semgrep-style searches over handlers and decorators \n\n designed a browser-based validation harness that reproduces candidates across 10+ sandboxed test-account sessions and routes validated/inconclusive/filtered findings to appsec reviewers via slack alerts; shipped on an internal tooling platform',
+    technologies: ['typescript', 'react', 'docker', 'mysql', 'langchain', 'rag', 'llms', 'semgrep', 'rest apis', 'browser agents'],
   },
   {
     period: 'february 2026 – april 2026',
