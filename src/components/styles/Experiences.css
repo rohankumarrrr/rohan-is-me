@@ -1,167 +1,137 @@
-/* TimelineSection.css */
-
-.timeline-section {
-    display: flex;
-    justify-content: center;
-    gap: 5vh;
-    padding: 2vh 10vw 4vh;
-    background-color: var(--bg-primary);
-    flex-wrap: wrap;
-  }
-  
-.timeline-column {
-  flex: 1;
-  min-width: 300px;
-  /* max-height: 80vh; */ /* <-- REMOVE THIS LINE */
-  position: relative;
-}
-
-.timeline-heading {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  font-family: 'Futura Upright';
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.timeline-line {
-  position: relative;
-  padding-left: 2.5vw;
-  /* border-left: 1px solid #252835; */ /* <-- REMOVE THIS */
-}
-
-.timeline-line-visual {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  background-color: var(--text-primary);
-  z-index: 0;
-  transform-origin: top; /* This makes the scale animation grow downwards */
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 2rem;
-  padding-left: 1rem;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -1.1rem;
-  top: 5vh;
-  width: 10px;
-  height: 10px;
-  background-color: var(--text-primary);
-  border-radius: 50%;
-  border: 2px solid var(--bg-secondary);
-  z-index: 1;
-}
-
-.timeline-content {
-  background-color: var(--bg-secondary);
-  border-color: var(--border);
-  padding: 1rem 1.25rem;
-  border-width: 1px;
-  border-style: solid;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.timeline-content:hover {
-  transform: scale(1.02);
-  translate: ease;
-}
-
-.timeline-period {
-  font-family: 'Futura Upright';
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.timeline-title {
-  font-family: 'Futura Upright';
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 0.3rem 0;
-  color: var(--text-primary);
-}
-
-.timeline-description {
-  font-family: 'Futura Upright';
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.tech-pills {
+.experiences-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-primary);
+  padding: 4vh 8vw 12vh;
 }
 
-.tech-pill {
-  font-family: 'Futura Upright';
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  border: 0.5px solid var(--border);
-  border-radius: 20px;
-  padding: 0.2rem 0.6rem;
+.entries-section {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 6vh;
+}
+
+.entries-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-heading {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-style: italic;
+  margin: 0 0 3vh;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid var(--border);
+}
+
+.entries-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  padding: 2.2vh 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entries-list > .entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.entry-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.entry-period {
+  font-size: 0.85rem;
+  color: var(--text-primary);
   white-space: nowrap;
+  font-style: italic;
+}
+
+.entry-description {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 1vh 0 0;
+}
+
+.entry-details-list {
+  list-style: disc outside;
+  margin: 1vh 0 0;
+  padding-left: 1.2em;
+}
+
+.entry-details-list li {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.5vh;
+}
+
+.entry-details-list li:last-child {
+  margin-bottom: 0;
+}
+
+.entry-tech {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  font-style: italic;
+  margin: 1.2vh 0 0;
+}
+
+.entry-link {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 1vh 0 0;
+}
+
+.entry-link:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
-  .timeline-section {
-    gap: 3vh; /* Add spacing between sections */
+  .experiences-container {
+    padding: 3vh 6vw 8vh;
   }
 
-  .timeline-column {
-    max-height: none; /* Allow columns to expand dynamically */
-    width: 100%; /* Make columns take full width */
+  .entries-section {
+    margin-bottom: 5vh;
   }
 
-  .timeline-heading {
-    font-size: 1.8rem;
-    text-align: center;
+  .section-heading {
+    font-size: 1.6rem;
   }
 
-  .timeline-line {
-    left: -3.8vw;
-    padding-left: 1.5vw; /* Reduce padding for smaller screens */
-    border-left: 1px solid var(--border);
+  .entry-header {
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
-  .timeline-item {
-    margin-bottom: 1.5rem; /* Adjust spacing between items */
-    width: 80vw;
+  .entry-title {
+    font-size: 1.15rem;
   }
 
-  .timeline-dot {
-    left: 0rem; /* Adjust dot position */
-    top: 3vh; /* Adjust dot alignment */
-    width: 8px; /* Adjust dot size */
-    height: 8px;
-  }
-
-  .timeline-content {
-    padding: 0.8rem 1rem; /* Adjust padding for smaller screens */
-  }
-
-  .timeline-period {
-    font-size: 0.9rem;
-  }
-
-  .timeline-title {
-    font-size: 1.2rem;
-  }
-
-  .timeline-description {
-    font-size: 1.0rem;
-  }
-
-  .tech-pill {
-    font-size: 0.82rem;
+  .entry-description,
+  .entry-details-list li,
+  .entry-tech {
+    font-size: 1rem;
   }
 }

@@ -8,13 +8,13 @@ html, body {
 
 .app {
   background-color: var(--bg-primary);
+  min-height: 100vh;
 }
 
 .footer {
   text-align: center;
-  padding: 2vh 0 3vh;
-  font-family: 'Futura Upright';
+  padding: 4vh 0 5vh;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   background-color: var(--bg-primary);
 }

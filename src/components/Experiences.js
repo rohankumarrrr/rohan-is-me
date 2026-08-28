@@ -6,26 +6,36 @@ const education = [
   {
     period: 'august 2023 – december 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activites: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning, machine learning systems',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activities: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning systems',
   },
+];
+
+const publications = [
   {
-    period: 'september 2019 – june 2023',
-    title: 'randolph high school',
-    description: '',
+    period: 'february 2026',
+    title: 'ripel: a data-augmented peer evaluation system for assessing teamwork',
+    description: 'sigcse ts 2026',
+    link: 'https://dl.acm.org/doi/10.1145/3770761.3777297',
+    linkLabel: 'read more',
   },
 ];
 
 const experience = [
   {
+    period: 'september 2026 – present',
+    title: 'software engineer @ kosmos',
+    description: 'engineer no. 3',
+  },
+  {
     period: 'may 2026 – august 2026',
     title: 'software engineer intern @ pinterest',
-    description: '\n product security \n\n built vulnscout, an ai-assisted application security agent that mines pinterest\'s accepted bugcrowd history to proactively surface variants of prior web/api authorization bugs (idor, broken access control) before external researchers report them \n\n engineered a langgraph deepagent grounding llm candidate generation in a vector db of historical reports (multi-query rag), pinterest source code, and jira/github fix-pr context via semgrep-style searches over handlers and decorators \n\n designed a browser-based validation harness that reproduces candidates across 10+ sandboxed test-account sessions and routes validated/inconclusive/filtered findings to appsec reviewers via slack alerts; shipped on an internal tooling platform',
-    technologies: ['typescript', 'react', 'docker', 'mysql', 'langchain', 'rag', 'llms', 'semgrep', 'rest apis', 'browser agents'],
+    description: '\n application security \n\n built a multi-agent ai system (typescript, langgraph) that autonomously searches pinterest\'s source code for security vulnerabilities, grounded in a retrieval (rag) layer over the company\'s own history of confirmed vulnerabilities\n\n engineered a second agentic harness that dynamically validates suspected vulnerabilities by driving a chrome browser, logging into real accounts, attempting to perform the claimed attack, and returning a reproduced/refuted verdict \n\n owned the platform end-to-end as the sole engineer building the infrastructure beneath both systems: a fleet-wide rate governor and a postgres-backed job queue that keep hours-long agent runs alive and durable under a shared llm token budget',
+    technologies: ['typescript', 'python', 'postgresql', 'prisma', 'langgraph', 'deepagents', 'rag', 'llms', 'docker', 'rest apis', 'git'],
   },
   {
     period: 'february 2026 – april 2026',
     title: 'software development engineer intern @ amazon',
-    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music’s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in Java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions.',
+    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music\'s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions',
     technologies: ['java', 'pyspark', 'aws (glue)', 'reinforcement learning (rl)', 'a/b testing', 'distributed systems'],
   },
   {
@@ -48,95 +58,80 @@ const experience = [
   }
 ];
 
-function TimelineItem({ period, title, description, technologies = [], type = 'experience', variants }) {
+function Entry({ period, title, description, technologies = [], link, linkLabel = 'view', variants }) {
   const [isHovered, setIsHovered] = useState(false);
-  const contentRef = useRef(null);
 
   const hasDetailsToExpand = description.includes('\n\n');
+  const trimmed = description.trim();
 
-  const techPills = technologies.length > 0 && (
-    <div className="tech-pills">
-      {technologies.map((tech, i) => (
-        <span key={i} className="tech-pill">{tech}</span>
-      ))}
-    </div>
+  const techLine = technologies.length > 0 && (
+    <p className="entry-tech">{technologies.join(', ')}</p>
+  );
+
+  const linkLine = link && (
+    <a href={link} target="_blank" rel="noopener noreferrer" className="entry-link">
+      {linkLabel} <span aria-hidden="true">→</span>
+    </a>
   );
 
   if (!hasDetailsToExpand) {
     return (
-      <motion.div className="timeline-item" variants={variants}>
-        <div className="timeline-dot" />
-        <motion.div
-          className="timeline-content"
-          whileHover={{ scale: 1.03 }}
-        >
-          <span className="timeline-period">{period}</span>
-          <h3 className="timeline-title">{title}</h3>
-          <p className="timeline-description" style={{ whiteSpace: "pre-line", margin: 0 }}>
-            {description.trim()}
+      <motion.div className="entry" variants={variants}>
+        <div className="entry-header">
+          <h3 className="entry-title">{title}</h3>
+          <span className="entry-period">{period}</span>
+        </div>
+        {linkLine}
+        {trimmed && (
+          <p className="entry-description" style={{ whiteSpace: "pre-line" }}>
+            {trimmed}
           </p>
-          {techPills}
-        </motion.div>
+        )}
+        {techLine}
       </motion.div>
     );
   }
 
-  const descriptionParts = description.trim().split('\n\n');
-  const teamHeader = descriptionParts[0];
-  const details = descriptionParts.slice(1);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setTimeout(() => {
-      if (contentRef.current) {
-        const element = contentRef.current;
-        const rect = element.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        if (rect.bottom > viewportHeight) {
-          const scrollByAmount = rect.bottom - viewportHeight + 20;
-          window.scrollBy({ top: scrollByAmount, behavior: 'smooth' });
-        }
-      }
-    }, 400);
-  };
+  const descriptionParts = trimmed.split('\n\n').map((part) => part.trim());
+  const [teamHeader, ...details] = descriptionParts;
 
   return (
-    <motion.div className="timeline-item" variants={variants}>
-      <div className="timeline-dot" />
-      <motion.div
-        ref={contentRef}
-        className="timeline-content"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setIsHovered(false)}
-        layout
-        transition={{ layout: { duration: 0.3, type: "spring", bounce: 0.4 } }}
-      >
-        <span className="timeline-period">{period}</span>
-        <h3 className="timeline-title">{title}</h3>
-        <p className="timeline-description" style={{ whiteSpace: "pre-line", margin: 0 }}>
-          {teamHeader}
-        </p>
-        <AnimatePresence>
-          {isHovered && details.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto', transition: { duration: 0.3, delay: 0.1 } }}
-              exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
-              style={{ overflow: 'hidden' }}
-            >
-              <p className="timeline-description" style={{ whiteSpace: "pre-line", paddingTop: '1rem' }}>
-                {details.join('\n\n')}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {techPills}
-      </motion.div>
+    <motion.div
+      className="entry"
+      variants={variants}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      layout
+      transition={{ layout: { duration: 0.3, type: "spring", bounce: 0.3 } }}
+    >
+      <div className="entry-header">
+        <h3 className="entry-title">{title}</h3>
+        <span className="entry-period">{period}</span>
+      </div>
+      {linkLine}
+      <p className="entry-description">{teamHeader}</p>
+      <AnimatePresence>
+        {isHovered && details.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto', transition: { duration: 0.3, delay: 0.1 } }}
+            exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
+            style={{ overflow: 'hidden' }}
+          >
+            <ul className="entry-details-list">
+              {details.map((detail, i) => (
+                <li key={i}>{detail}</li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {techLine}
     </motion.div>
   );
 }
 
-export default function Experiences() {
+function Section({ heading, items }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
@@ -144,71 +139,38 @@ export default function Experiences() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2, // Stagger the animation of children by 0.2s
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
-  const itemVariantsLeft = {
-    hidden: { opacity: 0, x: -100 },
-    show: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 50 } },
-  };
-
-  const itemVariantsRight = {
-    hidden: { opacity: 0, x: 100 },
-    show: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 50 } },
-  };
-
-  // Variants for the timeline line itself to "draw" from top to bottom
-  const lineVariants = {
-    hidden: { scaleY: 0 },
-    show: { 
-      scaleY: 1, 
-      transition: { 
-        duration: 1, 
-        ease: "easeIn",
-        delay: 0.4 // Delay to start after the last item has animated in
-      } 
-    },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
   return (
-    <section className="timeline-section" ref={ref}>
-      <div className="timeline-column">
-        <h2 className="timeline-heading">education</h2>
-        <motion.div 
-          className="timeline-line"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-        >
-          <motion.div 
-            className="timeline-line-visual"
-            variants={lineVariants}
-          />
-          {education.map((item, i) => (
-            <TimelineItem key={i} {...item} type="education" variants={itemVariantsLeft}/>
-          ))}
-        </motion.div>
-      </div>
-      <div className="timeline-column">
-        <h2 className="timeline-heading">experience</h2>
-        <motion.div 
-          className="timeline-line"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-        >
-          <motion.div 
-            className="timeline-line-visual"
-            variants={lineVariants}
-          />
-          {experience.map((item, i) => (
-            <TimelineItem key={i} {...item} type="experience" variants={itemVariantsRight}/>
-          ))}
-        </motion.div>
-      </div>
+    <section className="entries-section" ref={ref}>
+      <h2 className="section-heading">{heading}</h2>
+      <motion.div
+        className="entries-list"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "show" : "hidden"}
+      >
+        {items.map((item, i) => (
+          <Entry key={i} {...item} variants={itemVariants} />
+        ))}
+      </motion.div>
     </section>
+  );
+}
+
+export default function Experiences() {
+  return (
+    <div className="experiences-container">
+      <Section heading="experience" items={experience} />
+      <Section heading="education" items={education} />
+      <Section heading="publications" items={publications} />
+    </div>
   );
 }

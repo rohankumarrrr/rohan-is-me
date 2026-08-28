@@ -1,61 +1,28 @@
 :root {
-  --bg-primary: #fafaf8;
-  --bg-secondary: #ffffff;
-  --text-primary: #1f2935;
-  --text-secondary: #6b7280;
-  --accent: #FFB343;
-  --interactive-bg: #252835;
-  --interactive-text: #ffffff;
-  --border: #4b5563;
+  --bg-primary: #ffffff;
+  --text-primary: #000000;
+  --border: #d4d4d4;
 }
 
 [data-theme="dark"] {
-  --bg-primary: #111318;
-  --bg-secondary: #1a1d24;
-  --text-primary: #e8eaed;
-  --text-secondary: #9ca3af;
-  --accent: #90D5FF;
-  --interactive-bg: #252835;
-  --interactive-text: #ffffff;
-  --border: #374151;
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  --border: #2a2a2a;
 }
 
-[data-theme="dark"] .social-icon {
-  filter: invert(0.9);
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Futura', 'Futura Upright', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Times New Roman', Times, Georgia, serif;
   color: var(--text-primary);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-@font-face {
-  font-family: 'Futura';
-  src: url('./assets/fonts/futura/futura_medium_italic_font-webfont.woff2') format('woff2'),
-       url('./assets/fonts/futura/futura_medium_italic_font-webfont.woff') format('woff'),
-       url('./assets/fonts/futura/futura_medium_italic_font-truetype.ttf') format('truetype');
-  font-weight: normal; /* or 400 */
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura Upright';
-  src: url('./assets/fonts/futura/futura_book_font-webfont.woff') format('woff'), 
-       url('./assets/fonts/futura/futura_book_font-webfont.woff2') format('woff2'),
-       url('./assets/fonts/futura/futura_book_font-truetype.ttf') format('truetype');
-  font-weight: normal; /* or 400 */
-  font-style: normal;
-  font-display: swap;
 }
