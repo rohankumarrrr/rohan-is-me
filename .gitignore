@@ -24,3 +24,5 @@ yarn-error.log*
 
 # IDEs and editors
 .claude
+.vercel
+.env*

@@ -43,7 +43,7 @@ const Home = () => {
         </motion.p>
         <motion.ul className="build-list" variants={itemVariants}>
           <li><a className="inline-link" href="https://pinterest.com/" target="_blank" rel="noopener noreferrer">pinterest's</a> first-party agentic harness for autonomous vulnerability discovery and validation.</li>
-          <li>the personalization layer behind multilingual music recommendations at <a className="inline-link" href="https://music.amazon.com/" target="_blank" rel="noopener noreferrer">amazon music</a>.</li>
+          <li>the personalization layer behind multilingual music recommendations for <a className="inline-link" href="https://music.amazon.com/" target="_blank" rel="noopener noreferrer">amazon music/alexa/alexa+</a>.</li>
         </motion.ul>
         <motion.p variants={itemVariants}>
           when i'm not building, i'm probably <a className="inline-link" href="https://open.spotify.com/artist/0dWCkDXiZhBI7l1LcE0BoV?si=yaev3hm-QPCRJjY37EUgVw" target="_blank" rel="noopener noreferrer">producing music</a> or doomscrolling <a className="inline-link" href="https://www.depop.com/rohankumarrr/" target="_blank" rel="noopener noreferrer">depop</a> for new jeans.

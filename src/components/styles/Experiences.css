@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--bg-primary);
-  padding: 4vh 8vw 12vh;
+  padding: 4vh 8vw 4vh;
 }
 
 .entries-section {
@@ -109,29 +109,11 @@
 
 @media (max-width: 768px) {
   .experiences-container {
-    padding: 3vh 6vw 8vh;
-  }
-
-  .entries-section {
-    margin-bottom: 5vh;
-  }
-
-  .section-heading {
-    font-size: 1.6rem;
+    padding: 2vh 8vw 10vh;
   }
 
   .entry-header {
     flex-direction: column;
     gap: 0.2rem;
-  }
-
-  .entry-title {
-    font-size: 1.15rem;
-  }
-
-  .entry-description,
-  .entry-details-list li,
-  .entry-tech {
-    font-size: 1rem;
   }
 }
