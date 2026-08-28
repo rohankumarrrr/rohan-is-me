@@ -23,8 +23,10 @@ const publications = [
 const experience = [
   {
     period: 'september 2026 – present',
-    title: 'software engineer @ kosmos',
-    description: 'engineer no. 3',
+    title: 'founding engineer @ vinskal',
+    description: 'building the single source of truth for job search.',
+    link: 'https://vinskal.com',
+    linkLabel: 'read more',
   },
   {
     period: 'may 2026 – august 2026',

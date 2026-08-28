@@ -39,7 +39,7 @@ const Home = () => {
           <span className="last-updated">last updated: August 28, 2026</span>
         </motion.p>
         <motion.p variants={itemVariants}>
-          i'm a senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a> i'm currently at <a className="inline-link" href="https://kosmos.fyi/" target="_blank" rel="noopener noreferrer">kosmos</a>, helping build the intelligence and agentic execution layer for prediction markets. i've also built:
+          i'm a senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a> i'm also building <a className="inline-link" href="https://vinskal.com/" target="_blank" rel="noopener noreferrer">vinskal</a>, the single source of truth for job search. i've also built:
         </motion.p>
         <motion.ul className="build-list" variants={itemVariants}>
           <li><a className="inline-link" href="https://pinterest.com/" target="_blank" rel="noopener noreferrer">pinterest's</a> first-party agentic harness for autonomous vulnerability discovery and validation.</li>
