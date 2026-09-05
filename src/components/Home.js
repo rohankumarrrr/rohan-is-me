@@ -36,7 +36,7 @@ const Home = () => {
       >
         <motion.h1 variants={itemVariants}>hey, it's Rohan.</motion.h1>
         <motion.p className="last-updated-row" variants={itemVariants}>
-          <span className="last-updated">last updated: August 28, 2026</span>
+          <span className="last-updated">last updated: September 04, 2026</span>
         </motion.p>
         <motion.p variants={itemVariants}>
           i'm a senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a> i'm currently building <a className="inline-link" href="https://vinskal.com/" target="_blank" rel="noopener noreferrer">vinskal</a>, an ai-native career copilot designed to own your job search. i've previously built:
