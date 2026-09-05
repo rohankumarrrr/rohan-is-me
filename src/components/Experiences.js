@@ -23,7 +23,7 @@ const publications = [
 const experience = [
   {
     period: 'september 2026 – present',
-    title: 'founding engineer @ vinskal',
+    title: 'co-founder, engineering @ vinskal',
     description: 'building the single source of truth for job search.',
     link: 'https://vinskal.com',
     linkLabel: 'read more',
