@@ -4,7 +4,7 @@ Personal website built with React and Framer Motion. Live at [rohan-is.me](https
 
 ## Stack
 
-- React 19, React Router v7
+- React 19 (Create React App)
 - Framer Motion
 - CSS custom properties (light/dark theme)
 - Deployed on Vercel

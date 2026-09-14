@@ -86,6 +86,14 @@
   margin-bottom: 0;
 }
 
+.entry-note {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  font-style: italic;
+  opacity: 0.7;
+  margin: 1vh 0 0;
+}
+
 .entry-tech {
   font-size: 0.82rem;
   color: var(--text-primary);

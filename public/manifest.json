@@ -1,6 +1,7 @@
 {
-  "short_name": "hey, it's rohan",
-  "name": "Rohan Kumar's personal portfolio website",
+  "short_name": "Rohan Kumar",
+  "name": "Rohan Kumar — software engineer",
+  "description": "Statistics & computer science senior at UIUC, currently building Vinskal. Previously engineering at Pinterest and Amazon.",
   "icons": [
     {
       "src": "favicon.ico",

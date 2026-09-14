@@ -6,7 +6,7 @@ const education = [
   {
     period: 'august 2023 – december 2026',
     title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activities: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, database systems, distributed systems, high frequency trading technology, algorithmic market microstructure, statistical modeling, statistical learning, machine learning systems',
+    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activities: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, computer systems, database systems, distributed systems, high frequency trading technology, statistical modeling, statistical learning, applied machine learning',
   },
 ];
 
@@ -22,9 +22,11 @@ const publications = [
 
 const experience = [
   {
-    period: 'september 2026 – present',
+    period: 'august 2026 – present',
     title: 'co-founder, engineering @ vinskal',
-    description: 'building the single source of truth for job search.',
+    description: '\n because finding a job is kinda hard \n\n architected the continuous job-discovery pipeline behind 130k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed its eval harness with a seed/held-out split, model judges, scorecards, and per-run budget ceilings \n\n cut monthly infrastructure spend 24% by eliminating $281/mo in runaway database egress, migrating ci to merge-queued ubicloud runner architecture that also ran 40% faster, and adding model/vendor usage metering',
+    note: 'written about vinskal, tailored by vinskal. obviously',
+    technologies: ['python', 'typescript', 'fastapi', 'postgresql', 'playwright', 'docker', 'cloudflare workers', 'github actions'],
     link: 'https://vinskal.com',
     linkLabel: 'read more',
   },
@@ -60,7 +62,7 @@ const experience = [
   }
 ];
 
-function Entry({ period, title, description, technologies = [], link, linkLabel = 'view', variants }) {
+function Entry({ period, title, description, technologies = [], note, link, linkLabel = 'view', variants }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const hasDetailsToExpand = description.includes('\n\n');
@@ -94,7 +96,9 @@ function Entry({ period, title, description, technologies = [], link, linkLabel 
     );
   }
 
-  const descriptionParts = trimmed.split('\n\n').map((part) => part.trim());
+  // Split the raw description so an entry that opens with '\n\n' yields an
+  // empty header and renders straight into its bullets.
+  const descriptionParts = description.split('\n\n').map((part) => part.trim());
   const [teamHeader, ...details] = descriptionParts;
 
   return (
@@ -111,7 +115,7 @@ function Entry({ period, title, description, technologies = [], link, linkLabel 
         <span className="entry-period">{period}</span>
       </div>
       {linkLine}
-      <p className="entry-description">{teamHeader}</p>
+      {teamHeader && <p className="entry-description">{teamHeader}</p>}
       <AnimatePresence>
         {isHovered && details.length > 0 && (
           <motion.div
@@ -125,6 +129,7 @@ function Entry({ period, title, description, technologies = [], link, linkLabel 
                 <li key={i}>{detail}</li>
               ))}
             </ul>
+            {note && <p className="entry-note">{note}</p>}
           </motion.div>
         )}
       </AnimatePresence>
