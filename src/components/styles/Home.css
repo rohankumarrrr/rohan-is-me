@@ -1,8 +1,13 @@
 .container {
   display: flex;
   justify-content: center;
-  min-height: 80vh;
-  padding: 16vh 8vw 6vh;
+  /* Centre vertically so the leftover height splits evenly above and below
+     the content instead of pooling under it. Vertical padding is symmetric
+     and acts as a floor on short screens; asymmetric padding would skew
+     the split. */
+  align-items: center;
+  min-height: 100vh;
+  padding: 8vh 8vw;
   background-color: var(--bg-primary);
 }
 
@@ -11,6 +16,12 @@
   flex-direction: column;
   max-width: 640px;
   width: 100%;
+  /* Centre the BODY rather than the whole block: this phantom margin makes
+     the centred margin box taller than the content, lifting everything by
+     half the header's height so the body's midpoint lands on the viewport's.
+     Value mirrors the header — h1 (3rem) + 1vh, last-updated (1.8125rem)
+     + 3vh — so it tracks both root font size and viewport height. */
+  margin-bottom: calc(4.8125rem + 4vh);
 }
 
 h1 {
@@ -95,7 +106,13 @@ p {
 
 @media (max-width: 768px) {
   .container {
-    padding: 14vh 8vw 4vh;
+    padding: 6vh 8vw;
+  }
+
+  /* On phones the content nearly fills the screen, so there is no free space
+     to centre into — the phantom margin would only add dead height below. */
+  .content {
+    margin-bottom: 0;
   }
 }
 
