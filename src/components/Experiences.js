@@ -63,7 +63,27 @@ const experience = [
 ];
 
 function Entry({ period, title, description, technologies = [], note, link, linkLabel = 'view', variants }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const lastPointerType = useRef('mouse');
+
+  // A mouse opens and closes the entry by hovering. Touch and pen have no
+  // hover to leave — a tap emits a synthetic mouseenter but never a matching
+  // mouseleave — so they toggle on tap instead. Tracking the pointer that
+  // started the interaction (rather than sniffing the device) keeps both
+  // working on hybrids like a touchscreen laptop.
+  const handlePointerEnter = (e) => {
+    if (e.pointerType === 'mouse') setIsOpen(true);
+  };
+  const handlePointerLeave = (e) => {
+    if (e.pointerType === 'mouse') setIsOpen(false);
+  };
+  const handlePointerDown = (e) => {
+    lastPointerType.current = e.pointerType;
+  };
+  const handleClick = () => {
+    if (lastPointerType.current === 'mouse') return;
+    setIsOpen((open) => !open);
+  };
 
   const hasDetailsToExpand = description.includes('\n\n');
   const trimmed = description.trim();
@@ -73,7 +93,13 @@ function Entry({ period, title, description, technologies = [], note, link, link
   );
 
   const linkLine = link && (
-    <a href={link} target="_blank" rel="noopener noreferrer" className="entry-link">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="entry-link"
+      onClick={(e) => e.stopPropagation()}
+    >
       {linkLabel} <span aria-hidden="true">→</span>
     </a>
   );
@@ -105,8 +131,10 @@ function Entry({ period, title, description, technologies = [], note, link, link
     <motion.div
       className="entry"
       variants={variants}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      onPointerDown={handlePointerDown}
+      onClick={handleClick}
       layout
       transition={{ layout: { duration: 0.3, type: "spring", bounce: 0.3 } }}
     >
@@ -117,7 +145,7 @@ function Entry({ period, title, description, technologies = [], note, link, link
       {linkLine}
       {teamHeader && <p className="entry-description">{teamHeader}</p>}
       <AnimatePresence>
-        {isHovered && details.length > 0 && (
+        {isOpen && details.length > 0 && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto', transition: { duration: 0.3, delay: 0.1 } }}
