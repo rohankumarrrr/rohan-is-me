@@ -36,7 +36,7 @@ const Home = () => {
       >
         <motion.h1 variants={itemVariants}>hey, it's Rohan.</motion.h1>
         <motion.p className="last-updated-row" variants={itemVariants}>
-          <span className="last-updated">last updated: September 15, 2026</span>
+          <span className="last-updated">last updated: September 22, 2026</span>
         </motion.p>
         <motion.p variants={itemVariants}>
           i'm a senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a> i'm currently building a job search platform called <a className="inline-link" href="https://vinskal.com/" target="_blank" rel="noopener noreferrer">vinskal</a>. i've previously built:
@@ -46,7 +46,7 @@ const Home = () => {
           <li>the personalization layer behind multilingual music recommendations for <a className="inline-link" href="https://music.amazon.com/" target="_blank" rel="noopener noreferrer">amazon music/alexa/alexa+</a>.</li>
         </motion.ul>
         <motion.p variants={itemVariants}>
-          when i'm not building, i'm probably <a className="inline-link" href="https://open.spotify.com/artist/0dWCkDXiZhBI7l1LcE0BoV?si=yaev3hm-QPCRJjY37EUgVw" target="_blank" rel="noopener noreferrer">producing music</a> or doomscrolling <a className="inline-link" href="https://www.depop.com/rohankumarrr/" target="_blank" rel="noopener noreferrer">depop</a> for new jeans.
+          when i'm not building, i'm probably <a className="inline-link" href="https://www.youtube.com/watch?v=_RL_57Qamyo&list=RD_RL_57Qamyo&start_radio=1&pp=ygUHcmVkdmVpbKAHAQ%3D%3D" target="_blank" rel="noopener noreferrer">producing music</a> or doomscrolling <a className="inline-link" href="https://www.depop.com/rohankumarrr/" target="_blank" rel="noopener noreferrer">depop</a> for new jeans.
         </motion.p>
         <motion.div className="last-listened" variants={itemVariants}>
           <LastListened />
