@@ -21,7 +21,11 @@
   font-size: 1.4rem;
   font-weight: normal;
   font-style: italic;
-  margin: 0 0 3vh;
+  /* No bottom margin: the first entry's own top padding supplies the gap
+     below the rule, so it matches the spacing after every entry divider.
+     A margin here would stack on top of that and make the first row sit
+     noticeably lower than the rest. */
+  margin: 0;
   padding-bottom: 1vh;
   border-bottom: 1px solid var(--border);
 }
