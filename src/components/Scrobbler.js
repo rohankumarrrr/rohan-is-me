@@ -40,10 +40,10 @@ const LastListened = () => {
     const seconds = Math.floor(new Date().getTime() / 1000 - date)
     let interval = Math.floor(seconds / 31536000)
 
-    if (interval > 1) return interval + ' year'
+    if (interval >= 1) return interval + ' year'
 
     interval = Math.floor(seconds / 2592000)
-    if (interval > 1) return interval + ' minute'
+    if (interval >= 1) return interval + ' month'
 
     interval = Math.floor(seconds / 86400)
     if (interval >= 1) return interval + ' day'
@@ -52,7 +52,7 @@ const LastListened = () => {
     if (interval >= 1) return interval + ' hour'
 
     interval = Math.floor(seconds / 60)
-    if (interval > 1) return interval + ' minute'
+    if (interval >= 1) return interval + ' minute'
 
     return Math.floor(seconds) + ' second'
   }
