@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, frame, cancelFrame } from 'framer-motion';
 import { sections, splitDescription } from '../data/entries';
 import SwapText from './SwapText';
 import './styles/Experiences.css';
@@ -7,6 +7,23 @@ import './styles/Experiences.css';
 // How long the cursor has to rest on a row before it opens. Without it,
 // sweeping down this dense list flicks every row open on the way past.
 const HOVER_OPEN_DELAY_MS = 100;
+
+// Keeps `el` at the same place on screen for the length of the open and close
+// animations, scrolling the page to cancel out any drift. The correction runs
+// in framer-motion's post-render step — after it has applied that frame's
+// animated heights, before the browser paints — so it lands in the same frame
+// as the shift and the row never visibly moves.
+function holdInPlace(el, duration = 450) {
+  if (!el) return;
+  const start = el.getBoundingClientRect().top;
+  const until = performance.now() + duration;
+  const correct = () => {
+    const drift = el.getBoundingClientRect().top - start;
+    if (Math.abs(drift) >= 1) window.scrollBy(0, drift);
+    if (performance.now() >= until) cancelFrame(correct);
+  };
+  frame.postRender(correct, true);
+}
 
 // Seconds between one element's entrance and the next, down the page.
 const STAGGER = 0.06;
@@ -39,9 +56,9 @@ function useCanHover() {
   return canHover;
 }
 
-function Row({ entry, index }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Row({ entry, index, isOpen, onOpen, onClose, onToggle }) {
   const lastPointerType = useRef('mouse');
+  const headRef = useRef(null);
   const openTimer = useRef(null);
   const bodyId = useId();
   const { header, details } = splitDescription(entry.description);
@@ -56,12 +73,12 @@ function Row({ entry, index }) {
   const handlePointerEnter = (e) => {
     if (e.pointerType !== 'mouse') return;
     clearTimeout(openTimer.current);
-    openTimer.current = setTimeout(() => setIsOpen(true), HOVER_OPEN_DELAY_MS);
+    openTimer.current = setTimeout(onOpen, HOVER_OPEN_DELAY_MS);
   };
   const handlePointerLeave = (e) => {
     if (e.pointerType !== 'mouse') return;
     clearTimeout(openTimer.current);
-    setIsOpen(false);
+    onClose();
   };
   const handlePointerDown = (e) => {
     lastPointerType.current = e.pointerType;
@@ -70,7 +87,7 @@ function Row({ entry, index }) {
     // A click from Enter or Space has detail 0 and always toggles; a mouse
     // click is left alone because hover already owns the state.
     if (e.detail !== 0 && lastPointerType.current === 'mouse') return;
-    setIsOpen((open) => !open);
+    onToggle(headRef.current);
   };
 
   return (
@@ -83,7 +100,13 @@ function Row({ entry, index }) {
       onPointerDown={handlePointerDown}
       onClick={handleClick}
     >
-      <button type="button" className="row-head" aria-expanded={isOpen} aria-controls={bodyId}>
+      <button
+        ref={headRef}
+        type="button"
+        className="row-head"
+        aria-expanded={isOpen}
+        aria-controls={bodyId}
+      >
         <span className="row-title">
           {/* The visible text turns into the header while open; screen
               readers always get the title here and the header in the body. */}
@@ -171,6 +194,19 @@ function LinkRow({ entry, index }) {
 export default function Experiences() {
   const colRef = useRef(null);
   const [paddingTop, setPaddingTop] = useState(null);
+  const [openKey, setOpenKey] = useState(null);
+
+  // Only one row is open at a time. Hover opens and closes rows directly; a
+  // tap or Enter toggles one and closes whichever other row was open.
+  const openRow = (key) => setOpenKey(key);
+  const closeRow = (key) => setOpenKey((current) => (current === key ? null : current));
+  const toggleRow = (key, head) => {
+    // When the row closing sits above the one tapped, everything below it
+    // slides up as it collapses — the tapped row included, sometimes off
+    // screen. Hold the tapped row still while that happens.
+    if (openKey && openKey !== key) holdInPlace(head);
+    setOpenKey(openKey === key ? null : key);
+  };
   const canHover = useCanHover();
   const reduceMotion = useReducedMotion();
 
@@ -240,7 +276,15 @@ export default function Experiences() {
                   return section.kind === 'link' ? (
                     <LinkRow key={i} entry={item} index={rowPosition} />
                   ) : (
-                    <Row key={i} entry={item} index={rowPosition} />
+                    <Row
+                      key={i}
+                      entry={item}
+                      index={rowPosition}
+                      isOpen={openKey === `${section.id}-${i}`}
+                      onOpen={() => openRow(`${section.id}-${i}`)}
+                      onClose={() => closeRow(`${section.id}-${i}`)}
+                      onToggle={(head) => toggleRow(`${section.id}-${i}`, head)}
+                    />
                   );
                 })}
               </ul>
