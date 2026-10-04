@@ -1,211 +1,253 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { sections, splitDescription } from '../data/entries';
+import SwapText from './SwapText';
 import './styles/Experiences.css';
-import { motion, AnimatePresence, useInView } from "framer-motion";
 
-const education = [
-  {
-    period: 'august 2023 – december 2026',
-    title: 'university of illinois at urbana-champaign',
-    description: '\n b.s. in statistics & computer science \n\n gpa: 3.86 \n\n activities: technology director @ national organization of business and engineering (nobe), technical lead @ illinois business consulting (ibc), content team @ reflections|projections 2025 \n\n courses: object oriented programming, data structures, algorithms, computer systems, database systems, distributed systems, high frequency trading technology, statistical modeling, statistical learning, applied machine learning',
-  },
-];
+// How long the cursor has to rest on a row before it opens. Without it,
+// sweeping down this dense list flicks every row open on the way past.
+const HOVER_OPEN_DELAY_MS = 100;
 
-const publications = [
-  {
-    period: 'february 2026',
-    title: 'ripel: a data-augmented peer evaluation system for assessing teamwork',
-    description: 'sigcse ts 2026',
-    link: 'https://dl.acm.org/doi/10.1145/3770761.3777297',
-    linkLabel: 'read more',
-  },
-];
+// Seconds between one element's entrance and the next, down the page.
+const STAGGER = 0.06;
 
-const experience = [
-  {
-    period: 'august 2026 – present',
-    title: 'founding engineer @ vinskal',
-    description: '\n because finding a job is hard \n\n architected the continuous job-discovery pipeline behind 130k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
-    note: 'written about vinskal, tailored by vinskal. obviously',
-    technologies: ['python', 'typescript', 'fastapi', 'postgresql', 'playwright', 'docker', 'cloudflare workers', 'github actions'],
-    link: 'https://vinskal.com',
-    linkLabel: 'read more',
-  },
-  {
-    period: 'may 2026 – august 2026',
-    title: 'software engineer intern @ pinterest',
-    description: '\n application security \n\n built a multi-agent ai system (typescript, langgraph) that autonomously searches pinterest\'s source code for security vulnerabilities, grounded in a retrieval (rag) layer over the company\'s own history of confirmed vulnerabilities\n\n engineered a second agentic harness that dynamically validates suspected vulnerabilities by driving a chrome browser, logging into real accounts, attempting to perform the claimed attack, and returning a reproduced/refuted verdict \n\n owned the platform end-to-end as the sole engineer building the infrastructure beneath both systems: a fleet-wide rate governor and a postgres-backed job queue that keep hours-long agent runs durable under a shared llm token budget',
-    technologies: ['typescript', 'python', 'postgresql', 'prisma', 'langgraph', 'deepagents', 'rag', 'llms', 'docker', 'rest apis', 'git'],
-  },
-  {
-    period: 'february 2026 – april 2026',
-    title: 'software development engineer intern @ amazon',
-    description: '\n sequencing and voice recommendations for amazon music \n\n designed and deployed multilingual personalization features for amazon music\'s voice recommendation system (≈23m+ daily requests), integrating user listening behavior into an ml ranking pipeline and achieving 96%+ feature coverage \n\n owned end-to-end system design and development of a language-aware candidate filtering system in java, reducing irrelevant cross-language recommendations and improving music recommendation quality across 17m+ daily voice requests \n\n engineered 5 large-scale pyspark data pipelines (aws glue) to analyze 100m+ recommendation events, uncovering feature coverage gaps and critical quality issues that directly informed ranking model inputs and system design decisions',
-    technologies: ['java', 'pyspark', 'aws (glue)', 'reinforcement learning (rl)', 'a/b testing', 'distributed systems'],
-  },
-  {
-    period: 'january 2024 – december 2025',
-    title: 'research assistant @ uiuc',
-    description: '\n human-computer interaction, professor brian p. bailey \n\n engineered a scalable data pipeline in python to process and analyze teamwork behaviors across 100+ github repositories \n\n architected a cloud-native backend on gcp and firebase, ensuring efficient data management for over 120 concurrent users \n\n developed and deployed a responsive dashboard using next.js and fastapi with real-time data tracking capabilities',
-    technologies: ['python', 'numpy', 'pandas', 'sci-kit learn', 'next.js', 'fastapi', 'gcp', 'firebase', 'restful apis'],
-  },
-  {
-    period: 'may 2025 – august 2025',
-    title: 'software engineer intern @ relativity',
-    description: '\n processing arm & infrastructure \n\n owned the end-to-end development of internal api extensions and automated github actions ci/cd workflows, reducing direct client data access during incident resolution and improving resolution speed \n\n designed and engineered fault-tolerant .net (c#) migration jobs to transition over 1tb of data from legacy sql systems to a distributed, azure-hosted nosql architecture, enhancing horizontal scalability and reducing storage costs',
-    technologies: ['c#', '.net', 'azure kubernetes service (aks)', 'mysql', 'docker', 'restful apis', 'github actions'],
-  },
-  {
-    period: 'june 2024 – july 2024',
-    title: 'software engineer intern @ am best',
-    description: '\n web development \n\n developed a production .net api in c# to serve financial records and credit ratings for over 300 insurance clients \n\n identified and resolved performance bottlenecks, implementing caching strategies that reduced query response times by 25%',
-    technologies: ['c#', 'mysql', 'blazor', 'asp.net', 'azure services', 'restful apis', 'ci/cd'],
-  }
-];
+// Entrance: text fades in while the heading rules and dotted leaders draw
+// themselves from the left. Each element receives its position down the page
+// as `custom`, so the stagger runs continuously across all three sections.
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: (i) => ({ opacity: 1, transition: { duration: 0.5, delay: i * STAGGER } }),
+};
 
-function Entry({ period, title, description, technologies = [], note, link, linkLabel = 'view', variants }) {
+const drawIn = {
+  hidden: { scaleX: 0 },
+  visible: (i) => ({
+    scaleX: 1,
+    transition: { duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: i * STAGGER + 0.1 },
+  }),
+};
+
+function useCanHover() {
+  const query = '(hover: hover) and (pointer: fine)';
+  const [canHover, setCanHover] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = (e) => setCanHover(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+  return canHover;
+}
+
+function Row({ entry, index }) {
   const [isOpen, setIsOpen] = useState(false);
   const lastPointerType = useRef('mouse');
+  const openTimer = useRef(null);
+  const bodyId = useId();
+  const { header, details } = splitDescription(entry.description);
 
-  // A mouse opens and closes the entry by hovering. Touch and pen have no
-  // hover to leave — a tap emits a synthetic mouseenter but never a matching
-  // mouseleave — so they toggle on tap instead. Tracking the pointer that
-  // started the interaction (rather than sniffing the device) keeps both
-  // working on hybrids like a touchscreen laptop.
+  useEffect(() => () => clearTimeout(openTimer.current), []);
+
+  // A mouse opens a row by resting on it and closes it by leaving. Touch has
+  // no hover to leave — a tap emits a synthetic mouseenter but never a
+  // matching mouseleave — so it toggles on tap instead, anywhere on the row.
+  // Deciding from the pointer that started the interaction, rather than from
+  // the device, keeps both working on a touchscreen laptop.
   const handlePointerEnter = (e) => {
-    if (e.pointerType === 'mouse') setIsOpen(true);
+    if (e.pointerType !== 'mouse') return;
+    clearTimeout(openTimer.current);
+    openTimer.current = setTimeout(() => setIsOpen(true), HOVER_OPEN_DELAY_MS);
   };
   const handlePointerLeave = (e) => {
-    if (e.pointerType === 'mouse') setIsOpen(false);
+    if (e.pointerType !== 'mouse') return;
+    clearTimeout(openTimer.current);
+    setIsOpen(false);
   };
   const handlePointerDown = (e) => {
     lastPointerType.current = e.pointerType;
   };
-  const handleClick = () => {
-    if (lastPointerType.current === 'mouse') return;
+  const handleClick = (e) => {
+    // A click from Enter or Space has detail 0 and always toggles; a mouse
+    // click is left alone because hover already owns the state.
+    if (e.detail !== 0 && lastPointerType.current === 'mouse') return;
     setIsOpen((open) => !open);
   };
 
-  const hasDetailsToExpand = description.includes('\n\n');
-  const trimmed = description.trim();
-
-  const techLine = technologies.length > 0 && (
-    <p className="entry-tech">{technologies.join(', ')}</p>
-  );
-
-  const linkLine = link && (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="entry-link"
-      onClick={(e) => e.stopPropagation()}
-    >
-      {linkLabel} <span aria-hidden="true">→</span>
-    </a>
-  );
-
-  if (!hasDetailsToExpand) {
-    return (
-      <motion.div className="entry" variants={variants}>
-        <div className="entry-header">
-          <h3 className="entry-title">{title}</h3>
-          <span className="entry-period">{period}</span>
-        </div>
-        {linkLine}
-        {trimmed && (
-          <p className="entry-description" style={{ whiteSpace: "pre-line" }}>
-            {trimmed}
-          </p>
-        )}
-        {techLine}
-      </motion.div>
-    );
-  }
-
-  // Split the raw description so an entry that opens with '\n\n' yields an
-  // empty header and renders straight into its bullets.
-  const descriptionParts = description.split('\n\n').map((part) => part.trim());
-  const [teamHeader, ...details] = descriptionParts;
-
   return (
-    <motion.div
-      className="entry"
-      variants={variants}
+    <motion.li
+      className={`row${isOpen ? ' is-open' : ''}`}
+      variants={fadeIn}
+      custom={index}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onClick={handleClick}
-      layout
-      transition={{ layout: { duration: 0.3, type: "spring", bounce: 0.3 } }}
     >
-      <div className="entry-header">
-        <h3 className="entry-title">{title}</h3>
-        <span className="entry-period">{period}</span>
-      </div>
-      {linkLine}
-      {teamHeader && <p className="entry-description">{teamHeader}</p>}
-      <AnimatePresence>
-        {isOpen && details.length > 0 && (
+      <button type="button" className="row-head" aria-expanded={isOpen} aria-controls={bodyId}>
+        <span className="row-title">
+          {/* The visible text turns into the header while open; screen
+              readers always get the title here and the header in the body. */}
+          <span className="sr-only">{entry.title}</span>
+          <span aria-hidden="true">
+            <SwapText from={entry.title} to={header} active={isOpen} />
+          </span>
+        </span>
+        <motion.span className="row-leader" aria-hidden="true" variants={drawIn} custom={index} />
+        <span className="row-period">{entry.period}</span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
           <motion.div
+            id={bodyId}
+            className="row-body-wrap"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto', transition: { duration: 0.3, delay: 0.1 } }}
+            animate={{ opacity: 1, height: 'auto', transition: { duration: 0.3, delay: 0.05 } }}
             exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
             style={{ overflow: 'hidden' }}
           >
-            <ul className="entry-details-list">
-              {details.map((detail, i) => (
-                <li key={i}>{detail}</li>
-              ))}
-            </ul>
-            {note && <p className="entry-note">{note}</p>}
+            <div className="row-body">
+              {header && <p className="sr-only">{header}</p>}
+              {details.length > 0 && (
+                <ul className="row-bullets">
+                  {details.map((detail, i) => (
+                    <li key={i}>{detail}</li>
+                  ))}
+                </ul>
+              )}
+              {entry.technologies?.length > 0 && (
+                <p className="row-tech">{entry.technologies.join(', ')}</p>
+              )}
+              {entry.link && (
+                <a
+                  className="row-link"
+                  href={entry.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {entry.linkLabel || 'view'} <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-      {techLine}
-    </motion.div>
+    </motion.li>
   );
 }
 
-function Section({ heading, items }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.1 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  };
-
+function ExternalIcon() {
   return (
-    <section className="entries-section" ref={ref}>
-      <h2 className="section-heading">{heading}</h2>
-      <motion.div
-        className="entries-list"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "show" : "hidden"}
-      >
-        {items.map((item, i) => (
-          <Entry key={i} {...item} variants={itemVariants} />
-        ))}
-      </motion.div>
-    </section>
+    <svg
+      className="row-external"
+      viewBox="0 0 12 12"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M5 2.5H2.5v7h7V7" />
+      <path d="M7 2h3v3M10 2 5.5 6.5" />
+    </svg>
+  );
+}
+
+// A row that is just a link out — used for publications.
+function LinkRow({ entry, index }) {
+  return (
+    <motion.li className="row row--link" variants={fadeIn} custom={index}>
+      <a className="row-head" href={entry.link} target="_blank" rel="noopener noreferrer">
+        <span className="row-title">
+          <span className="row-link-text">{entry.title}</span>
+          <ExternalIcon />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </span>
+        <motion.span className="row-leader" aria-hidden="true" variants={drawIn} custom={index} />
+        <span className="row-period">{entry.period}</span>
+      </a>
+    </motion.li>
   );
 }
 
 export default function Experiences() {
+  const colRef = useRef(null);
+  const [paddingTop, setPaddingTop] = useState(null);
+  const canHover = useCanHover();
+  const reduceMotion = useReducedMotion();
+
+  // Centre the list on its collapsed height. Centring on its live height
+  // would make an opening row grow the list in both directions, sliding the
+  // rows above it — including the one under the cursor — upward. Subtracting
+  // the open bodies keeps the offset fixed, so rows only ever push downward.
+  useLayoutEffect(() => {
+    const col = colRef.current;
+    if (!col) return undefined;
+    const measure = () => {
+      const openBodies = [...col.querySelectorAll('.row-body-wrap')].reduce(
+        (sum, el) => sum + el.offsetHeight,
+        0
+      );
+      const collapsed = col.offsetHeight - openBodies;
+      const footer = document.querySelector('.footer')?.offsetHeight ?? 0;
+      const available = window.innerHeight - footer;
+      const minimum = window.innerHeight * 0.06;
+      setPaddingTop(Math.max(minimum, (available - collapsed) / 2));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(col);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
+
+  // Running position of each animated element down the page.
+  let position = 0;
+
   return (
-    <div className="experiences-container">
-      <Section heading="experience" items={experience} />
-      <Section heading="education" items={education} />
-      <Section heading="publications" items={publications} />
+    <div className="work" style={paddingTop == null ? undefined : { paddingTop }}>
+      {/* Like the home screen, this replays each time it scrolls into view. */}
+      <motion.div
+        ref={colRef}
+        className="work-col"
+        variants={{ hidden: {}, visible: {} }}
+        initial={reduceMotion ? false : 'hidden'}
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+      >
+        {sections.map((section, sectionIndex) => {
+          const headingPosition = position++;
+          return (
+            <section key={section.id} className="work-group" aria-labelledby={`work-${section.id}`}>
+              <motion.div className="work-heading-row" variants={fadeIn} custom={headingPosition}>
+                <h2 id={`work-${section.id}`} className="work-heading">
+                  {section.heading}
+                </h2>
+                {sectionIndex === 0 && (
+                  <span className="work-hint">{canHover ? 'hover for details' : 'tap for details'}</span>
+                )}
+                <motion.span
+                  className="work-rule"
+                  aria-hidden="true"
+                  variants={drawIn}
+                  custom={headingPosition}
+                />
+              </motion.div>
+              <ul className="rows">
+                {section.items.map((item, i) => {
+                  const rowPosition = position++;
+                  return section.kind === 'link' ? (
+                    <LinkRow key={i} entry={item} index={rowPosition} />
+                  ) : (
+                    <Row key={i} entry={item} index={rowPosition} />
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        })}
+      </motion.div>
     </div>
   );
 }

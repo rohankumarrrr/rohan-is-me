@@ -1,131 +1,228 @@
-.experiences-container {
+/* Experiences.js sets padding-top inline to centre the list on screen; this
+   value is only the fallback before that first measurement. */
+.work {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   background-color: var(--bg-primary);
-  padding: 4vh 8vw 4vh;
+  padding: 6vh 8vw;
 }
 
-.entries-section {
+/* Same width as the home screen's column, so the two left edges line up. */
+.work-col {
   width: 100%;
   max-width: 640px;
-  margin-bottom: 6vh;
 }
 
-.entries-section:last-child {
-  margin-bottom: 0;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.section-heading {
-  color: var(--text-primary);
-  font-size: 1.4rem;
-  font-weight: normal;
-  font-style: italic;
-  /* No bottom margin: the first entry's own top padding supplies the gap
-     below the rule, so it matches the spacing after every entry divider.
-     A margin here would stack on top of that and make the first row sit
-     noticeably lower than the rest. */
-  margin: 0;
-  padding-bottom: 1vh;
-  border-bottom: 1px solid var(--border);
+.work-group + .work-group {
+  margin-top: 5vh;
 }
 
-.entries-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.entry {
-  padding: 2.2vh 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.entries-list > .entry:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.entry-header {
+.work-heading-row {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
+  margin-bottom: 1.4vh;
+  padding-bottom: 1vh;
 }
 
-.entry-title {
-  font-size: 1.1rem;
-  font-weight: bold;
+/* The rule under each heading is its own element, so an entrance animation
+   can draw it from the left. */
+.work-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--border);
+  transform-origin: left center;
+}
+
+.work-heading {
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-style: italic;
   margin: 0;
   color: var(--text-primary);
 }
 
-.entry-period {
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  white-space: nowrap;
+.work-hint {
+  font-size: 0.8rem;
   font-style: italic;
-}
-
-.entry-description {
-  font-size: 0.95rem;
+  opacity: 0.45;
+  white-space: nowrap;
   color: var(--text-primary);
-  line-height: 1.6;
-  margin: 1vh 0 0;
 }
 
-.entry-details-list {
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row-head {
+  position: relative;
+  width: 100%;
+  display: flex;
+  /* A title that wraps keeps its date on the last line, not the first. */
+  align-items: baseline;
+  align-items: last baseline;
+  gap: 0.6em;
+  margin: 0;
+  padding: 0.7vh 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--text-primary);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.row-head:focus-visible {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.row-title {
+  flex: 0 1 auto;
+  font-size: 1rem;
+}
+
+.row-leader {
+  flex: 1 1 1.5em;
+  min-width: 1.5em;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.35;
+  /* Sits the dots near the x-height rather than on the descender line.
+     Offset with top, not transform, which the draw entrance uses to scale
+     it in from the left. */
+  position: relative;
+  top: -0.28em;
+  transform-origin: left center;
+}
+
+.row-period {
+  flex: none;
+  font-size: 0.85rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ---------- title → header swap ---------- */
+
+.swap--stack {
+  position: relative;
+  display: inline-block;
+}
+
+/* Transforms need a box, so each swapping piece of text is inline-block. */
+.swap-item {
+  display: inline-block;
+}
+
+/* ---------- open row ---------- */
+
+.row-body {
+  margin: 0.2vh 0 1.4vh 0.2em;
+  padding: 0.2vh 0 0.4vh 1.1em;
+  border-left: 1px solid var(--border);
+}
+
+.row-bullets {
   list-style: disc outside;
-  margin: 1vh 0 0;
+  margin: 0;
   padding-left: 1.2em;
 }
 
-.entry-details-list li {
+.row-bullets li {
   font-size: 0.95rem;
-  color: var(--text-primary);
   line-height: 1.6;
   margin-bottom: 0.5vh;
+  color: var(--text-primary);
 }
 
-.entry-details-list li:last-child {
+.row-bullets li:last-child {
   margin-bottom: 0;
 }
 
-.entry-note {
+.row-tech {
   font-size: 0.82rem;
-  color: var(--text-primary);
-  font-style: italic;
-  opacity: 0.7;
-  margin: 1vh 0 0;
-}
-
-.entry-tech {
-  font-size: 0.82rem;
-  color: var(--text-primary);
   font-style: italic;
   margin: 1.2vh 0 0;
+  color: var(--text-primary);
 }
 
-.entry-link {
+.row-link {
   display: inline-block;
   font-size: 0.82rem;
   color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
-  margin: 1vh 0 0;
+  margin: 1.2vh 0 0;
 }
 
-.entry-link:hover {
+.row-link:hover {
   opacity: 0.6;
-  cursor: pointer;
+}
+
+/* ---------- link rows (publications) ---------- */
+
+/* An external-link icon follows the title; on hover the title underlines and
+   the icon nudges toward the corner it points at. */
+.row-external {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.35em;
+  vertical-align: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.row--link .row-head:hover .row-link-text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.row--link .row-head:hover .row-external {
+  opacity: 1;
+  transform: translate(1px, -1px);
 }
 
 @media (max-width: 768px) {
-  .experiences-container {
-    padding: 2vh 8vw 10vh;
+  .work {
+    padding: 6vh 8vw;
   }
 
-  .entry-header {
+  /* No room for a leader on a phone: the date drops under the title, as it
+     did in the old layout. */
+  .row-head {
     flex-direction: column;
-    gap: 0.2rem;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .row-leader {
+    display: none;
   }
 }

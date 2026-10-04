@@ -12,8 +12,12 @@ function App() {
       <div className="app">
         <Navbar />
         <Home />
-        <Experiences />
-        <footer className="footer">© 2026 Rohan Kumar</footer>
+        {/* The work section and footer share the second screen, so scrolling
+            down lands on a page of its own. */}
+        <div className="work-page">
+          <Experiences />
+          <footer className="footer">© 2026 Rohan Kumar</footer>
+        </div>
       </div>
       <Analytics />
     </ThemeProvider>

@@ -18,3 +18,15 @@ html, body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
 }
+
+/* The second screen: the work section fills whatever the footer leaves, so
+   scrolling to the bottom shows exactly one page. */
+.work-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-page > .work {
+  flex: 1;
+}
