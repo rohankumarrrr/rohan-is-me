@@ -3,11 +3,15 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // Shows `from`, and `to` while `active`: the old text lifts away as the new
 // one rises into place. With nothing to switch to, it just shows `from`.
-export default function SwapText({ from, to, active }) {
+// `render` dresses whichever text is showing (a link's icon, say), so the
+// dressing moves with its text.
+const plain = (text) => text;
+
+export default function SwapText({ from, to, active, render = plain }) {
   const reduceMotion = useReducedMotion();
   const text = active && to ? to : from;
 
-  if (!to || reduceMotion) return <span className="swap">{text}</span>;
+  if (!to || reduceMotion) return <span className="swap">{render(text)}</span>;
 
   return (
     <span className="swap swap--stack">
@@ -22,7 +26,7 @@ export default function SwapText({ from, to, active }) {
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
-          {text}
+          {render(text)}
         </motion.span>
       </AnimatePresence>
     </span>

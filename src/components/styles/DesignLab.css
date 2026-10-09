@@ -1,0 +1,312 @@
+/* Dev-only design panel (DesignLab.js). Sized in px and set in the system UI
+   face, so it holds still while the page's type changes around it. */
+.lab,
+.lab-open {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 40;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color-scheme: light;
+}
+
+[data-theme="dark"] .lab,
+[data-theme="dark"] .lab-open {
+  color-scheme: dark;
+}
+
+.lab {
+  width: 290px;
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 0.08);
+}
+
+.lab * {
+  font: inherit;
+  color: inherit;
+}
+
+.lab p {
+  margin: 0;
+}
+
+.lab-open {
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.lab-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lab-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.lab .lab-tab {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.45;
+  letter-spacing: 0.04em;
+}
+
+.lab .lab-tab[aria-selected="true"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lab .lab-close {
+  background: none;
+  border: 0;
+  padding: 0 2px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lab-field {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.lab-field--top {
+  align-items: start;
+}
+
+.lab-field--range {
+  grid-template-columns: 72px minmax(0, 1fr) 36px;
+}
+
+.lab-field > span {
+  opacity: 0.55;
+}
+
+.lab select {
+  width: 100%;
+  min-width: 0;
+  padding: 3px 4px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--bg-primary);
+}
+
+.lab input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--text-primary);
+}
+
+.lab output {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.lab-check input {
+  margin: 0;
+  accent-color: var(--text-primary);
+}
+
+.lab-segmented {
+  display: flex;
+}
+
+.lab-segmented button {
+  flex: 1;
+  padding: 3px 0;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  cursor: pointer;
+}
+
+.lab-segmented button + button {
+  border-left: 0;
+}
+
+.lab-segmented button[aria-pressed="true"] {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.lab-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* A stronger edge than --border, so near-white swatches still read on a
+   near-white panel. */
+.lab-swatch {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 28%, transparent);
+  cursor: pointer;
+}
+
+.lab-swatch[aria-pressed="true"] {
+  outline: 1.5px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.lab-picked {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-field > .lab-picked {
+  margin-top: 0;
+  gap: 14px;
+}
+
+.lab-picked .lab-picked {
+  margin-top: 0;
+}
+
+.lab-picked > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.55;
+}
+
+.lab input[type="color"] {
+  width: 22px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+}
+
+/* ---------- theme toggle stand-ins, drawn into the navbar ----------
+   They borrow .theme-toggle's colour, size and hover from Navbar.css. */
+
+/* The morph: the core swells and a second circle bites it into a crescent
+   while the rays turn and fold away, and back again. */
+.lab-morph {
+  width: 1em;
+  height: 1em;
+  overflow: visible;
+}
+
+.lab-morph-core {
+  r: 8px;
+  transition: r 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-morph-bite {
+  transition: cx 0.5s cubic-bezier(0.4, 0, 0.2, 1), cy 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-morph-rays {
+  transform-origin: 12px 12px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.lab-morph[data-shape="sun"] .lab-morph-core {
+  r: 4.6px;
+}
+
+.lab-morph[data-shape="sun"] .lab-morph-bite {
+  cx: 27px;
+  cy: -3px;
+}
+
+.lab-morph[data-shape="moon"] .lab-morph-rays {
+  transform: rotate(-45deg) scale(0.5);
+  opacity: 0;
+}
+
+.lab-toggle--switch {
+  font-size: 1rem;
+}
+
+.lab-switch {
+  position: relative;
+  display: block;
+  width: 1.9em;
+  height: 1.05em;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+
+.lab-switch-knob {
+  position: absolute;
+  top: 50%;
+  left: 0.14em;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(0, -50%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .lab-switch-knob {
+  transform: translate(0.82em, -50%);
+}
+
+.lab-toggle--text {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.lab-toggle-key {
+  font-family: inherit;
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.25em 0.5em;
+  border: 1px solid currentColor;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+}
+
+.lab-rule {
+  width: 100%;
+  margin: 2px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.lab-note {
+  opacity: 0.55;
+}
+
+.lab-hint {
+  opacity: 0.4;
+}
+
+.lab kbd {
+  padding: 0 4px;
+  border: 1px solid var(--border);
+}

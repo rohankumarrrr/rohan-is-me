@@ -1,25 +1,97 @@
+/* Soft white paper with soft black ink; in the dark, GitHub's cool canvas with
+   soft white ink. Each border mixes 16% of the ink into its background, and
+   the theme-color metas in index.html match the backgrounds. */
 :root {
-  --bg-primary: #ffffff;
-  --text-primary: #000000;
-  --border: #d4d4d4;
+  --bg-primary: #fcfcfc;
+  --text-primary: #262626;
+  --border: #dadada;
 }
 
 [data-theme="dark"] {
-  --bg-primary: #000000;
-  --text-primary: #ffffff;
-  --border: #2a2a2a;
+  --bg-primary: #0d1117;
+  --text-primary: #f2f2f2;
+  --border: #32353a;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* Satoshi (loaded in index.html) sets a touch larger than Times did, so the
+   whole rem scale steps down to 96% to match. */
+html {
+  font-size: 96%;
+}
+
 body {
   margin: 0;
-  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ---- Theme sweep (ported from vinskal.com) ----
+   A theme flip wipes diagonally across the viewport. useTheme puts
+   .theme-sweep on <html> for the length of one view transition, during which
+   the browser holds a screenshot of the old theme and one of the new,
+   stacked. The new one is revealed through a soft-edged mask that travels
+   from the top-right corner, where the toggle lives, to the bottom-left.
+
+   The mask is three viewports across so its soft band can park fully outside
+   the frame at both ends: the sweep starts with none of the new theme
+   showing and ends with all of it. The 8% band is about a quarter of the
+   screen's diagonal: wide enough that no pixel visibly steps, narrow enough
+   to read as a travelling edge rather than a fade. */
+.theme-sweep::view-transition-group(root) {
+  animation-duration: 640ms;
+}
+
+/* The default crossfade would dissolve the whole frame at once. Its
+   plus-lighter blend would also blow out the band's midpoint. */
+.theme-sweep::view-transition-old(root),
+.theme-sweep::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-sweep::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+/* The old theme sits still underneath and is uncovered as the new one
+   arrives. */
+.theme-sweep::view-transition-old(root) {
+  z-index: 0;
+}
+
+.theme-sweep::view-transition-new(root) {
+  z-index: 1;
+  mask-image: linear-gradient(to bottom left, #000 46%, rgb(0 0 0 / 0.5) 50%, transparent 54%);
+  mask-size: 300% 300%;
+  mask-repeat: no-repeat;
+  /* Near-constant speed: a sweep that eases hard in the middle reads as a
+     fade. */
+  animation: theme-sweep 640ms cubic-bezier(0.4, 0.05, 0.25, 1) forwards;
+}
+
+@keyframes theme-sweep {
+  /* Band parked past the bottom-left corner: none of the new theme shows. */
+  from { mask-position: 0% 100%; }
+  /* Band parked past the top-right corner: all of it does. */
+  to { mask-position: 100% 0%; }
+}
+
+/* Without the View Transitions API, or with reduced motion asked for, every
+   colour crossfades in place instead. useTheme adds this class only for the
+   length of the fade (keep the two durations in step), so hovers and
+   entrance animations keep their own timing the rest of the time. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease,
+    text-decoration-color 0.5s ease, outline-color 0.5s ease, fill 0.5s ease,
+    stroke 0.5s ease !important;
 }
 
 code {

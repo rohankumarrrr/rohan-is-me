@@ -4,6 +4,12 @@
 // bullets with blank lines: '\n header \n\n bullet one \n\n bullet two'.
 // One that opens with '\n\n' has no header; one with no '\n\n' at all is a
 // single line with nothing to expand.
+//
+// An entry with a `link` makes its title a link out, marked with an
+// external-link icon.
+//
+// A title too long for one line breaks wherever it runs out of room; join
+// words with non-breaking spaces ('\u00a0') to send them down together.
 
 export const education = [
   {
@@ -16,21 +22,19 @@ export const education = [
 export const publications = [
   {
     period: 'february 2026',
-    title: 'ripel: a data-augmented peer evaluation system for assessing teamwork',
+    title: 'ripel: a data-augmented peer evaluation system for\u00a0assessing\u00a0teamwork',
     description: 'sigcse ts 2026',
     link: 'https://dl.acm.org/doi/10.1145/3770761.3777297',
-    linkLabel: 'read more',
   },
 ];
 
 export const experience = [
   {
     period: 'august 2026 – present',
-    title: 'founding engineer @ vinskal',
-    description: '\n\n architected the continuous job-discovery pipeline behind 130k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
+    title: 'co-founder @ vinskal',
+    description: '\n launching soon @ vinskal.com \n\n architected the continuous job-discovery pipeline behind 130k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
     technologies: ['python', 'typescript', 'fastapi', 'postgresql', 'playwright', 'docker', 'cloudflare workers', 'github actions'],
     link: 'https://vinskal.com',
-    linkLabel: 'learn more',
   },
   {
     period: 'may 2026 – august 2026',

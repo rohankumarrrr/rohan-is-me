@@ -98,9 +98,49 @@
   outline-offset: 3px;
 }
 
+/* A long title breaks well short of the date rather than running the full
+   width. Where it breaks is the title's own call: see entries.js. */
 .row-title {
   flex: 0 1 auto;
+  max-width: 70%;
   font-size: 1rem;
+}
+
+/* A row whose title links out. The link stretches over the whole row but the
+   date, so the target holds still when the title swaps for a shorter header.
+   The date sits above the stretch, and the leader lets clicks through. */
+.row-head--static {
+  cursor: default;
+}
+
+.row-title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.row-title-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.row-title-link:focus-visible {
+  outline: none;
+}
+
+.row-title-link:focus-visible::after {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.row-head--static .row-period {
+  position: relative;
+  z-index: 1;
+}
+
+/* The last word and the external-link icon break as one. */
+.row-title-tail {
+  white-space: nowrap;
 }
 
 .row-leader {
@@ -114,6 +154,7 @@
   position: relative;
   top: -0.28em;
   transform-origin: left center;
+  pointer-events: none;
 }
 
 .row-period {
@@ -137,53 +178,65 @@
 
 /* ---------- open row ---------- */
 
+/* The details sit a step behind the titles: muted text in numbered points,
+   with only each point's lead (its opening verb, or a label like "courses:")
+   and its stats back in full ink, so the eye can run down those alone. */
+
 .row-body {
-  margin: 0.2vh 0 1.4vh 0.2em;
-  padding: 0.2vh 0 0.4vh 1.1em;
-  border-left: 1px solid var(--border);
+  margin: 0.2vh 0 1.4vh;
+  padding: 0.2vh 0 0.4vh;
 }
 
 .row-bullets {
-  list-style: disc outside;
+  list-style: decimal-leading-zero outside;
+  max-width: 62ch;
   margin: 0;
-  padding-left: 1.2em;
+  padding-left: 2.1em;
 }
 
 .row-bullets li {
   font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 0.5vh;
+  line-height: 1.7;
+  margin-bottom: 1.1vh;
+  color: color-mix(in srgb, var(--text-primary) 68%, var(--bg-primary));
+}
+
+.row-bullets li::marker {
+  font-size: 0.78em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text-primary) 45%, var(--bg-primary));
+}
+
+/* Set by Experiences.js around a point's lead and stats. */
+.row-lead,
+.row-stat {
+  font-weight: 500;
   color: var(--text-primary);
 }
 
-.row-bullets li:last-child {
-  margin-bottom: 0;
-}
-
+/* A list, so each item can be styled on its own, set as one line with dots
+   between. Its 64% ink is the faintest that still reads at 4.5:1 here. */
 .row-tech {
+  list-style: none;
   font-size: 0.82rem;
   font-style: italic;
-  margin: 1.2vh 0 0;
-  color: var(--text-primary);
+  margin: 1.8vh 0 0;
+  padding: 0;
+  color: color-mix(in srgb, var(--text-primary) 64%, var(--bg-primary));
 }
 
-.row-link {
-  display: inline-block;
-  font-size: 0.82rem;
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  margin: 1.2vh 0 0;
+.row-tech li {
+  display: inline;
 }
 
-.row-link:hover {
-  opacity: 0.6;
+.row-tech li:not(:last-child)::after {
+  content: ' · ';
 }
 
-/* ---------- link rows (publications) ---------- */
+/* ---------- links out (publications, and titles with a link) ---------- */
 
-/* An external-link icon follows the title; on hover the title underlines and
-   the icon nudges toward the corner it points at. */
+/* An external-link icon follows the title; on hover the title's line grows
+   and the icon nudges toward the corner it points at. */
 .row-external {
   display: inline-block;
   width: 0.7em;
@@ -199,12 +252,33 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.row--link .row-head:hover .row-link-text {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+/* The prose links' growing line (Home.css), on one wrapper around the whole
+   title so it grows across a title that wraps and carries on through the
+   Vinskal title's swap. It stops short of the icon: 1.05em is the icon's
+   width plus its margin, above. */
+.row-link-line {
+  padding-bottom: 2px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat,
+    linear-gradient(
+        color-mix(in srgb, currentColor 28%, transparent),
+        color-mix(in srgb, currentColor 28%, transparent)
+      )
+      0 100% / calc(100% - 1.05em) 1px no-repeat;
+  transition: background-size 0.35s ease;
 }
 
-.row--link .row-head:hover .row-external {
+.is-external:hover .row-link-line {
+  background-size: calc(100% - 1.05em) 1px, calc(100% - 1.05em) 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-link-line {
+    transition: none;
+  }
+}
+
+.is-external:hover .row-external {
   opacity: 1;
   transform: translate(1px, -1px);
 }
@@ -220,6 +294,13 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.15rem;
+  }
+
+  /* Titles wrap often at this width; even lines keep a lone word from
+     trailing onto the last one. */
+  .row-title {
+    max-width: none;
+    text-wrap: balance;
   }
 
   .row-leader {

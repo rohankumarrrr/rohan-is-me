@@ -8,6 +8,38 @@ import './styles/Experiences.css';
 // sweeping down this dense list flicks every row open on the way past.
 const HOVER_OPEN_DELAY_MS = 100;
 
+// A stat in a detail line: 130k+, ≈23m+, 96%+, 50-hour, 1tb, 3.86. The
+// character before it is captured rather than looked behind at, which older
+// Safari can't parse. A year is a date, not a stat.
+const STAT = /(^|[^\w.])(≈?\d[\d,.]*(?:k|m|tb|%)?\+?(?:-hour)?)(?!\w)/gi;
+const YEAR = /^(?:19|20)\d\d$/;
+
+// Marks what a reader scans a detail line for: its lead, a label like
+// "courses:" or else the opening verb, and its stats. Styled in
+// Experiences.css.
+function emphasize(text) {
+  const colon = text.indexOf(':');
+  const leadEnd = colon > 0 && colon < 24 ? colon + 1 : text.search(/\s|$/);
+  const marks = [[0, leadEnd, 'row-lead']];
+  for (const m of text.matchAll(STAT)) {
+    const start = m.index + m[1].length;
+    if (start >= leadEnd && !YEAR.test(m[2])) marks.push([start, start + m[2].length, 'row-stat']);
+  }
+  const parts = [];
+  let at = 0;
+  marks.forEach(([start, end, className]) => {
+    if (start > at) parts.push(text.slice(at, start));
+    parts.push(
+      <span key={start} className={className}>
+        {text.slice(start, end)}
+      </span>
+    );
+    at = end;
+  });
+  parts.push(text.slice(at));
+  return parts;
+}
+
 // Keeps `el` at the same place on screen for the length of the open and close
 // animations, scrolling the page to cancel out any drift. The correction runs
 // in framer-motion's post-render step — after it has applied that frame's
@@ -56,11 +88,45 @@ function useCanHover() {
   return canHover;
 }
 
+// A wrapped title's box keeps the full width it was given, wider than its last
+// line, so a leader starting at the box's edge would leave a gap after the
+// text. This measures that gap — from the box's edge back to `endRef`, an
+// empty marker after the last word — so the leader can be pulled back over it.
+function useLeaderReach(titleRef, endRef) {
+  const [reach, setReach] = useState(0);
+  useLayoutEffect(() => {
+    const title = titleRef.current;
+    const end = endRef.current;
+    if (!title || !end) return undefined;
+    const measure = () => {
+      const gap = title.getBoundingClientRect().right - end.getBoundingClientRect().right;
+      setReach(gap >= 1 ? Math.round(gap) : 0);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(title);
+    window.addEventListener('resize', measure);
+    document.fonts?.addEventListener('loadingdone', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+      document.fonts?.removeEventListener('loadingdone', measure);
+    };
+  }, [titleRef, endRef]);
+  return reach;
+}
+
+const leaderStyle = (reach) => (reach ? { marginLeft: -reach } : undefined);
+
 function Row({ entry, index, isOpen, onOpen, onClose, onToggle }) {
   const lastPointerType = useRef('mouse');
+  const focusOpened = useRef(false);
   const headRef = useRef(null);
+  const titleRef = useRef(null);
+  const endRef = useRef(null);
   const openTimer = useRef(null);
   const bodyId = useId();
+  const reach = useLeaderReach(titleRef, endRef);
   const { header, details } = splitDescription(entry.description);
 
   useEffect(() => () => clearTimeout(openTimer.current), []);
@@ -90,6 +156,57 @@ function Row({ entry, index, isOpen, onOpen, onClose, onToggle }) {
     onToggle(headRef.current);
   };
 
+  // With a link, the title is the way out to it, so it can't also be the
+  // button that toggles the row. Keyboard focus reveals the details the way
+  // hover does, and on touch a first tap reveals them, a second follows.
+  const handleLinkClick = (e) => {
+    e.stopPropagation();
+    if (e.detail !== 0 && lastPointerType.current !== 'mouse' && !isOpen) {
+      e.preventDefault();
+      onToggle(headRef.current);
+    }
+  };
+  const handleLinkFocus = (e) => {
+    if (!e.currentTarget.matches(':focus-visible')) return;
+    focusOpened.current = true;
+    onOpen();
+  };
+  const handleLinkBlur = () => {
+    if (!focusOpened.current) return;
+    focusOpened.current = false;
+    onClose();
+  };
+
+  const leader = (
+    <motion.span
+      className="row-leader"
+      aria-hidden="true"
+      variants={drawIn}
+      custom={index}
+      style={leaderStyle(reach)}
+    />
+  );
+  const period = <span className="row-period">{entry.period}</span>;
+  const bodyContent = (
+    <>
+      {header && <p className="sr-only">{header}</p>}
+      {details.length > 0 && (
+        <ul className="row-bullets">
+          {details.map((detail, i) => (
+            <li key={i}>{emphasize(detail)}</li>
+          ))}
+        </ul>
+      )}
+      {entry.technologies?.length > 0 && (
+        <ul className="row-tech" aria-label="technologies">
+          {entry.technologies.map((tech) => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+
   return (
     <motion.li
       className={`row${isOpen ? ' is-open' : ''}`}
@@ -100,24 +217,50 @@ function Row({ entry, index, isOpen, onOpen, onClose, onToggle }) {
       onPointerDown={handlePointerDown}
       onClick={handleClick}
     >
-      <button
-        ref={headRef}
-        type="button"
-        className="row-head"
-        aria-expanded={isOpen}
-        aria-controls={bodyId}
-      >
-        <span className="row-title">
-          {/* The visible text turns into the header while open; screen
-              readers always get the title here and the header in the body. */}
-          <span className="sr-only">{entry.title}</span>
-          <span aria-hidden="true">
-            <SwapText from={entry.title} to={header} active={isOpen} />
+      {entry.link ? (
+        <div ref={headRef} className="row-head row-head--static">
+          <a
+            ref={titleRef}
+            className="row-title row-title-link is-external"
+            href={entry.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleLinkClick}
+            onFocus={handleLinkFocus}
+            onBlur={handleLinkBlur}
+          >
+            {/* As in the button rows, the visible text turns into the header
+                while open; screen readers always get the title here. */}
+            <span className="sr-only">{entry.title} (opens in a new tab)</span>
+            <span className="row-link-line" aria-hidden="true">
+              <SwapText from={entry.title} to={header} active={isOpen} render={renderLinkText} />
+            </span>
+            <span ref={endRef} />
+          </a>
+          {leader}
+          {period}
+        </div>
+      ) : (
+        <button
+          ref={headRef}
+          type="button"
+          className="row-head"
+          aria-expanded={isOpen}
+          aria-controls={bodyId}
+        >
+          <span ref={titleRef} className="row-title">
+            {/* The visible text turns into the header while open; screen
+                readers always get the title here and the header in the body. */}
+            <span className="sr-only">{entry.title}</span>
+            <span aria-hidden="true">
+              <SwapText from={entry.title} to={header} active={isOpen} />
+            </span>
+            <span ref={endRef} />
           </span>
-        </span>
-        <motion.span className="row-leader" aria-hidden="true" variants={drawIn} custom={index} />
-        <span className="row-period">{entry.period}</span>
-      </button>
+          {leader}
+          {period}
+        </button>
+      )}
 
       <AnimatePresence initial={false}>
         {isOpen && (
@@ -129,33 +272,13 @@ function Row({ entry, index, isOpen, onOpen, onClose, onToggle }) {
             exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="row-body">
-              {header && <p className="sr-only">{header}</p>}
-              {details.length > 0 && (
-                <ul className="row-bullets">
-                  {details.map((detail, i) => (
-                    <li key={i}>{detail}</li>
-                  ))}
-                </ul>
-              )}
-              {entry.technologies?.length > 0 && (
-                <p className="row-tech">{entry.technologies.join(', ')}</p>
-              )}
-              {entry.link && (
-                <a
-                  className="row-link"
-                  href={entry.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {entry.linkLabel || 'view'} <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </div>
+            <div className="row-body">{bodyContent}</div>
           </motion.div>
         )}
       </AnimatePresence>
+      {/* A link row has no toggle to announce, so a screen reader reading
+          straight past it still gets the details. */}
+      {entry.link && !isOpen && <div className="sr-only">{bodyContent}</div>}
     </motion.li>
   );
 }
@@ -174,19 +297,53 @@ function ExternalIcon() {
   );
 }
 
+// The visible text of a title that links out. The icon rides with the last
+// word, so a title that wraps never leaves it stranded on a line of its own.
+function LinkText({ text }) {
+  const split = text.lastIndexOf(' ') + 1;
+  return (
+    <>
+      <span className="row-link-text">{text.slice(0, split)}</span>
+      <span className="row-title-tail">
+        <span className="row-link-text">{text.slice(split)}</span>
+        <ExternalIcon />
+      </span>
+    </>
+  );
+}
+
+const renderLinkText = (text) => <LinkText text={text} />;
+
 // A row that is just a link out — used for publications.
 function LinkRow({ entry, index }) {
+  const titleRef = useRef(null);
+  const endRef = useRef(null);
+  const reach = useLeaderReach(titleRef, endRef);
   return (
     <motion.li className="row row--link" variants={fadeIn} custom={index}>
-      <a className="row-head" href={entry.link} target="_blank" rel="noopener noreferrer">
-        <span className="row-title">
-          <span className="row-link-text">{entry.title}</span>
-          <ExternalIcon />
+      <div className="row-head row-head--static">
+        <a
+          ref={titleRef}
+          className="row-title row-title-link is-external"
+          href={entry.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="row-link-line">
+            <LinkText text={entry.title} />
+          </span>
           <span className="sr-only"> (opens in a new tab)</span>
-        </span>
-        <motion.span className="row-leader" aria-hidden="true" variants={drawIn} custom={index} />
+          <span ref={endRef} />
+        </a>
+        <motion.span
+          className="row-leader"
+          aria-hidden="true"
+          variants={drawIn}
+          custom={index}
+          style={leaderStyle(reach)}
+        />
         <span className="row-period">{entry.period}</span>
-      </a>
+      </div>
     </motion.li>
   );
 }

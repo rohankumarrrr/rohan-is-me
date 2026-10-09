@@ -55,15 +55,36 @@ p {
   margin-bottom: 0;
 }
 
-.inline-link {
+/* Links rest on a faint line, and on hover a solid one grows across it from
+   the left. Both lines are background layers rather than an underline, so
+   one can grow and still follow a link that wraps onto a second line.
+   Experiences.css gives the Vinskal and publication titles the same line. */
+.inline-link,
+.text-link {
   color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  padding-bottom: 2px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat,
+    linear-gradient(
+        color-mix(in srgb, currentColor 28%, transparent),
+        color-mix(in srgb, currentColor 28%, transparent)
+      )
+      0 100% / 100% 1px no-repeat;
+  transition: background-size 0.35s ease;
 }
 
-.inline-link:hover {
-  opacity: 0.6;
+.inline-link:hover,
+.text-link:hover {
+  background-size: 100% 1px, 100% 1px;
   cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inline-link,
+  .text-link {
+    transition: none;
+  }
 }
 
 .last-listened p {
@@ -79,15 +100,7 @@ p {
 }
 
 .text-link {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
   font-size: 1.05rem;
-}
-
-.text-link:hover {
-  opacity: 0.6;
-  cursor: pointer;
 }
 
 .link-sep {
