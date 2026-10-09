@@ -11,8 +11,34 @@
     />
     <link rel="canonical" href="https://www.rohan-is.me/" />
 
+    <!-- The page draws both themes itself, so forced-dark modes (Chrome's
+         auto-dark, Samsung Internet) leave it alone, and the browser's own
+         canvas starts out matching the system before any CSS arrives. -->
+    <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+
+    <!-- Picks the theme before the first paint: a saved choice, else the
+         system's. Left to the app's script, which loads after the page first
+         paints, a dark-mode phone would flash the light theme. It also points
+         both theme-color metas (the browser's own bars) at the chosen theme,
+         where their media queries alone would follow the system. useTheme
+         takes over from here; keep the two colours in step with index.css. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        var bg = theme === 'dark' ? '#0d1117' : '#fcfcfc';
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', bg);
+      })();
+    </script>
 
     <!-- Satoshi, from Fontshare (Indian Type Foundry; free for commercial
          use): the variable roman and italic, 300–900. -->

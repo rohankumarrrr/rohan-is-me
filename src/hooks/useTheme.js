@@ -10,6 +10,37 @@ const THEME_FADE_MS = 500;
 let sweepsRunning = 0;
 let fadeTimer;
 
+// Saved data can be off-limits entirely (Safari with all cookies blocked
+// throws on any access), so a failed read is no saved choice and a failed
+// write leaves the choice to this visit.
+function readSavedTheme() {
+  try {
+    const saved = localStorage.getItem('theme');
+    return saved === 'light' || saved === 'dark' ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveTheme(theme) {
+  try {
+    localStorage.setItem('theme', theme);
+  } catch {
+    // Not saved: the next visit falls back to the system's theme.
+  }
+}
+
+const systemTheme = () => (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+// The browser's own bars (Safari's tinted toolbar, Chrome's address bar) take
+// their colour from the theme-color metas, whose media queries follow the
+// system. Pointing both at the page's background makes them follow the
+// toggle too.
+function syncBrowserBars() {
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim();
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', bg));
+}
+
 // Runs `apply`, which flips the theme, as a diagonal sweep across the page:
 // the one vinskal.com plays. The View Transitions API snapshots the page before
 // and after the flip, and index.css reveals the new snapshot through a
@@ -47,11 +78,15 @@ function animateThemeChange(apply) {
 }
 
 export function ThemeProvider({ children }) {
+  // The inline script in index.html has already picked the theme before the
+  // first paint; this picks it the same way only if that script didn't run.
   const [theme, setThemeState] = useState(() => {
-    const stored = localStorage.getItem('theme');
-    const resolved = stored ??
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', resolved);
+    const root = document.documentElement;
+    const picked = root.getAttribute('data-theme');
+    if (picked === 'light' || picked === 'dark') return picked;
+    const resolved = readSavedTheme() ?? systemTheme();
+    root.setAttribute('data-theme', resolved);
+    syncBrowserBars();
     return resolved;
   });
 
@@ -62,6 +97,7 @@ export function ThemeProvider({ children }) {
     if (root.getAttribute('data-theme') === next) return;
     animateThemeChange(() => {
       root.setAttribute('data-theme', next);
+      syncBrowserBars();
       setThemeState(next);
     });
   }, []);
@@ -69,9 +105,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
+      if (!readSavedTheme()) setTheme(e.matches ? 'dark' : 'light');
     };
     mq.addEventListener('change', handleChange);
     return () => mq.removeEventListener('change', handleChange);
@@ -80,7 +114,7 @@ export function ThemeProvider({ children }) {
   const toggleTheme = useCallback(() => {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('theme', next);
+    saveTheme(next);
     setTheme(next);
   }, [setTheme]);
 
