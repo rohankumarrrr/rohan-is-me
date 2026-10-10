@@ -40,20 +40,45 @@ function emphasize(text) {
   return parts;
 }
 
-// Keeps `el` at the same place on screen for the length of the open and close
-// animations, scrolling the page to cancel out any drift. The correction runs
-// in framer-motion's post-render step — after it has applied that frame's
-// animated heights, before the browser paints — so it lands in the same frame
-// as the shift and the row never visibly moves.
+// Keeps `el` at the same place on screen while the rows above it change height,
+// for the length of the open and close animations.
+//
+// Scrolling the page every frame to cancel the drift shakes it on iOS Safari,
+// which applies a script's scroll a frame late: each correction lands after the
+// layout it was chasing has moved on, and the page jumps tens of pixels back
+// and forth until the animation ends. So the drift is cancelled by shifting the
+// work page with a transform instead, set in framer-motion's post-render step,
+// after that frame's animated heights and before paint, so the two land
+// together on every browser. When the animation is over, the shift is traded
+// for one scroll of the same distance. The browser's own scroll anchoring is
+// off meanwhile, or it would cancel the same drift a second time.
+let releaseHold = null;
+
 function holdInPlace(el, duration = 450) {
-  if (!el) return;
+  const page = el?.closest('.work-page');
+  if (!page) return;
+  releaseHold?.();
+  const root = document.documentElement;
   const start = el.getBoundingClientRect().top;
   const until = performance.now() + duration;
-  const correct = () => {
-    const drift = el.getBoundingClientRect().top - start;
-    if (Math.abs(drift) >= 1) window.scrollBy(0, drift);
-    if (performance.now() >= until) cancelFrame(correct);
+  let shift = 0;
+  root.style.overflowAnchor = 'none';
+
+  const release = () => {
+    cancelFrame(correct);
+    page.style.transform = '';
+    window.scrollBy(0, -shift);
+    root.style.overflowAnchor = '';
+    releaseHold = null;
   };
+  function correct() {
+    // Where the row sits in the layout, with the current shift taken back out.
+    const top = el.getBoundingClientRect().top - shift;
+    shift = start - top;
+    page.style.transform = Math.abs(shift) >= 0.5 ? `translateY(${shift}px)` : '';
+    if (performance.now() >= until) release();
+  }
+  releaseHold = release;
   frame.postRender(correct, true);
 }
 
