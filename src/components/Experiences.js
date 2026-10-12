@@ -8,7 +8,7 @@ import './styles/Experiences.css';
 // sweeping down this dense list flicks every row open on the way past.
 const HOVER_OPEN_DELAY_MS = 100;
 
-// A stat in a detail line: 130k+, ≈23m+, 96%+, 50-hour, 1tb, 3.86. The
+// A stat in a detail line: 500k+, ≈23m+, 96%+, 50-hour, 1tb, 3.86. The
 // character before it is captured rather than looked behind at, which older
 // Safari can't parse. A year is a date, not a stat.
 const STAT = /(^|[^\w.])(≈?\d[\d,.]*(?:k|m|tb|%)?\+?(?:-hour)?)(?!\w)/gi;

@@ -32,7 +32,7 @@ export const experience = [
   {
     period: 'august 2026 – present',
     title: 'co-founder @ vinskal',
-    description: '\n launching soon @ vinskal.com \n\n architected the continuous job-discovery pipeline behind 130k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
+    description: '\n launching soon @ vinskal.com \n\n architected the continuous job-discovery pipeline behind 500k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
     technologies: ['python', 'typescript', 'fastapi', 'postgresql', 'playwright', 'docker', 'cloudflare workers', 'github actions'],
     link: 'https://vinskal.com',
   },
