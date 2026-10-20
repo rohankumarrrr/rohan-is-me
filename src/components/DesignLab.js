@@ -432,19 +432,175 @@ ${tech} li::after { content: none !important; }`);
   return out.join('\n');
 }
 
-// The rows that open, in page order: every experience and education entry.
-const PREVIEW_ROWS = sections.filter((sec) => sec.kind !== 'link').flatMap((sec) => sec.items.map((item) => item.title));
+// The rows that open, as [key, title]: every experience and education entry.
+const PREVIEW_ROWS = sections
+  .filter((sec) => !sec.kind)
+  .flatMap((sec) => sec.items.map((item, i) => [`${sec.id}-${i}`, item.title]));
 
 // Opens a row and leaves it open while the panel is in use: the same tap a
 // touchscreen makes, which holds a row open until it is tapped again.
-function holdRowOpen(index) {
-  const li = document.querySelectorAll('.work .rows > li.row:not(.row--link)')[index];
+function holdRowOpen(key) {
+  const li = document.querySelector(`.work li.row[data-key="${key}"]`);
   if (!li) return;
   if (!li.classList.contains('is-open')) {
     li.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerType: 'touch' }));
     li.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 }));
   }
   setTimeout(() => li.scrollIntoView({ block: 'center', behavior: 'smooth' }), 50);
+}
+
+// ---------- roles ----------
+
+const COMPANY_DATES = [
+  ['none', 'no dates on the company line (current)'],
+  ['open', 'from its first role to present'],
+  ['started', 'from its first role to the end of the last begun'],
+];
+
+// ---------- layouts ----------
+
+// Ways to keep the work page organised as every list grows. Experiences.js
+// reads the picks from <html data-lab-layout>, data-lab-fit and
+// data-lab-pretend; the first layout is what ships.
+const LAYOUTS = [
+  { id: 'side', label: 'tabs down the side (current)', note: 'the section names down the left, staying put as you scroll; the section showing beside them' },
+  { id: 'stack', label: 'stacked sections (previous)', note: 'every section in full, one under another: the page grows with every entry' },
+  { id: 'tabs', label: 'tabs', note: 'one strip of section names with counts; one section showing, the line under the strip sliding to it. ← → move between tabs' },
+  { id: 'columns', label: 'three columns', note: 'sections | entries | details: point at an entry and its details show on the right. Nothing ever expands, so nothing ever moves' },
+  { id: 'split', label: 'experience + a tabbed column', note: 'experience in full on the left; education and writing tabbed in a narrow column on the right' },
+];
+
+// ---------- writing ----------
+
+// Papers and shower thoughts, in one section. Experiences.js reads the picks
+// from <html data-lab-writing-name>, data-lab-writing-order and
+// data-lab-writing-line; the first of each is what ships.
+const WRITING_CONTROLS = [
+  ['wName', 'name', 'writing-name', [['writing', 'writing'], ['words', 'words'], ['ideas', 'ideas'], ['both', 'papers & thoughts']]],
+  ['wOrder', 'arrange', 'writing-order', [['kinds', 'publications, then shower thoughts, each under its name'], ['date', 'one list, newest first; the line under says which']]],
+  ['wMark', 'kind names', 'writing-label', [
+    ['tracked', 'small, upright, spaced out (current)'],
+    ['margin', 'a note in the right margin, by its first entry'],
+    ['heading', 'a subheading: italic, full ink'],
+    ['count', 'a line with a leader to how many'],
+    ['tag', 'a small tag on each entry\'s line'],
+    ['asterism', 'no names: ⁂ between the two'],
+    ['centred', 'centred between hairlines'],
+    ['rail', 'like a company line, entries on its rail (seen)'],
+    ['ruled', 'with a hairline to the dates (seen)'],
+    ['none', 'none: a gap, the line under says which (seen)'],
+    ['italic', 'small italic (seen)'],
+  ]],
+  ['wWords', 'kind words', 'writing-words', [
+    ['standard', 'publications / shower thoughts'],
+    ['short', 'papers / thoughts'],
+    ['review', 'peer reviewed / not peer reviewed'],
+    ['shower', 'in print / in the shower'],
+  ]],
+  ['wLine', 'post line', 'writing-line', [['opening', 'its first sentence (current)'], ['quote', 'a line from it, in quotes'], ['time', 'how long it takes to read']]],
+];
+
+// The side layout, taken further. Each control works on its own; the
+// presets are starting combinations. Switching and motion are behaviour,
+// named on <html data-lab-side-switch> and data-lab-side-motion for
+// Experiences.js; everything else is CSS, below.
+const SIDE_CONTROLS = [
+  ['sCount', 'numbers', [['none', 'none'], ['right', 'muted, at the right'], ['leader', 'dotted leader to the number'], ['hover', 'only while hovered'], ['words', 'in words, under the name'], ['super', 'superscript (previous)']]],
+  ['sMarker', 'showing', [['ink', 'full ink, nothing else'], ['bar', 'a bar beside it (current)'], ['line', 'a line under the name'], ['arrow', 'an arrow beside it'], ['pill', 'a soft highlight behind it'], ['rule', 'a line drawn across to the list']]],
+  ['sAlign', 'names', [['left', 'flush left'], ['right', 'flush right, against the list']]],
+  ['sPlace', 'place', [['centred', 'names + list centred together'], ['hang', 'list in its usual column, names in the margin']]],
+  ['sDivider', 'divider', [['none', 'none'], ['rule', 'a thin rule between']]],
+  ['sHeading', 'over list', [['none', 'nothing'], ['rule', 'a rule, level with the names'], ['heading', 'the section name, as a heading']]],
+  ['sType', 'type', [['italic', 'italic, like the headings'], ['roman', 'upright'], ['small', 'smaller']]],
+  ['sSwitch', 'switch on', [['click', 'click'], ['hover', 'hover (a short rest)']]],
+  ['sMotion', 'motion', [['y', 'slides up or down, with the tabs'], ['x', 'slides sideways (previous)'], ['fade', 'crossfade'], ['none', 'none']]],
+  ['sHint', 'hint', [['end', '"hover for details", after the list'], ['plus', 'a + by each row, turning to ×'], ['chevron', 'a › by each row, turning down'], ['peek', 'the current role opens by itself, once'], ['open', 'the current role starts open'], ['none', 'nothing'], ['margin', '"hover for details", under the names (previous)']]],
+];
+
+const SIDE_PRESETS = [
+  { id: 'current', label: 'current', set: { sCount: 'none', sMarker: 'bar', sAlign: 'right', sPlace: 'hang', sDivider: 'none', sHeading: 'rule', sType: 'italic', sSwitch: 'hover', sMotion: 'y', sHint: 'end' } },
+  { id: 'quiet', label: 'quiet: names only, in the margin', set: { sCount: 'none', sMarker: 'ink', sAlign: 'right', sPlace: 'hang', sDivider: 'none', sHeading: 'none', sType: 'italic', sSwitch: 'hover', sMotion: 'y' } },
+  { id: 'connected', label: 'connected: a line runs to the list', set: { sCount: 'none', sMarker: 'rule', sAlign: 'right', sPlace: 'hang', sDivider: 'rule', sHeading: 'none', sType: 'italic', sSwitch: 'hover', sMotion: 'y' } },
+  { id: 'contents', label: 'contents: dotted leaders, like the rows', set: { sCount: 'leader', sMarker: 'ink', sAlign: 'left', sPlace: 'centred', sDivider: 'none', sHeading: 'rule', sType: 'italic', sSwitch: 'click', sMotion: 'y' } },
+  { id: 'index', label: 'index: counts in words, a heading', set: { sCount: 'words', sMarker: 'bar', sAlign: 'right', sPlace: 'centred', sDivider: 'rule', sHeading: 'heading', sType: 'roman', sSwitch: 'click', sMotion: 'fade' } },
+  { id: 'previous', label: 'previous', set: { sCount: 'super', sMarker: 'bar', sAlign: 'left', sPlace: 'centred', sDivider: 'none', sHeading: 'none', sType: 'italic', sSwitch: 'click', sMotion: 'x' } },
+];
+
+function sideCss(s) {
+  const COL = 'html body .work-col[data-layout="side"]';
+  const NAV = `${COL} .work-nav--vertical`;
+  const out = [];
+  const right = s.sAlign === 'right';
+  const small = `align-self: baseline; font-size: 0.72rem; font-style: normal; vertical-align: 0; opacity: 0.5;`;
+
+  if (s.sCount === 'none') out.push(`${NAV} .work-nav-count { display: none; }`);
+  if (s.sCount === 'right') out.push(`${NAV} .work-nav-count { ${small} margin-${right ? 'right' : 'left'}: auto; }`);
+  if (s.sCount === 'leader') out.push(`${NAV} .work-nav-leader { display: block; } ${NAV} .work-nav-count { ${small} }`);
+  if (s.sCount === 'hover') {
+    out.push(`${NAV} .work-nav-count { ${small} margin-${right ? 'right' : 'left'}: auto; opacity: 0; transition: opacity 0.2s ease; }
+${NAV} .work-nav-tab:hover .work-nav-count, ${NAV} .work-nav-tab:focus-visible .work-nav-count { opacity: 0.5; }`);
+  }
+  if (s.sCount === 'words') out.push(`${NAV} .work-nav-count { display: none; } ${NAV} .work-nav-noun { display: block; }`);
+
+  if (right) {
+    out.push(`${NAV} .work-nav-tab { flex-direction: row-reverse; text-align: right; }
+${NAV} .work-nav-noun { text-align: right; }
+${COL} .work-side-hint { text-align: right; }
+${NAV} .work-nav-marker { left: auto; right: -0.9em; }`);
+  }
+
+  const marker = `${NAV} .work-nav-marker`;
+  if (s.sMarker === 'ink' || s.sMarker === 'rule') out.push(`${marker} { display: none; }`);
+  if (s.sMarker === 'line') out.push(`${marker} { left: 0; right: 0; top: auto; bottom: -0.12em; width: auto; height: 1px; }`);
+  if (s.sMarker === 'arrow') {
+    out.push(`${marker} { left: auto; right: calc(100% + 0.5em); top: 0; bottom: auto; width: auto; height: auto; background: none; font-style: normal; }
+${marker}::before { content: '→'; }`);
+    if (right) out.push(`${marker} { right: auto; left: calc(100% + 0.5em); } ${marker}::before { content: '←'; }`);
+  }
+  if (s.sMarker === 'pill') {
+    out.push(`${marker} { left: -0.45em; right: -0.45em; top: -0.1em; bottom: -0.12em; width: auto; height: auto; z-index: -1; border-radius: 6px; background: color-mix(in srgb, var(--text-primary) 8%, var(--bg-primary)); }`);
+  }
+  if (s.sMarker === 'rule') {
+    // From the name to the list, drawn as it's picked. Flush right, it runs
+    // across the gap from the name's end; flush left, a leader carries it
+    // the rest of the way.
+    const draw = `transform-origin: left center; animation: lab-rule-draw 0.45s cubic-bezier(0.22, 1, 0.36, 1);`;
+    if (right) {
+      out.push(`${NAV} .work-nav-tab[aria-selected="true"] .work-nav-label::after { content: ''; position: absolute; left: calc(100% + 0.5em); top: 58%; width: calc(var(--side-gap) - 0.5em); height: 1px; background: var(--text-primary); opacity: 0.6; ${draw} }`);
+    } else {
+      out.push(`${NAV} .work-nav-tab[aria-selected="true"] .work-nav-leader { display: block; border-bottom-style: solid; opacity: 0.6; margin-right: calc(0.4em - var(--side-gap)); ${draw} }
+${NAV} .work-nav-tab[aria-selected="true"] .work-nav-count { display: none; }`);
+    }
+    out.push(`@keyframes lab-rule-draw { from { transform: scaleX(0); } }`);
+  }
+
+  if (s.sPlace === 'hang') {
+    out.push(`@media (min-width: 1180px) {
+  ${COL} { max-width: 640px; }
+  ${COL} .work-side { display: block; position: relative; }
+  ${COL} .work-side-nav { position: absolute; top: 0; bottom: 0; right: calc(100% + var(--side-gap)); width: 190px; }
+}`);
+  }
+  if (s.sDivider === 'rule') out.push(`${COL} .work-side-main { min-height: 100%; padding-left: 2.2rem; border-left: 1px solid var(--border); } ${COL} .work-side { --side-gap: 2.2rem; }`);
+  if (s.sHeading === 'rule') out.push(`${COL} .work-side-main { padding-top: 1.6vh; border-top: 1px solid var(--border); } ${COL} .work-side-nav-inner { padding-top: 1.6vh; }`);
+  if (s.sHeading === 'heading') out.push(`${COL} .work-side-heading { display: block; }`);
+  if (s.sType === 'roman') out.push(`${NAV} .work-nav-tab { font-style: normal; }`);
+  if (s.sType === 'small') out.push(`${NAV} .work-nav-tab { font-size: 0.95rem; } ${NAV} { gap: 0.9vh; }`);
+
+  // Saying that rows open. Every way but the old one hides the margin hint.
+  if (s.sHint !== 'margin') out.push(`${COL} .work-side-hint { display: none; }`);
+  if (s.sHint === 'end') out.push(`${COL} .work-end-hint { display: block; }`);
+  if (s.sHint === 'plus' || s.sHint === 'chevron') {
+    // Hung in the right margin, so the dates stay in line with the rows that
+    // have nothing to open.
+    const glyph = s.sHint === 'plus' ? "'+'" : "'›'";
+    const turned = s.sHint === 'plus' ? 'rotate(45deg)' : 'rotate(90deg)';
+    out.push(`${COL} button.row-head::after { content: ${glyph}; position: absolute; right: -1.5em; top: 50%; width: 1em; text-align: center; font-size: 0.95rem; font-style: normal; line-height: 1; color: color-mix(in srgb, var(--text-primary) 45%, var(--bg-primary)); transform: translateY(-50%); transition: transform 0.25s ease, color 0.2s ease; }
+${COL} .row:hover > button.row-head::after { color: var(--text-primary); }
+${COL} .row.is-open > button.row-head::after { transform: translateY(-50%) ${turned}; color: var(--text-primary); }`);
+  }
+
+  return out.join('\n');
 }
 
 // ---------- state ----------
@@ -467,7 +623,13 @@ const DEFAULTS = {
   linkStyle: 'grow',
   indexLinks: false,
   toggle: SHIPPED_TOGGLE,
+  companyDates: COMPANY_DATES[0][0],
+  layout: LAYOUTS[0].id,
+  fit: false,
+  pretend: false,
+  ...SIDE_PRESETS[0].set,
   ...DETAIL_PRESETS[0].set,
+  ...Object.fromEntries(WRITING_CONTROLS.map(([key, , , options]) => [key, options[0][0]])),
 };
 
 const byId = (id) => FONTS.find((f) => f.id === id) ?? FONTS[0];
@@ -482,6 +644,14 @@ function loadState() {
       if (!options.some(([value]) => value === state[key])) state[key] = DEFAULTS[key];
     }
     if (!TOGGLES.some((t) => t.id === state.toggle)) state.toggle = DEFAULTS.toggle;
+    if (!COMPANY_DATES.some(([id]) => id === state.companyDates)) state.companyDates = DEFAULTS.companyDates;
+    if (!LAYOUTS.some((l) => l.id === state.layout)) state.layout = DEFAULTS.layout;
+    for (const [key, , options] of SIDE_CONTROLS) {
+      if (!options.some(([value]) => value === state[key])) state[key] = DEFAULTS[key];
+    }
+    for (const [key, , , options] of WRITING_CONTROLS) {
+      if (!options.some(([value]) => value === state[key])) state[key] = DEFAULTS[key];
+    }
     return state;
   } catch {
     return DEFAULTS;
@@ -537,6 +707,7 @@ function overridesCss(state, body, heading, size) {
   }
   if (state.toggle !== SHIPPED_TOGGLE) parts.push('html body .navbar .theme-toggle:not(.lab-toggle) { display: none; }');
   parts.push(detailsCss(state));
+  if (state.layout === 'side') parts.push(sideCss(state));
   return parts.join('\n');
 }
 
@@ -587,6 +758,30 @@ export default function DesignLab() {
 
   useEffect(() => () => document.getElementById('design-lab-overrides')?.remove(), []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-lab-company-dates', state.companyDates);
+    root.setAttribute('data-lab-layout', state.layout);
+    root.setAttribute('data-lab-fit', state.fit ? 'on' : 'off');
+    root.setAttribute('data-lab-pretend', state.pretend ? 'on' : 'off');
+    root.setAttribute('data-lab-side-switch', state.sSwitch);
+    root.setAttribute('data-lab-side-motion', state.sMotion);
+    root.setAttribute('data-lab-side-hint', state.sHint);
+    root.setAttribute('data-lab-writing-name', state.wName);
+    root.setAttribute('data-lab-writing-order', state.wOrder);
+    root.setAttribute('data-lab-writing-line', state.wLine);
+    root.setAttribute('data-lab-writing-label', state.wMark);
+    root.setAttribute('data-lab-writing-words', state.wWords);
+  }, [state.companyDates, state.layout, state.fit, state.pretend, state.sSwitch, state.sMotion, state.sHint, state.wName, state.wOrder, state.wLine, state.wMark, state.wWords]);
+  useEffect(
+    () => () => {
+      for (const name of ['company-dates', 'layout', 'fit', 'pretend', 'side-switch', 'side-motion', 'side-hint', ...WRITING_CONTROLS.map(([, , attr]) => attr)]) {
+        document.documentElement.removeAttribute(`data-lab-${name}`);
+      }
+    },
+    []
+  );
+
   // [ and ] step the body font through the list, for quick A/B flicking.
   useEffect(() => {
     const onKey = (e) => {
@@ -623,6 +818,9 @@ export default function DesignLab() {
     ['color', 'colour'],
     ['toggle', 'toggle'],
     ['details', 'details'],
+    ['roles', 'roles'],
+    ['writing', 'writing'],
+    ['layout', 'layout'],
   ];
 
   return (
@@ -653,7 +851,119 @@ export default function DesignLab() {
         {state.tab === 'color' && <ColorTab state={state} update={update} theme={theme} showTheme={showTheme} />}
         {state.tab === 'toggle' && <ToggleTab state={state} update={update} />}
         {state.tab === 'details' && <DetailsTab state={state} update={update} />}
+        {state.tab === 'roles' && <RolesTab state={state} update={update} />}
+        {state.tab === 'writing' && <WritingTab state={state} update={update} />}
+        {state.tab === 'layout' && <LayoutTab state={state} update={update} />}
       </aside>
+    </>
+  );
+}
+
+function SideControls({ state, update }) {
+  const preset =
+    SIDE_PRESETS.find((p) => Object.entries(p.set).every(([key, value]) => state[key] === value))?.id ?? 'custom';
+  return (
+    <>
+      <hr className="lab-rule" />
+      <label className="lab-field">
+        <span>preset</span>
+        <select
+          value={preset}
+          onChange={(e) => {
+            const picked = SIDE_PRESETS.find((p) => p.id === e.target.value);
+            if (picked) update(picked.set);
+          }}
+        >
+          {SIDE_PRESETS.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.label}
+            </option>
+          ))}
+          {preset === 'custom' && <option value="custom">custom</option>}
+        </select>
+      </label>
+      {SIDE_CONTROLS.map(([key, label, options]) => (
+        <label key={key} className="lab-field">
+          <span>{label}</span>
+          <select value={state[key]} onChange={(e) => update({ [key]: e.target.value })}>
+            {options.map(([value, text]) => (
+              <option key={value} value={value}>
+                {text}
+              </option>
+            ))}
+          </select>
+        </label>
+      ))}
+      <p className="lab-note">names in the margin need a window at least 1180px wide; narrower, they sit beside the list</p>
+      <hr className="lab-rule" />
+    </>
+  );
+}
+
+function LayoutTab({ state, update }) {
+  const picked = LAYOUTS.find((l) => l.id === state.layout) ?? LAYOUTS[0];
+  return (
+    <>
+      <div className="lab-field lab-field--top">
+        <span>work page</span>
+        <div className="lab-options">
+          {LAYOUTS.map((l) => (
+            <label key={l.id} className="lab-check">
+              <input type="radio" name="lab-layout" checked={state.layout === l.id} onChange={() => update({ layout: l.id })} />
+              <span>{l.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <p className="lab-note">{picked.note}</p>
+      {state.layout === 'side' && <SideControls state={state} update={update} />}
+      <label className="lab-check">
+        <input type="checkbox" checked={state.fit} onChange={(e) => update({ fit: e.target.checked })} />
+        <span>cap each list at about a screen, scrolling inside</span>
+      </label>
+      <label className="lab-check">
+        <input type="checkbox" checked={state.pretend} onChange={(e) => update({ pretend: e.target.checked })} />
+        <span>pretend there's more: +3 roles, +3 papers, +6 thoughts</span>
+      </label>
+      <p className="lab-note">under 900px wide, every layout but stacked becomes tabs</p>
+    </>
+  );
+}
+
+function WritingTab({ state, update }) {
+  return (
+    <>
+      {WRITING_CONTROLS.map(([key, label, , options]) => (
+        <label key={key} className="lab-field">
+          <span>{label}</span>
+          <select value={state[key]} onChange={(e) => update({ [key]: e.target.value })}>
+            {options.map(([value, text]) => (
+              <option key={value} value={value}>
+                {text}
+              </option>
+            ))}
+          </select>
+        </label>
+      ))}
+      <p className="lab-note">the paper and the shower thoughts, in one section; "pretend" on the layout tab fills it out</p>
+    </>
+  );
+}
+
+function RolesTab({ state, update }) {
+  return (
+    <>
+      <label className="lab-field">
+        <span>company</span>
+        <select value={state.companyDates} onChange={(e) => update({ companyDates: e.target.value })}>
+          {COMPANY_DATES.map(([id, label]) => (
+            <option key={id} value={id}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </label>
+      <p className="lab-note">the dates on a company's line, over its roles</p>
     </>
   );
 }
@@ -683,12 +993,12 @@ function DetailsTab({ state, update }) {
     <>
       <label className="lab-field">
         <span>hold open</span>
-        <select value="" onChange={(e) => holdRowOpen(Number(e.target.value))}>
+        <select value="" onChange={(e) => holdRowOpen(e.target.value)}>
           <option value="" disabled>
             pick a row…
           </option>
-          {PREVIEW_ROWS.map((title, i) => (
-            <option key={title} value={i}>
+          {PREVIEW_ROWS.map(([key, title]) => (
+            <option key={key} value={key}>
               {title}
             </option>
           ))}
@@ -922,7 +1232,7 @@ function ColorTab({ state, update, theme, showTheme }) {
 
       <label className="lab-check">
         <input type="checkbox" checked={state.indexLinks} onChange={(e) => update({ indexLinks: e.target.checked })} />
-        <span>colour the vinskal + publication titles too</span>
+        <span>colour the publication title too</span>
       </label>
     </>
   );

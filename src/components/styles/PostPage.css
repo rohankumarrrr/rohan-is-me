@@ -1,0 +1,132 @@
+/* A post, on a page of its own (PostPage.js): the site's 640px column,
+   centred, with the title and date centred over text set flush left. */
+
+.post-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.post-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10vh 8vw 8vh;
+}
+
+.post {
+  width: 100%;
+  max-width: 640px;
+}
+
+.post-crumbs {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 9vh;
+  font-size: 0.9rem;
+}
+
+.post-crumbs .text-link {
+  font-size: inherit;
+}
+
+.post-crumb-sep {
+  color: color-mix(in srgb, var(--text-primary) 55%, var(--bg-primary));
+}
+
+/* Leaves the post, as escape does. */
+.post-close {
+  margin-left: auto;
+  padding: 0 0.3em;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--text-primary) 55%, var(--bg-primary));
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.post-close:hover,
+.post-close:focus-visible {
+  color: var(--text-primary);
+}
+
+.post-close:focus-visible {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.post-head {
+  margin: 0 0 6vh;
+  text-align: center;
+}
+
+.post-title {
+  margin: 0 0 1.4vh;
+  font-size: 2.2rem;
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.post-title-name {
+  display: inline-block;
+}
+
+.post-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--text-primary) 64%, var(--bg-primary));
+}
+
+.post-body p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0 0 2.6vh;
+}
+
+/* The points are numbered the way a work row's details are. */
+.post-body ul {
+  list-style: decimal-leading-zero outside;
+  margin: 0 0 2.6vh;
+  padding-left: 2.1em;
+}
+
+.post-body li {
+  color: var(--text-primary);
+}
+
+.post-body li::marker {
+  font-size: 0.78em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text-primary) 45%, var(--bg-primary));
+}
+
+.post-lead {
+  font-weight: 500;
+}
+
+.post-sign {
+  margin-top: 5vh;
+  font-style: italic;
+  color: color-mix(in srgb, var(--text-primary) 64%, var(--bg-primary));
+}
+
+@media (max-width: 768px) {
+  .post-wrap {
+    padding: 8vh 8vw 6vh;
+  }
+
+  .post-crumbs {
+    margin-bottom: 6vh;
+  }
+
+  .post-title {
+    font-size: 1.8rem;
+  }
+}

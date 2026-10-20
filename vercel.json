@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/shower-thoughts/:slug", "destination": "/index.html" }]
+}

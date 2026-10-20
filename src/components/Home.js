@@ -1,11 +1,22 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "./styles/Home.css";
 import LastListened from "./Scrobbler";
+import { arrival } from "../hooks/useRoute";
 
 const Home = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
+
+  // Back from a post, the page turn itself brings the intro in, so it shows
+  // at once instead of staggering in after the turn has landed. The usual
+  // in-view replay takes over a moment later.
+  const [quiet, setQuiet] = useState(() => arrival.quiet);
+  useEffect(() => {
+    if (!quiet) return undefined;
+    const timer = setTimeout(() => setQuiet(false), 1000);
+    return () => clearTimeout(timer);
+  }, [quiet]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -31,12 +42,12 @@ const Home = () => {
       <motion.div
         className="content"
         variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        initial={quiet ? false : "hidden"}
+        animate={quiet || isInView ? "visible" : "hidden"}
       >
         <motion.h1 variants={itemVariants}>hey, it's Rohan.</motion.h1>
         <motion.p className="last-updated-row" variants={itemVariants}>
-          <span className="last-updated">last updated: October 12, 2026</span>
+          <span className="last-updated">last updated: October 19, 2026</span>
         </motion.p>
         <motion.p variants={itemVariants}>
           i'm a senior studying statistics & computer science at the <a className="inline-link" href="https://siebelschool.illinois.edu/" target="_blank" rel="noopener noreferrer">university of illinois urbana-champaign.</a> i'm currently building a job search platform called <a className="inline-link" href="https://vinskal.com/" target="_blank" rel="noopener noreferrer">vinskal</a>. i've previously built:

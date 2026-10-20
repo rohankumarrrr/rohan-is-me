@@ -58,7 +58,7 @@ p {
 /* Links rest on a faint line, and on hover a solid one grows across it from
    the left. Both lines are background layers rather than an underline, so
    one can grow and still follow a link that wraps onto a second line.
-   Experiences.css gives the Vinskal and publication titles the same line. */
+   Experiences.css gives the publication title the same line. */
 .inline-link,
 .text-link {
   color: var(--text-primary);
@@ -111,7 +111,10 @@ p {
   margin: 0 0 3vh;
 }
 
+/* Lowercase like the rest of the page. Home.js keeps the date as "Month DD,
+   YYYY" (see AGENTS.md); this only sets how it reads. */
 .last-updated {
+  text-transform: lowercase;
   font-size: 0.75rem;
   color: var(--text-primary);
   opacity: 0.45;

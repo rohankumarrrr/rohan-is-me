@@ -98,6 +98,36 @@ html.theme-transition *::after {
     stroke 0.5s ease !important;
 }
 
+/* ---- Page turn: the work page ⇄ a post (useRoute.js) ----
+   The titles that appear on both pages are named for the turn, and glide
+   from one place to the other while everything else fades: the old page out
+   quickly, the new one in just after, rising a few pixels. */
+.page-turn::view-transition-group(*) {
+  animation-duration: 0.65s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-turn::view-transition-old(root) {
+  animation: page-turn-out 0.25s ease both;
+}
+
+.page-turn::view-transition-new(root) {
+  animation: page-turn-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+@keyframes page-turn-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-turn-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

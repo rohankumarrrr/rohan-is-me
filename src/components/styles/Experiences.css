@@ -233,7 +233,822 @@
   content: ' · ';
 }
 
+/* ---------- more than one role at a company ---------- */
+
+/* The company heads a list of its roles, which hang off a line: a dot beside
+   each role, and a line from each dot down to the next that runs alongside
+   whatever details the role has open. */
+.row-group-roles {
+  --role-indent: 1.4em;
+  padding-left: var(--role-indent);
+}
+
+/* The middle of the lowercase letters on a row's first line: its head's top
+   padding plus a little over half a line. Dots beside a row sit here. */
+.row {
+  --first-line: calc(0.7vh + 0.76em);
+}
+
+.row-group-roles > .row {
+  position: relative;
+}
+
+.row-group-roles > .row::before {
+  content: '';
+  position: absolute;
+  left: calc(0.4em - var(--role-indent) - 2.5px);
+  top: calc(var(--first-line) - 2.5px);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text-primary) 45%, var(--bg-primary));
+}
+
+.row-group-roles > .row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: calc(0.4em - var(--role-indent) - 0.5px);
+  top: calc(var(--first-line) + 6px);
+  bottom: calc(6px - var(--first-line));
+  width: 1px;
+  background: var(--border);
+}
+
+/* A company line with no dates has no leader to run to them. */
+.row-group-head--bare .row-leader,
+.row-group-head--bare .row-period {
+  visibility: hidden;
+}
+
+/* ---------- a role still to come ---------- */
+
+/* It sits a step back, on a hollow dot, and the line down to the role before
+   it is dashed: the time between hasn't happened yet. */
+.row--incoming > .row-head {
+  color: color-mix(in srgb, var(--text-primary) 55%, var(--bg-primary));
+}
+
+.row-group-roles > .row--incoming::before {
+  background: var(--bg-primary);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 50%, var(--bg-primary));
+}
+
+.row-group-roles > .row--incoming::after {
+  background: repeating-linear-gradient(to bottom, var(--border) 0 3px, transparent 3px 6px);
+}
+
+/* ---------- the only entry in its section ---------- */
+
+/* It shows open: its header under the title, its details beneath. A paper
+   or a post has the same line under its title (its venue, a line from it),
+   set close enough that one which wraps still reads as one line. */
+.row-subline {
+  margin: -0.4vh 0 0.4vh;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: color-mix(in srgb, var(--text-primary) 64%, var(--bg-primary));
+}
+
+.row-body--static {
+  margin-top: 0.8vh;
+}
+
+/* ---------- the role I'm in ---------- */
+
+/* A small four-point star in the margin left of the title, turning and
+   glinting every few seconds. It sits in the text line, on the baseline, and
+   its margins cancel out so the title stays flush with the rows around it. */
+.row--current .row-title::before {
+  content: '✦';
+  display: inline-block;
+  width: 1em;
+  margin: 0 0.8em 0 -1.8em;
+  font-size: 0.7em;
+  line-height: 1;
+  text-align: center;
+  vertical-align: 0.12em;
+  color: color-mix(in srgb, var(--text-primary) 70%, var(--bg-primary));
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  70%,
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 0.7;
+  }
+  80% {
+    transform: rotate(90deg) scale(1.35);
+    opacity: 1;
+  }
+  90% {
+    transform: rotate(180deg) scale(1);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row--current .row-title::before {
+    animation: none;
+  }
+}
+
+/* ---------- layouts (design lab) ---------- */
+
+/* A tabbed layout sits a fixed way down its screen rather than centred, so
+   switching to a shorter or longer section never moves the tabs. */
+.work--anchored {
+  padding-top: 14vh;
+}
+
+/* The section names as tabs: the heading's italic, the one showing in full
+   ink with a line under it that slides between them. */
+.work-nav-row {
+  position: relative;
+  margin-bottom: 1.4vh;
+  padding-bottom: 1vh;
+}
+
+.work-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4vh 1.5em;
+}
+
+.work-nav-tab {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-primary);
+  opacity: 0.38;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.work-nav-tab:hover,
+.work-nav-tab[aria-selected="true"] {
+  opacity: 1;
+}
+
+.work-nav-tab:focus-visible {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 4px;
+}
+
+.work-nav-count {
+  margin-left: 0.25em;
+  font-size: 0.55em;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 0.75em;
+  opacity: 0.7;
+}
+
+.work-nav-label {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Sits on the rule under the strip. */
+.work-nav-marker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1vh - 1px);
+  height: 1px;
+  background: var(--text-primary);
+}
+
+/* The count's other forms; the layout's styles choose. */
+.work-nav-leader,
+.work-nav-noun {
+  display: none;
+}
+
+/* Down the left: one name a line, the marker a short rule beside it. */
+.work-nav--vertical {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.2vh;
+}
+
+.work-nav--vertical .work-nav-tab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.3em;
+  width: 100%;
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+.work-nav--vertical .work-nav-count {
+  align-self: flex-start;
+  margin-left: 0;
+}
+
+.work-nav--vertical .work-nav-leader {
+  flex: 1 1 1.5em;
+  min-width: 1.5em;
+  margin: 0 0.2em;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.35;
+  position: relative;
+  top: -0.28em;
+}
+
+.work-nav--vertical .work-nav-noun {
+  flex-basis: 100%;
+  margin-top: 0.1em;
+  font-size: 0.68rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+}
+
+.work-nav--vertical .work-nav-marker {
+  left: -0.9em;
+  right: auto;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 1.5px;
+  height: auto;
+}
+
+.work-nav-row--vertical {
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  top: 12vh;
+  align-self: start;
+}
+
+/* The columns layout's names carry no count. */
+.work-columns .work-nav-count {
+  display: none;
+}
+
+/* fit: a section's list stops at about a screen and scrolls inside, fading
+   at its edges. */
+.work-panel.is-fit {
+  max-height: 58vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(to bottom, transparent, #000 2.5vh, #000 calc(100% - 4vh), transparent);
+  padding: 1vh 0.6em 3vh;
+  margin: 0 -0.6em;
+}
+
+/* side: the names down the left, one section beside them. */
+.work-col[data-layout="side"] {
+  max-width: 880px;
+}
+
+.work-side {
+  --side-gap: 3.5rem;
+  display: grid;
+  grid-template-columns: 180px minmax(0, 640px);
+  gap: var(--side-gap);
+  align-items: start;
+}
+
+.work-side-nav-inner {
+  position: sticky;
+  top: 12vh;
+}
+
+.work-side-hint {
+  margin: 3vh 0 0;
+  transition: opacity 0.25s ease;
+}
+
+.work-side-hint.is-hidden {
+  opacity: 0;
+}
+
+/* Ways of saying that rows open: all off unless the lab turns one on. */
+.work-end-hint {
+  display: none;
+  margin: 2vh 0 0;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: right;
+  color: color-mix(in srgb, var(--text-primary) 50%, var(--bg-primary));
+  transition: opacity 0.25s ease;
+}
+
+.work-end-hint.is-hidden {
+  opacity: 0;
+}
+
+/* The section's name over its list: off unless the lab turns it on. */
+.work-side-heading {
+  display: none;
+  margin: 0 0 1.4vh;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* The side layout as it ships, set as the lab sets it with these picks
+   (DesignLab.js, sideCss): no counts; a bar beside the name showing; the
+   names flush right, against the list; on a wide screen, the list in its
+   usual column with the names hung in the margin; a rule over the list,
+   level with the names; and "hover for details" after the list. While the
+   lab is open it sets the side layout itself, so all of this stands down. */
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-nav--vertical .work-nav-count {
+  display: none;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-nav--vertical .work-nav-tab {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-nav--vertical .work-nav-noun {
+  text-align: right;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-nav--vertical .work-nav-marker {
+  left: auto;
+  right: -0.9em;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-side-main {
+  padding-top: 1.6vh;
+  border-top: 1px solid var(--border);
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-side-nav-inner {
+  padding-top: 1.6vh;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-side-hint {
+  display: none;
+}
+
+html:not([data-lab-layout]) .work-col[data-layout="side"] .work-end-hint {
+  display: block;
+}
+
+@media (min-width: 1180px) {
+  html:not([data-lab-layout]) .work-col[data-layout="side"] {
+    max-width: 640px;
+  }
+
+  html:not([data-lab-layout]) .work-col[data-layout="side"] .work-side {
+    display: block;
+    position: relative;
+  }
+
+  html:not([data-lab-layout]) .work-col[data-layout="side"] .work-side-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(100% + var(--side-gap));
+    width: 190px;
+  }
+}
+
+/* columns: sections | entries | the picked entry's details. */
+.work-col[data-layout="columns"] {
+  max-width: 1040px;
+}
+
+.work-columns {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 320px) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.work-columns-detail {
+  position: sticky;
+  top: 12vh;
+  padding-left: 2.6rem;
+  border-left: 1px solid var(--border);
+  min-height: 30vh;
+}
+
+.entry-detail-title {
+  margin: 0 0 0.4vh;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+/* split: experience on the left, the rest tabbed on the right. */
+.work-col[data-layout="split"] {
+  max-width: 1000px;
+}
+
+.work-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.work-split-side .work-nav-tab {
+  font-size: 0.92rem;
+}
+
+.work-split-side .work-nav {
+  flex-wrap: nowrap;
+  gap: 0.9em;
+}
+
+/* A compact list: each title over its date, for a narrow column. */
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  width: calc(100% + 1.2em);
+  margin: 0 -0.6em;
+  padding: 0.8vh 0.6em;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.entry.is-picked > .entry-head,
+.entry-head:hover {
+  background: color-mix(in srgb, var(--text-primary) 6%, var(--bg-primary));
+}
+
+.entry-head:focus-visible {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.entry-title {
+  max-width: none;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.entry-when {
+  display: block;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--text-primary) 60%, var(--bg-primary));
+}
+
+.entry.row--incoming .entry-title,
+.entry.row--incoming .entry-when {
+  color: color-mix(in srgb, var(--text-primary) 55%, var(--bg-primary));
+}
+
+.entry-group {
+  padding: 0.8vh 0 0.2vh;
+}
+
+.entry-company {
+  font-size: 0.95rem;
+}
+
+.entry-roles {
+  margin: 0.4vh 0 0 0.3em;
+  padding-left: 0.9em;
+  border-left: 1px solid var(--border);
+}
+
+/* An entry's details, in the details column or opened under it. */
+.entry-details {
+  margin-top: 2vh;
+}
+
+.entry-details .row-bullets {
+  padding-left: 1.9em;
+}
+
+.entry-header,
+.entry-excerpt {
+  margin: 0 0 1.4vh;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text-primary) 68%, var(--bg-primary));
+}
+
+.entry-header {
+  font-style: italic;
+}
+
+.entry-go {
+  display: inline-block;
+  margin-top: 0.6vh;
+  font-size: 0.88rem;
+}
+
+.entry-details--small {
+  margin: 0.4vh 0 1.4vh;
+}
+
+.entry-details--small .row-bullets li,
+.entry-details--small .entry-header,
+.entry-details--small .entry-excerpt {
+  font-size: 0.84rem;
+}
+
+/* On a phone the strip stays one line and scrolls sideways, so the line
+   under the tab showing always sits on the rule. */
+@media (max-width: 900px) {
+  .work-nav-row {
+    padding-bottom: 0;
+  }
+
+  .work-nav {
+    flex-wrap: nowrap;
+    gap: 1.2em;
+    overflow-x: auto;
+    padding-bottom: 1vh;
+    scrollbar-width: none;
+  }
+
+  .work-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .work-nav-tab {
+    flex: none;
+    font-size: 1.1rem;
+  }
+
+  .work-nav-marker {
+    bottom: calc(-1vh - 0px);
+  }
+}
+
+/* A year over the entries that began in it, once a list spans more than one. */
+.work-year {
+  margin: 1.6vh 0 0.2vh;
+  font-size: 0.78rem;
+  font-style: italic;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--text-primary) 45%, var(--bg-primary));
+}
+
+.work-year:first-child {
+  margin-top: 0;
+}
+
+/* In the writing section, each kind's name with its entries (publications,
+   shower thoughts). The lab picks how it's set (Experiences.js): never like
+   the italic line under an entry, which it would read as. Each label carries
+   a rule either side and a count, which only some of the styles show. */
+.work-kind {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  margin: 2.8vh 0 0.5vh;
+  color: color-mix(in srgb, var(--text-primary) 52%, var(--bg-primary));
+}
+
+.work-kind:first-child {
+  margin-top: 0;
+}
+
+.work-kind-rule,
+.work-kind-count {
+  display: none;
+}
+
+.work-kind-rule {
+  height: 1px;
+  background: var(--border);
+  transform-origin: left center;
+}
+
+/* A note in the right margin, level with the kind's first entry, the way a
+   sidenote sits by the line it's about. It takes no room in the list; the
+   kinds are parted by a gap. Where there's no margin to spare, it sits over
+   its entries instead. */
+.work-kind--margin {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+@media (min-width: 1180px) {
+  .work-kind--margin {
+    position: relative;
+    display: block;
+    height: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    font-style: italic;
+    letter-spacing: 0;
+  }
+
+  .work-kind--margin:not(:first-child) {
+    margin-top: 2.4vh;
+  }
+
+  .work-kind--margin .work-kind-name {
+    position: absolute;
+    left: calc(100% + 2.2rem);
+    top: calc(0.7vh + 0.2em);
+    white-space: nowrap;
+  }
+}
+
+/* A subheading: the section heading's italic, a size down, in full ink. */
+.work-kind--heading {
+  margin-top: 3.4vh;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* Like a company line without its rail: the name at the size of a row, a
+   dotted leader to how many there are where the dates sit. */
+.work-kind--count {
+  gap: 0.6em;
+  margin-bottom: 0.2vh;
+  color: color-mix(in srgb, var(--text-primary) 80%, var(--bg-primary));
+}
+
+.work-kind--count .work-kind-rule--after {
+  display: block;
+  flex: 1;
+  height: 0;
+  background: none;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.35;
+}
+
+.work-kind--count .work-kind-count {
+  display: inline;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Centred between two short hairlines, like a break in a book. */
+.work-kind--centred {
+  justify-content: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.work-kind--centred .work-kind-rule {
+  display: block;
+  flex: 0 1 3em;
+}
+
+/* Small upright letters, spaced out. */
+.work-kind--tracked {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+/* A label with a hairline running on from it to the dates. */
+.work-kind--ruled {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.work-kind--ruled .work-kind-rule--after {
+  display: block;
+  flex: 1;
+}
+
+.work-kind--italic {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* As a company line, its entries on the rail beneath it. */
+.work-kind-group + .work-kind-group {
+  margin-top: 1.6vh;
+}
+
+/* No names: the kinds parted by an asterism, centred over the list... */
+.work-kind-break {
+  text-align: center;
+  color: color-mix(in srgb, var(--text-primary) 40%, var(--bg-primary));
+}
+
+.work-kind-break:not(:first-child) {
+  margin: 1.4vh 0 0.6vh;
+}
+
+/* ...or by a gap. */
+.work-kind-gap {
+  height: 2.2vh;
+}
+
+/* Which kind an entry is, as a small tag opening the line under it. */
+.row-tag {
+  display: inline-block;
+  margin-right: 0.6em;
+  padding: 0 0.55em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-style: normal;
+  line-height: 1.5;
+  vertical-align: 0.05em;
+}
+
+/* ---------- coming back from a post ---------- */
+
+/* The row a reader came back to is marked for a moment, then fades. */
+.row--arrived > .row-head {
+  border-radius: 6px;
+  animation: row-arrived 1.8s ease-out;
+}
+
+@keyframes row-arrived {
+  from {
+    background-color: color-mix(in srgb, var(--text-primary) 8%, transparent);
+    box-shadow: 0 0 0 0.45em color-mix(in srgb, var(--text-primary) 8%, transparent);
+  }
+  to {
+    background-color: transparent;
+    box-shadow: 0 0 0 0.45em transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row--arrived > .row-head {
+    animation: none;
+  }
+}
+
+/* ---------- a post ---------- */
+
+/* Its title grows its line on hover, with an arrow after it that nudges
+   along. The title is a box of its own, the width of its words, so it can
+   grow into the post's heading when the page turns. */
+.row-post-name {
+  display: inline-block;
+}
+
+.row-title-post .row-link-line {
+  background-size: 0 1px, 100% 1px;
+}
+
+.row-title-post:hover .row-link-line {
+  background-size: 100% 1px, 100% 1px;
+}
+
+.row-post-arrow {
+  display: inline-block;
+  margin-left: 0.4em;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.row-title-post:hover .row-post-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
 /* ---------- links out (publications, and titles with a link) ---------- */
+
+/* A link row's title (a paper's, a post's) keeps to one line, however long:
+   it takes all the room the date and a short leader leave, and past that it
+   ends in an ellipsis rather than wrapping. The ellipsis needs the overflow
+   clipped, and the title's line hangs a few pixels below its text, so the
+   box is padded down to take the line in, and pulled back by as much so
+   nothing around it moves. On a phone, where the date sits under it, it
+   wraps as usual. */
+@media (min-width: 769px) {
+  .row--link .row-title {
+    max-width: none;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom: 5px;
+    margin-bottom: -5px;
+    /* Room, too, for the arrow or icon after it to nudge into on hover. */
+    padding-right: 4px;
+    margin-right: -4px;
+  }
+}
 
 /* An external-link icon follows the title; on hover the title's line grows
    and the icon nudges toward the corner it points at. */
@@ -253,8 +1068,8 @@
 }
 
 /* The prose links' growing line (Home.css), on one wrapper around the whole
-   title so it grows across a title that wraps and carries on through the
-   Vinskal title's swap. It stops short of the icon: 1.05em is the icon's
+   title so it grows across a title that wraps and carries on through a
+   linked title's swap to its header. It stops short of the icon: 1.05em is the icon's
    width plus its margin, above. */
 .row-link-line {
   padding-bottom: 2px;

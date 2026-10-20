@@ -1,4 +1,6 @@
-// Content for the experience, education and publications sections.
+import { posts } from './posts';
+
+// Content for the experience, education and writing sections.
 //
 // A description separates an optional one-line header from its detail
 // bullets with blank lines: '\n header \n\n bullet one \n\n bullet two'.
@@ -6,10 +8,13 @@
 // single line with nothing to expand.
 //
 // An entry with a `link` makes its title a link out, marked with an
-// external-link icon.
+// external-link icon. One that hasn't begun yet gives the month it `starts`
+// instead of a period, and shows as incoming (Experiences.js).
 //
 // A title too long for one line breaks wherever it runs out of room; join
-// words with non-breaking spaces ('\u00a0') to send them down together.
+// words with non-breaking spaces ('\u00a0') to send them down together. A
+// paper's or a post's title is the exception: it keeps to one line on a
+// desktop (Experiences.css).
 
 export const education = [
   {
@@ -22,7 +27,7 @@ export const education = [
 export const publications = [
   {
     period: 'february 2026',
-    title: 'ripel: a data-augmented peer evaluation system for\u00a0assessing\u00a0teamwork',
+    title: 'ripel: a data-augmented peer evaluation system for assessing teamwork',
     description: 'sigcse ts 2026',
     link: 'https://dl.acm.org/doi/10.1145/3770761.3777297',
   },
@@ -31,10 +36,9 @@ export const publications = [
 export const experience = [
   {
     period: 'august 2026 – present',
-    title: 'co-founder @ vinskal',
+    title: 'founding engineer @ vinskal',
     description: '\n launching soon @ vinskal.com \n\n architected the continuous job-discovery pipeline behind 500k+ live job postings using postgresql lease claims and per-host rate pacing; diagnosed a 50-hour, 49k+ row silent stall and redesigned the queue for durable recovery \n\n built an agentic incident responder (cloudflare workers, github actions) and its production alert-routing middleware, autonomously investigating downtime, quota, and runtime failures and opening prs for human review (1k+ alerts handled) \n\n built a playwright-based browser job application agent supporting five ats platforms and validated on live employer submissions; developed an evaluation harness measuring reliability, model quality, and per-run cost',
     technologies: ['python', 'typescript', 'fastapi', 'postgresql', 'playwright', 'docker', 'cloudflare workers', 'github actions'],
-    link: 'https://vinskal.com',
   },
   {
     period: 'may 2026 – august 2026',
@@ -68,14 +72,22 @@ export const experience = [
   }
 ];
 
+// Papers and shower thoughts share a section, there being too few of either
+// for one each. Each entry says which it is: a paper (kind 'link') links
+// straight out to where it was published, its description the venue; a post
+// opens on a page of its own, at /shower-thoughts/<slug>.
+export const writing = [
+  ...publications.map((paper) => ({ ...paper, kind: 'link' })),
+  ...posts.map((post) => ({ ...post, kind: 'post' })),
+];
+
 export const sections = [
   { id: 'experience', heading: 'experience', items: experience },
   { id: 'education', heading: 'education', items: education },
-  // Publications link straight to the paper rather than expanding.
-  { id: 'publications', heading: 'publications', items: publications, kind: 'link' },
+  { id: 'writing', heading: 'writing', items: writing, kind: 'writing' },
 ];
 
-export function splitDescription(description) {
+export function splitDescription(description = '') {
   if (!description.includes('\n\n')) {
     return { header: description.trim(), details: [] };
   }
