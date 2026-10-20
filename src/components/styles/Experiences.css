@@ -319,17 +319,21 @@
 /* A four-point star in the margin left of the title, turning and glinting
    every few seconds. It's drawn (a mask over the title's ink) rather than
    typed, since the site's font has no star and each device's stand-in sat
-   somewhere different; centred on the middle of the lowercase letters
-   (vertical-align: middle); and its margins cancel out so the title stays
-   flush with the rows around it. */
+   somewhere different. Its centre sits half a capital's height (0.35em)
+   above the baseline, level with the "@": the middle of the lowercase
+   letters reads as low beside their ascenders. Its margins cancel out, so
+   the title stays flush with the rows around it. A phone's larger, plainer
+   rows take a larger star. */
 .row--current .row-title::before {
   --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.9 7.2 16.8 11.1 24 12 16.8 12.9 12.9 16.8 12 24 11.1 16.8 7.2 12.9 0 12 7.2 11.1 11.1 7.2 12 0Z'/%3E%3C/svg%3E");
+  --star-size: 0.62em;
+  --star-gap: 0.4em;
   content: '';
   display: inline-block;
-  width: 0.8em;
-  height: 0.8em;
-  margin: 0 0.5em 0 -1.3em;
-  vertical-align: middle;
+  width: var(--star-size);
+  height: var(--star-size);
+  margin: 0 var(--star-gap) 0 calc(-1 * (var(--star-size) + var(--star-gap)));
+  vertical-align: calc(0.35em - var(--star-size) / 2);
   background-color: currentColor;
   -webkit-mask: var(--star) center / contain no-repeat;
   mask: var(--star) center / contain no-repeat;
@@ -350,6 +354,13 @@
   90% {
     transform: rotate(180deg) scale(1);
     opacity: 0.75;
+  }
+}
+
+@media (max-width: 768px) {
+  .row--current .row-title::before {
+    --star-size: 0.8em;
+    --star-gap: 0.36em;
   }
 }
 
@@ -818,8 +829,21 @@ html:not([data-lab-layout]) .work-col[data-layout="side"] .work-end-hint {
     display: none;
   }
 
+  /* The tab showing is marked on the rule itself, not just above it. The
+     name is a block, as tall as its tab, so the marker (offset by the
+     strip's padding) lands on the strip's last pixel row, which is the
+     rule's; and the strip sits over the rule, so the marker shows on it. */
+  .work-nav {
+    position: relative;
+    z-index: 1;
+  }
+
+  .work-nav-label {
+    display: block;
+  }
+
   .work-nav-marker {
-    bottom: calc(-1vh - 0px);
+    bottom: -1vh;
   }
 }
 
