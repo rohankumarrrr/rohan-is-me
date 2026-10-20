@@ -716,15 +716,20 @@ function SectionNav({ list, active, onPick, vertical = false, id, hoverSwitch = 
 
 // A panel's way in and out: a short slide along `axis` ('x' or 'y') in the
 // direction the tabs moved, or a crossfade ('fade').
+// A panel swiped away (`flung`, where the finger left it) carries on out the
+// way it was going, and the next comes in from further off to meet it.
 const panelMotion = {
-  hidden: ({ dir, axis }) => (axis === 'fade' ? { opacity: 0 } : { opacity: 0, [axis]: 14 * dir }),
+  hidden: ({ dir, axis, flung }) =>
+    axis === 'fade' ? { opacity: 0 } : { opacity: 0, [axis]: (flung ? 40 : 14) * dir },
   visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } },
-  exit: ({ dir, axis }) =>
-    axis === 'none'
-      ? { opacity: 0, transition: { duration: 0 } }
-      : axis === 'fade'
-        ? { opacity: 0, transition: { duration: 0.14 } }
-        : { opacity: 0, [axis]: -10 * dir, transition: { duration: 0.14 } },
+  exit: ({ dir, axis, flung }) =>
+    flung
+      ? { opacity: 0, x: flung - 40 * dir, transition: { duration: 0.16 } }
+      : axis === 'none'
+        ? { opacity: 0, transition: { duration: 0 } }
+        : axis === 'fade'
+          ? { opacity: 0, transition: { duration: 0.14 } }
+          : { opacity: 0, [axis]: -10 * dir, transition: { duration: 0.14 } },
 };
 
 // An entry's details, for the details column and the compact lists.
@@ -923,11 +928,46 @@ export default function Experiences() {
   const [sideTab, setSideTab] = useState(arrivedIn && arrivedIn !== 'experience' ? arrivedIn : others[0].id);
   const [dir, setDir] = useState(1);
   const [switched, setSwitched] = useState(false);
-  const pick = (list, current, set) => (id) => {
+  const [flung, setFlung] = useState(0);
+  const pick = (list, current, set, from = 0) => (id) => {
     if (id === current) return;
     setDir(list.findIndex((sec) => sec.id === id) > list.findIndex((sec) => sec.id === current) ? 1 : -1);
     setSwitched(true);
+    setFlung(from);
     set(id);
+  };
+
+  // On a touchscreen, a tab's panel swipes to the tab either side. It follows
+  // the finger (barely, where there's no tab that way) and springs back,
+  // unless it's let go far or fast enough to go on to the next. Dragged
+  // sideways only, it leaves the page to scroll as usual.
+  // A swipe's lift isn't a tap: the row under the finger stays as it was.
+  const swiped = useRef(false);
+  const swipeBetween = (list, current, set) => {
+    if (canHover) return {};
+    const i = list.findIndex((sec) => sec.id === current);
+    const [prev, next] = [list[i - 1], list[i + 1]];
+    const give = { left: next ? 0.5 : 0.1, right: prev ? 0.5 : 0.1 };
+    return {
+      drag: 'x',
+      dragConstraints: { left: 0, right: 0 },
+      dragElastic: give,
+      onPointerDown: () => (swiped.current = false),
+      onDragStart: () => (swiped.current = true),
+      onClickCapture: (e) => {
+        if (!swiped.current) return;
+        e.stopPropagation();
+        e.preventDefault();
+      },
+      onDragEnd: (e, { offset, velocity }) => {
+        // How far it would have gone: a quick flick counts for more than its
+        // distance, once it's gone far enough to be meant.
+        const reach = offset.x + velocity.x * 0.15;
+        const meant = Math.abs(offset.x) > 24;
+        const to = !meant ? null : reach < -70 ? next : reach > 70 ? prev : null;
+        if (to) pick(list, current, set, offset.x * (offset.x < 0 ? give.left : give.right))(to.id);
+      },
+    };
   };
 
   // Two of the side layout's ways to show that rows open: the role I'm in
@@ -1217,10 +1257,10 @@ export default function Experiences() {
   // A tab's panel. The first arrives with the page's own entrance; after a
   // switch, each new one slides in by itself, its rows counting their
   // stagger from zero.
-  const panel = (section, id, content) => {
+  const panel = (section, id, content, gestures = {}) => {
     if (switched) position = 0;
     const axis = layout === 'side' ? sideMotion : 'x';
-    const motionOf = { dir, axis };
+    const motionOf = { dir, axis, flung };
     // With no motion, the new panel and its rows are simply there.
     const own = !switched ? {} : axis === 'none' ? { initial: 'visible', animate: 'visible' } : { initial: 'hidden', animate: 'visible' };
     return (
@@ -1235,6 +1275,7 @@ export default function Experiences() {
           custom={motionOf}
           exit="exit"
           {...own}
+          {...gestures}
         >
           {content(section)}
         </motion.div>
@@ -1264,7 +1305,7 @@ export default function Experiences() {
     body = (
       <>
         {navRow(all, active.id, pick(all, active.id, setTab), 'work')}
-        {panel(active, 'work', rowsOf)}
+        {panel(active, 'work', rowsOf, swipeBetween(all, active.id, setTab))}
       </>
     );
   } else if (layout === 'side') {
